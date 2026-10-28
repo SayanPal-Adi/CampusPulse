@@ -4,44 +4,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CampusPulse | College Events</title>
+
+    <title>CampusPulse — Find Your Campus Event</title>
+    <meta name="description"
+          content="Discover college events, explore campus activities, and find opportunities to connect, learn, and participate.">
+
+    <meta name="theme-color" content="#f7f6f0">
+    <meta property="og:title" content="CampusPulse — Campus Events">
+    <meta property="og:description"
+          content="Discover and participate in events happening across your campus.">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/svg+xml"
+          href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='8' fill='%231c493b'/%3E%3Cpath d='M10 12h20v4H14v4h12v4H14v4h16v4H10z' fill='%23f7f6f0'/%3E%3C/svg%3E">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400,20,1;9..144,500,20,1;9..144,600,20,1&display=swap"
+          rel="stylesheet">
+
     <link rel="stylesheet"
           href="{{ url_for('static', filename='css/style.css') }}">
+
 </head>
+
 <body>
-    <header>
-        <a class="logo" href="/">CampusPulse<span>.</span></a>
-        <nav>
-            <a href="/">Home</a>
-            <a href="#events">Events</a>
-            <a href="#about">About</a>
-            <a class="login-btn" href="#login">Login</a>
-        </nav>
+
+    <a class="skip-link" href="#main-content">Skip to content</a>
+
+    <header class="site-header">
+        <div class="header-inner">
+
+            <a class="brand" href="/" aria-label="CampusPulse home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <path d="M4 8h24v4H8v4h16v4H8v4h20v4H4z"
+                              fill="currentColor"/>
+                    </svg>
+                </span>
+                <span>campus<span class="brand-light">pulse</span></span>
+            </a>
+
+            <nav class="main-nav" aria-label="Main navigation">
+                <a class="nav-link nav-active" href="/">Discover</a>
+                <a class="nav-link" href="#events">Events</a>
+                <a class="nav-link" href="#how-it-works">How it works</a>
+            </nav>
+
+            <a class="header-cta" href="#events">
+                Explore events
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M4 10h12M10 4l6 6-6 6"
+                          fill="none" stroke="currentColor"
+                          stroke-width="1.6" stroke-linecap="round"
+                          stroke-linejoin="round"/>
+                </svg>
+            </a>
+
+        </div>
     </header>
 
-    <main class="hero">
-        <p class="eyebrow">YOUR CAMPUS. YOUR COMMUNITY.</p>
-        <h1>Make Every Campus<br><span>Moment Count.</span></h1>
-        <p class="description">
-            Discover college events, connect with your community,
-            and never miss an opportunity to participate.
-        </p>
-        <a class="primary-btn" href="#events">Explore Events →</a>
+
+    <main id="main-content">
+
+        <!-- Hero -->
+        <section class="hero">
+
+            <div class="hero-copy">
+                <div class="eyebrow">
+                    <span class="eyebrow-line"></span>
+                    THE CAMPUS EVENT DIRECTORY
+                </div>
+
+                <h1>
+                    Your campus<br>
+                    has more to<br>
+                    <span>offer.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Find college fests, workshops, competitions and
+                    club activities. Discover what's happening on
+                    campus and choose what you want to be part of.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#events" class="button button-primary">
+                        Find an event
+                        <svg viewBox="0 0 20 20" aria-hidden="true">
+                            <path d="M4 10h12M10 4l6 6-6 6"
+                                  fill="none" stroke="currentColor"
+                                  stroke-width="1.7" stroke-linecap="round"
+                                  stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+
+                    <a href="#how-it-works" class="text-link">
+                        How CampusPulse works
+                    </a>
+                </div>
+
+                <div class="hero-note">
+                    <span class="note-rule"></span>
+                    <p>
+                        For students who want to take part,
+                        not just attend classes.
+                    </p>
+                </div>
+            </div>
+
+
+            <!-- Editorial visual, made with CSS rather than stock imagery -->
+            <div class="hero-visual" aria-label="CampusPulse event discovery preview">
+
+                <div class="visual-topline">
+                    <span>YOUR CAMPUS, IN ONE PLACE</span>
+                    <span class="visual-index">CP / 01</span>
+                </div>
+
+                <div class="visual-board">
+
+                    <div class="board-heading">
+                        <span class="board-kicker">DISCOVER</span>
+                        <h2>Find your<br>kind of event.</h2>
+                        <p>
+                            Something to learn. Something to build.
+                            Something new to experience.
+                        </p>
+                    </div>
+
+                    <div class="category-list" aria-label="Event categories">
+
+                        <div class="category-row category-featured">
+                            <span class="category-number">01</span>
+                            <span class="category-name">College fests</span>
+                            <svg viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M5 15 15 5M6 5h9v9"
+                                      fill="none" stroke="currentColor"
+                                      stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <div class="category-row">
+                            <span class="category-number">02</span>
+                            <span class="category-name">Workshops</span>
+                            <svg viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M5 15 15 5M6 5h9v9"
+                                      fill="none" stroke="currentColor"
+                                      stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <div class="category-row">
+                            <span class="category-number">03</span>
+                            <span class="category-name">Competitions</span>
+                            <svg viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M5 15 15 5M6 5h9v9"
+                                      fill="none" stroke="currentColor"
+                                      stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                        <div class="category-row">
+                            <span class="category-number">04</span>
+                            <span class="category-name">Club activities</span>
+                            <svg viewBox="0 0 20 20" aria-hidden="true">
+                                <path d="M5 15 15 5M6 5h9v9"
+                                      fill="none" stroke="currentColor"
+                                      stroke-width="1.5" stroke-linecap="round"
+                                      stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                    </div>
+
+                    <div class="board-footer">
+                        <span class="board-dot"></span>
+                        <span>One place to explore campus life</span>
+                    </div>
+
+                </div>
+
+                <div class="visual-caption">
+                    <span>01 — DISCOVER</span>
+                    <span>EXPLORE WHAT INTERESTS YOU</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Event discovery -->
+        <section class="events-section" id="events">
+
+            <div class="section-intro">
+                <div>
+                    <div class="eyebrow">
+                        <span class="eyebrow-line"></span>
+                        FIND YOUR NEXT EXPERIENCE
+                    </div>
+
+                    <h2>
+                        What's happening<br>
+                        <span>on campus?</span>
+                    </h2>
+                </div>
+
+                <p class="section-description">
+                    Explore activities, discover new interests and
+                    find events worth adding to your calendar.
+                </p>
+            </div>
+
+
+            <div class="events-toolbar">
+                <div class="events-label">
+                    <span class="label-marker"></span>
+                    <span>EVENT DIRECTORY</span>
+                </div>
+
+                <span class="events-caption">
+                    EVENTS WILL APPEAR HERE
+                </span>
+            </div>
+
+
+            <!--
+                Flask will populate this section with database events.
+                Keep the empty state until real events are available.
+            -->
+            <div class="event-list" id="event-list">
+
+                <div class="empty-state">
+                    <div class="empty-state-icon" aria-hidden="true">
+                        <svg viewBox="0 0 48 48" fill="none">
+                            <rect x="8" y="12" width="32" height="28"
+                                  rx="2" stroke="currentColor"
+                                  stroke-width="1.5"/>
+                            <path d="M16 8v8M32 8v8M8 21h32"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"/>
+                            <path d="M17 28h5M17 33h14"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="empty-state-copy">
+                        <span class="empty-label">THE DIRECTORY IS GETTING READY</span>
+                        <h3>Good things are worth looking forward to.</h3>
+                        <p>
+                            Events published by campus organizers will
+                            appear here. Check back when the directory
+                            is connected to the event database.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- How it works -->
+        <section class="how-section" id="how-it-works">
+
+            <div class="how-heading">
+                <div class="eyebrow eyebrow-light">
+                    <span class="eyebrow-line"></span>
+                    A SIMPLE WAY TO GET INVOLVED
+                </div>
+
+                <h2>
+                    From finding an event<br>
+                    to <span>being there.</span>
+                </h2>
+
+                <p>
+                    CampusPulse brings event discovery and student
+                    registration into one straightforward experience.
+                </p>
+            </div>
+
+            <div class="steps-list">
+
+                <article class="step">
+                    <span class="step-number">01</span>
+                    <div class="step-content">
+                        <h3>Explore</h3>
+                        <p>
+                            Browse published events and find activities
+                            that match your interests.
+                        </p>
+                    </div>
+                    <span class="step-status">DISCOVER</span>
+                </article>
+
+                <article class="step">
+                    <span class="step-number">02</span>
+                    <div class="step-content">
+                        <h3>Register</h3>
+                        <p>
+                            Sign in and register for an event while
+                            registration is open.
+                        </p>
+                    </div>
+                    <span class="step-status">PARTICIPATE</span>
+                </article>
+
+                <article class="step">
+                    <span class="step-number">03</span>
+                    <div class="step-content">
+                        <h3>Show up</h3>
+                        <p>
+                            Keep track of your registrations and
+                            check the event details before attending.
+                        </p>
+                    </div>
+                    <span class="step-status">TAKE PART</span>
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- Organizer introduction -->
+        <section class="organizer-section" id="organizers">
+
+            <div class="organizer-mark" aria-hidden="true">
+                <svg viewBox="0 0 48 48" fill="none">
+                    <path d="M8 12h32v5H13v6h25v5H13v6h27v5H8z"
+                          fill="currentColor"/>
+                </svg>
+            </div>
+
+            <div class="organizer-copy">
+                <span class="eyebrow">FOR EVENT ORGANIZERS</span>
+                <h2>Have something<br>worth bringing people together for?</h2>
+                <p>
+                    CampusPulse is being built to help campus organizers
+                    publish events and manage student registrations.
+                </p>
+            </div>
+
+            <div class="organizer-aside">
+                <span class="organizer-status">ORGANIZER TOOLS</span>
+                <p>
+                    Event publishing and registration management
+                    will be available through the organizer dashboard.
+                </p>
+            </div>
+
+        </section>
+
     </main>
 
-    <section id="events" class="events">
-        <p class="eyebrow">WHAT'S HAPPENING</p>
-        <h2>Discover Campus Events</h2>
-        <p>Find your next opportunity to learn, compete, and connect.</p>
-        <div id="event-list" class="event-list">
-            <p>Our events will appear here soon.</p>
-        </div>
-    </section>
 
-    <footer id="about">
-        <p>© 2026 CampusPulse. Built for campus communities.</p>
+    <footer class="site-footer">
+
+        <a class="brand footer-brand" href="/" aria-label="CampusPulse home">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none">
+                    <path d="M4 8h24v4H8v4h16v4H8v4h20v4H4z"
+                          fill="currentColor"/>
+                </svg>
+            </span>
+            <span>campus<span class="brand-light">pulse</span></span>
+        </a>
+
+        <p class="footer-description">
+            A college event discovery and management project.
+        </p>
+
+        <a class="back-to-top" href="#main-content">
+            Back to top ↑
+        </a>
+
+        <div class="footer-bottom">
+            <span>© 2026 CampusPulse</span>
+            <span>BUILT FOR CAMPUS COMMUNITIES</span>
+        </div>
+
     </footer>
 
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}" defer></script>
+
 </body>
 </html>
