@@ -1,0 +1,22 @@
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.env
+
+# Flask and local databases
+instance/
+*.sqlite
+*.sqlite3
+*.db
+
+# Test and coverage output
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor and operating system files
+.vscode/
+.DS_Store

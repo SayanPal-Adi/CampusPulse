@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusPulse | College Events</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <a class="logo" href="/">CampusPulse<span>.</span></a>
+        <nav>
+            <a href="/">Home</a>
+            <a href="#events">Events</a>
+            <a href="#about">About</a>
+            <a class="login-btn" href="#login">Login</a>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <p class="eyebrow">YOUR CAMPUS. YOUR COMMUNITY.</p>
+        <h1>Make Every Campus<br><span>Moment Count.</span></h1>
+        <p class="description">
+            Discover college events, connect with your community,
+            and never miss an opportunity to participate.
+        </p>
+        <a class="primary-btn" href="#events">Explore Events →</a>
+    </main>
+
+    <section id="events" class="events">
+        <p class="eyebrow">WHAT'S HAPPENING</p>
+        <h2>Discover Campus Events</h2>
+        <p>Find your next opportunity to learn, compete, and connect.</p>
+        <div id="event-list" class="event-list">
+            <p>Our events will appear here soon.</p>
+        </div>
+    </section>
+
+    <footer id="about">
+        <p>© 2026 CampusPulse. Built for campus communities.</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
