@@ -6,13 +6,17 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
-load_dotenv()
+load_dotenv(override=True)
 
 db = SQLAlchemy()
 
 
+
 def create_app():
     app = Flask(__name__)
+
+    # Load the project's .env file before reading configuration.
+    load_dotenv(override=True)
 
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("DATABASE_URL")
@@ -42,3 +46,4 @@ def create_app():
             return {"database": "unavailable"}, 503
 
     return app
+
