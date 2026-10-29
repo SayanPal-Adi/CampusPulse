@@ -2,7 +2,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask, app
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -11,11 +11,9 @@ load_dotenv(override=True)
 db = SQLAlchemy()
 
 
-
 def create_app():
     app = Flask(__name__)
 
-    # Load the project's .env file before reading configuration.
     load_dotenv(override=True)
 
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
@@ -29,6 +27,7 @@ def create_app():
         raise RuntimeError("DATABASE_URL is missing from .env")
 
     db.init_app(app)
+
     from .routes import auth_bp, events_bp
 
     app.register_blueprint(auth_bp)
@@ -36,7 +35,6 @@ def create_app():
 
     @app.route("/")
     def home():
-        from flask import render_template
         return render_template("index.html")
 
     @app.route("/health/db")
@@ -49,5 +47,11 @@ def create_app():
             db.session.rollback()
             return {"database": "unavailable"}, 503
 
-    return app
+    @app.route("/student-dashboard")
+    def student_dashboard():
+        return render_template("student_dashboard.html")
 
+    @app.route("/login")
+    def login_page():
+        return render_template("login.html")
+    return app
