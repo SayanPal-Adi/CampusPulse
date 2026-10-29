@@ -1,61 +1,26 @@
-
-# Python
-__pycache__/
-*.py[cod]
-venv/
-.venv/
-
-# Environment variables and secrets
-.env
-.env.*
-
-# Flask and local databases
-instance/
-*.sqlite
-*.sqlite3
-*.db
-
-# Session cookies and credentials
-cookies.txt
-
-# Test and coverage output
-.pytest_cache/
-.coverage
-htmlcov/
-
-# Editor and operating system files
-.vscode/
-.DS_Store
-
-# Secrets and environment variables
+# Environment and secrets
 .env
 .env.*
 !.env.example
 
 # Python
-__pycache__/
-*.py[cod]
 venv/
 .venv/
+__pycache__/
+*.py[cod]
 
 # Session cookies
 cookies.txt
+student-cookies.txt
 
-# Local databases
-instance/
-*.sqlite
-*.sqlite3
-*.db
+# Local testing scripts
+create_test_student.py
+create_test_organizer.py
+reset_test_password.py
 
-# Test output
+# Local files
+.DS_Store
+.vscode/
 .pytest_cache/
 .coverage
 htmlcov/
-
-# Editor and OS files
-.vscode/
-.DS_Store
-
- # Local testing scripts
-create_test_organizer.py
-reset_test_password.py
