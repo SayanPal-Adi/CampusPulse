@@ -2,7 +2,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, app
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -29,6 +29,10 @@ def create_app():
         raise RuntimeError("DATABASE_URL is missing from .env")
 
     db.init_app(app)
+    from .routes import auth_bp, events_bp
+
+    app.register_blueprint(auth_bp)
+    app.register_blueprint(events_bp)
 
     @app.route("/")
     def home():

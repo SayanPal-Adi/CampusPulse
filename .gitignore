@@ -4,13 +4,19 @@ __pycache__/
 *.py[cod]
 venv/
 .venv/
+
+# Environment variables and secrets
 .env
+.env.*
 
 # Flask and local databases
 instance/
 *.sqlite
 *.sqlite3
 *.db
+
+# Session cookies and credentials
+cookies.txt
 
 # Test and coverage output
 .pytest_cache/
@@ -20,3 +26,36 @@ htmlcov/
 # Editor and operating system files
 .vscode/
 .DS_Store
+
+# Secrets and environment variables
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+
+# Session cookies
+cookies.txt
+
+# Local databases
+instance/
+*.sqlite
+*.sqlite3
+*.db
+
+# Test output
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor and OS files
+.vscode/
+.DS_Store
+
+ # Local testing scripts
+create_test_organizer.py
+reset_test_password.py
