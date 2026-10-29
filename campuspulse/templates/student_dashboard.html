@@ -1,0 +1,589 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | CampusPulse</title>
+
+    <style>
+        :root {
+            --primary: #315c4c;
+            --primary-light: #e9f1ec;
+            --background: #f6f7f5;
+            --surface: #ffffff;
+            --text: #25312b;
+            --muted: #737c76;
+            --border: #e3e7e3;
+            --danger: #a43f3f;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: var(--background);
+            color: var(--text);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        button {
+            font: inherit;
+            cursor: pointer;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 7%;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .logout-button {
+            padding: 9px 15px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            color: var(--text);
+        }
+
+        .container {
+            width: min(1100px, 90%);
+            margin: 38px auto;
+        }
+
+        .welcome {
+            margin-bottom: 25px;
+        }
+
+        .welcome h1 {
+            margin: 0 0 8px;
+            font-size: clamp(26px, 4vw, 36px);
+        }
+
+        .welcome p,
+        .muted {
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-bottom: 38px;
+        }
+
+        .summary-card {
+            padding: 22px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .summary-card p {
+            margin: 0 0 12px;
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .summary-card strong {
+            font-size: 28px;
+        }
+
+        .section {
+            margin-top: 38px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            font-size: 23px;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .event-card {
+            padding: 22px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .event-card h3 {
+            margin: 12px 0;
+            font-size: 19px;
+        }
+
+        .event-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .category {
+            display: inline-block;
+            padding: 6px 10px;
+            border-radius: 20px;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .status {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .status.registered {
+            color: var(--primary);
+        }
+
+        .status.cancelled {
+            color: var(--danger);
+        }
+
+        .primary-button,
+        .secondary-button,
+        .cancel-button {
+            margin-top: 12px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        .primary-button {
+            border: 1px solid var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .secondary-button {
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text);
+        }
+
+        .cancel-button {
+            border: 1px solid #e8caca;
+            background: #fff7f7;
+            color: var(--danger);
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+
+        .message {
+            margin: 16px 0;
+            padding: 12px 14px;
+            border-radius: 8px;
+            background: #fff;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .message.error {
+            color: var(--danger);
+            border: 1px solid #e8caca;
+        }
+
+        .empty {
+            padding: 25px;
+            border: 1px dashed #cbd3cc;
+            border-radius: 12px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        footer {
+            padding: 28px 15px;
+            margin-top: 55px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        @media (max-width: 650px) {
+            .topbar {
+                padding: 16px 5%;
+            }
+
+            .container {
+                width: 90%;
+                margin-top: 28px;
+            }
+
+            .summary {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .summary-card {
+                padding: 17px;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="topbar">
+        <div class="brand">CampusPulse</div>
+        <button class="logout-button" id="logoutButton">
+            Log out
+        </button>
+    </header>
+
+    <main class="container">
+        <section class="welcome">
+            <h1 id="welcomeTitle">Welcome to CampusPulse</h1>
+            <p>Discover campus events and keep track of your registrations.</p>
+        </section>
+
+        <div id="pageMessage" class="message" role="status" aria-live="polite">
+            Loading your dashboard...
+        </div>
+
+        <section class="summary" aria-label="Registration summary">
+            <div class="summary-card">
+                <p>Total registrations</p>
+                <strong id="totalCount">—</strong>
+            </div>
+            <div class="summary-card">
+                <p>Active registrations</p>
+                <strong id="activeCount">—</strong>
+            </div>
+            <div class="summary-card">
+                <p>Available events</p>
+                <strong id="availableCount">—</strong>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <h2>My registrations</h2>
+                <button class="secondary-button" id="refreshButton">
+                    Refresh
+                </button>
+            </div>
+            <div id="registrationsGrid" class="event-grid"></div>
+        </section>
+
+        <section class="section">
+            <div class="section-heading">
+                <h2>Explore events</h2>
+            </div>
+            <div id="eventsGrid" class="event-grid"></div>
+        </section>
+    </main>
+
+    <footer>
+        CampusPulse · Your campus, your events.
+    </footer>
+
+    <script>
+        const registrationsGrid = document.getElementById("registrationsGrid");
+        const eventsGrid = document.getElementById("eventsGrid");
+        const pageMessage = document.getElementById("pageMessage");
+
+        let registrations = [];
+        let events = [];
+
+        function showMessage(message, isError = false) {
+            pageMessage.textContent = message;
+            pageMessage.className = isError
+                ? "message error"
+                : "message";
+        }
+
+        async function apiRequest(url, options = {}) {
+            const response = await fetch(url, {
+                credentials: "same-origin",
+                ...options,
+                headers: {
+                    ...(options.body
+                        ? { "Content-Type": "application/json" }
+                        : {}),
+                    ...options.headers
+                }
+            });
+
+            const data = await response.json().catch(() => ({}));
+
+            if (response.status === 401) {
+                throw new Error("Your session has expired. Please log in again.");
+            }
+
+            if (!response.ok) {
+                throw new Error(
+                    data.error || `Request failed (${response.status})`
+                );
+            }
+
+            return data;
+        }
+
+        function formatDate(value) {
+            const date = new Date(value);
+
+            if (Number.isNaN(date.getTime())) {
+                return "Date unavailable";
+            }
+
+            return date.toLocaleString([], {
+                dateStyle: "medium",
+                timeStyle: "short"
+            });
+        }
+
+        function createElement(tag, className, text) {
+            const element = document.createElement(tag);
+
+            if (className) {
+                element.className = className;
+            }
+
+            if (text !== undefined) {
+                element.textContent = text;
+            }
+
+            return element;
+        }
+
+        function makeEventCard(event) {
+            const card = createElement("article", "event-card");
+
+            card.append(
+                createElement("span", "category", event.category || "General"),
+                createElement("h3", "", event.title),
+                createElement("p", "", `📍 ${event.venue}`),
+                createElement("p", "", `🗓 ${formatDate(event.starts_at)}`),
+                createElement("p", "", event.description || "No description provided.")
+            );
+
+            return card;
+        }
+
+        function renderRegistrations() {
+            registrationsGrid.replaceChildren();
+
+            if (registrations.length === 0) {
+                registrationsGrid.append(
+                    createElement(
+                        "div",
+                        "empty",
+                        "You haven't registered for any events yet. Browse the events below to get started."
+                    )
+                );
+                return;
+            }
+
+            registrations.forEach(registration => {
+                const event = registration.event;
+                const card = makeEventCard(event);
+                const isActive = registration.registration_status === "registered";
+
+                card.append(
+                    createElement(
+                        "span",
+                        `status ${isActive ? "registered" : "cancelled"}`,
+                        `Registration: ${registration.registration_status}`
+                    ),
+                    createElement(
+                        "p",
+                        "muted",
+                        `Registered on ${formatDate(registration.registered_at)}`
+                    )
+                );
+
+                if (isActive) {
+                    const cancelButton = createElement(
+                        "button",
+                        "cancel-button",
+                        "Cancel registration"
+                    );
+
+                    cancelButton.addEventListener("click", async () => {
+                        const confirmed = window.confirm(
+                            `Cancel your registration for "${event.title}"?`
+                        );
+
+                        if (!confirmed) return;
+
+                        cancelButton.disabled = true;
+
+                        try {
+                            await apiRequest(
+                                `/api/events/${encodeURIComponent(event.id)}/cancel`,
+                                { method: "POST" }
+                            );
+
+                            await loadDashboard();
+                            showMessage("Your registration has been cancelled.");
+                        } catch (error) {
+                            showMessage(error.message, true);
+                            cancelButton.disabled = false;
+                        }
+                    });
+
+                    card.append(cancelButton);
+                }
+
+                registrationsGrid.append(card);
+            });
+        }
+
+        function renderEvents() {
+            eventsGrid.replaceChildren();
+
+            if (events.length === 0) {
+                eventsGrid.append(
+                    createElement(
+                        "div",
+                        "empty",
+                        "There are no published events available right now."
+                    )
+                );
+                return;
+            }
+
+            events.forEach(event => {
+                const card = makeEventCard(event);
+
+                const activeRegistration = registrations.some(
+                    registration =>
+                        registration.event.id === event.id &&
+                        registration.registration_status === "registered"
+                );
+
+                const button = createElement(
+                    "button",
+                    activeRegistration ? "secondary-button" : "primary-button",
+                    activeRegistration ? "Already registered" : "Register"
+                );
+
+                button.disabled = activeRegistration;
+
+                button.addEventListener("click", async () => {
+                    button.disabled = true;
+
+                    try {
+                        await apiRequest(
+                            `/api/events/${encodeURIComponent(event.id)}/register`,
+                            { method: "POST" }
+                        );
+
+                        await loadDashboard();
+                        showMessage("Registration successful!");
+                    } catch (error) {
+                        showMessage(error.message, true);
+                        button.disabled = false;
+                    }
+                });
+
+                card.append(button);
+                eventsGrid.append(card);
+            });
+        }
+
+        async function loadDashboard() {
+            showMessage("Loading your dashboard...");
+
+            try {
+                const [registrationData, eventData] = await Promise.all([
+                    apiRequest("/api/events/my-registrations"),
+                    apiRequest("/api/events/")
+                ]);
+
+                registrations = registrationData.registrations || [];
+                events = eventData || [];
+
+                document.getElementById("welcomeTitle").textContent =
+                    `Welcome, ${registrationData.student.name}!`;
+
+                document.getElementById("totalCount").textContent =
+                    registrations.length;
+
+                document.getElementById("activeCount").textContent =
+                    registrations.filter(
+                        item => item.registration_status === "registered"
+                    ).length;
+
+                document.getElementById("availableCount").textContent =
+                    events.length;
+
+                renderRegistrations();
+                renderEvents();
+
+                showMessage("Your dashboard is up to date.");
+            } catch (error) {
+                showMessage(error.message, true);
+
+                registrationsGrid.replaceChildren(
+                    createElement("div", "empty", error.message)
+                );
+
+                eventsGrid.replaceChildren(
+                    createElement("div", "empty", "Events could not be loaded.")
+                );
+            }
+        }
+
+        document.getElementById("refreshButton").addEventListener(
+            "click",
+            loadDashboard
+        );
+
+        document.getElementById("logoutButton").addEventListener(
+            "click",
+            async () => {
+                try {
+                    await apiRequest("/api/auth/logout", {
+                        method: "POST"
+                    });
+
+                    window.location.href = "/";
+                } catch (error) {
+                    showMessage(error.message, true);
+                }
+            }
+        );
+
+        loadDashboard();
+    </script>
+</body>
+</html>
