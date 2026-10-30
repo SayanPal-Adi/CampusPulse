@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Organizer Dashboard | CampusPulse</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/organizer.css') }}">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="organizer-header">
+
+        <a href="{{ url_for('home') }}" class="organizer-logo">
+            CampusPulse
+        </a>
+
+        <div class="organizer-header-right">
+            <span class="organizer-role">Event Organizer</span>
+
+            <button id="logoutButton" class="logout-button">
+                Log out
+            </button>
+        </div>
+
+    </header>
+
+
+    <main class="organizer-container">
+
+        <!-- Welcome section -->
+        <section class="organizer-welcome">
+
+            <div>
+                <p class="organizer-eyebrow">
+                    ORGANIZER WORKSPACE
+                </p>
+
+                <h1>
+                    Welcome, {{ user.full_name }}!
+                </h1>
+
+                <p class="welcome-description">
+                    Create events, manage registrations and bring
+                    your campus community together.
+                </p>
+            </div>
+
+            <button id="createEventButton" class="primary-button">
+                + Create event
+            </button>
+
+        </section>
+
+
+        <!-- Notification -->
+        <div id="notification" class="notification" hidden></div>
+
+
+        <!-- Statistics -->
+        <section class="organizer-stats">
+
+            <article class="stat-card">
+                <p>Total events</p>
+                <h2 id="totalEvents">0</h2>
+            </article>
+
+            <article class="stat-card">
+                <p>Published events</p>
+                <h2 id="publishedEvents">0</h2>
+            </article>
+
+            <article class="stat-card">
+                <p>Draft events</p>
+                <h2 id="draftEvents">0</h2>
+            </article>
+
+        </section>
+
+
+        <!-- Event list -->
+        <section class="organizer-events">
+
+            <div class="section-heading">
+
+                <div>
+                    <p class="organizer-eyebrow">YOUR ACTIVITIES</p>
+                    <h2>My events</h2>
+                </div>
+
+                <button id="refreshButton" class="secondary-button">
+                    Refresh
+                </button>
+
+            </div>
+
+            <div id="eventsContainer" class="events-grid">
+
+                <div class="loading-message">
+                    Loading your events...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Create event modal -->
+        <div id="eventModal" class="modal" hidden>
+
+            <div class="modal-backdrop" id="modalBackdrop"></div>
+
+            <section class="modal-content">
+
+                <div class="modal-heading">
+
+                    <div>
+                        <p class="organizer-eyebrow">NEW CAMPUS EVENT</p>
+                        <h2>Create an event</h2>
+                    </div>
+
+                    <button
+                        type="button"
+                        id="closeModalButton"
+                        class="close-button"
+                        aria-label="Close"
+                    >
+                        &times;
+                    </button>
+
+                </div>
+
+
+                <form id="eventForm">
+
+                    <div class="form-group">
+                        <label for="eventTitle">Event title</label>
+
+                        <input
+                            type="text"
+                            id="eventTitle"
+                            name="title"
+                            placeholder="Enter event title"
+                            maxlength="200"
+                            required
+                        >
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="eventDescription">Description</label>
+
+                        <textarea
+                            id="eventDescription"
+                            name="description"
+                            rows="4"
+                            placeholder="Describe your event"
+                        ></textarea>
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="eventCategory">Category</label>
+
+                            <select id="eventCategory" name="category">
+                                <option value="Technology">Technology</option>
+                                <option value="Cultural">Cultural</option>
+                                <option value="Sports">Sports</option>
+                                <option value="Academic">Academic</option>
+                                <option value="Workshop">Workshop</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventVenue">Venue</label>
+
+                            <input
+                                type="text"
+                                id="eventVenue"
+                                name="venue"
+                                placeholder="Event venue"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+                            <label for="eventStart">Start date and time</label>
+
+                            <input
+                                type="datetime-local"
+                                id="eventStart"
+                                name="starts_at"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="eventEnd">End date and time</label>
+
+                            <input
+                                type="datetime-local"
+                                id="eventEnd"
+                                name="ends_at"
+                                required
+                            >
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="eventCapacity">
+                            Maximum participants
+                        </label>
+
+                        <input
+                            type="number"
+                            id="eventCapacity"
+                            name="capacity"
+                            min="1"
+                            placeholder="Leave empty for unlimited"
+                        >
+                    </div>
+
+
+                    <div class="modal-actions">
+
+                        <button
+                            type="button"
+                            id="cancelEventButton"
+                            class="secondary-button"
+                        >
+                            Cancel
+                        </button>
+
+                        <button
+                            type="submit"
+                            id="submitEventButton"
+                            class="primary-button"
+                        >
+                            Save as draft
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <footer class="organizer-footer">
+        <p>CampusPulse &copy; 2026. Built for campus communities.</p>
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/organizer.js') }}" defer></script>
+
+</body>
+</html>
