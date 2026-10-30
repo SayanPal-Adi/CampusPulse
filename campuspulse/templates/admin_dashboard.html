@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +7,9 @@
 
     <title>Admin Dashboard | CampusPulse</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
 
 <body>
@@ -28,10 +25,7 @@
                     <span>CampusPulse</span>
                 </a>
 
-                <button type="button"
-                        class="sidebar-close"
-                        id="sidebarClose"
-                        aria-label="Close sidebar">
+                <button type="button" class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
                     &times;
                 </button>
             </div>
@@ -51,30 +45,22 @@
 
                 <p class="sidebar-label">MAIN MENU</p>
 
-                <button type="button"
-                        class="nav-item active"
-                        data-section="overview">
+                <button type="button" class="nav-item active" data-section="overview">
                     <span class="nav-icon">⌂</span>
                     <span>Overview</span>
                 </button>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="users">
+                <button type="button" class="nav-item" data-section="users">
                     <span class="nav-icon">♙</span>
                     <span>User Management</span>
                 </button>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="events">
+                <button type="button" class="nav-item" data-section="events">
                     <span class="nav-icon">▦</span>
                     <span>Event Management</span>
                 </button>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="registrations">
+                <button type="button" class="nav-item" data-section="registrations">
                     <span class="nav-icon">☷</span>
                     <span>Registrations</span>
                 </button>
@@ -83,9 +69,7 @@
                     ANALYTICS
                 </p>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="reports">
+                <button type="button" class="nav-item" data-section="reports">
                     <span class="nav-icon">▥</span>
                     <span>Reports</span>
                 </button>
@@ -99,9 +83,7 @@
                     CampusPulse Admin
                 </div>
 
-                <button type="button"
-                        class="sidebar-logout"
-                        id="adminLogoutButton">
+                <button type="button" class="sidebar-logout" id="adminLogoutButton">
                     <span class="nav-icon">↪</span>
                     <span>Log out</span>
                 </button>
@@ -123,10 +105,7 @@
 
                 <div class="topbar-left">
 
-                    <button type="button"
-                            class="menu-toggle"
-                            id="menuToggle"
-                            aria-label="Open navigation">
+                    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open navigation">
                         ☰
                     </button>
 
@@ -155,11 +134,7 @@
 
 
             <!-- Notification -->
-            <div id="adminNotification"
-                 class="admin-notification"
-                 role="status"
-                 aria-live="polite"
-                 hidden>
+            <div id="adminNotification" class="admin-notification" role="status" aria-live="polite" hidden>
             </div>
 
 
@@ -171,8 +146,7 @@
                      OVERVIEW SECTION
                 ========================== -->
 
-                <section class="admin-section active"
-                         id="overviewSection">
+                <section class="admin-section active" id="overviewSection">
 
                     <div class="page-heading">
                         <div>
@@ -259,9 +233,7 @@
                                 from one place.
                             </p>
 
-                            <button type="button"
-                                    class="welcome-action"
-                                    data-go-section="users">
+                            <button type="button" class="welcome-action" data-go-section="users">
                                 Manage users
                                 <span>→</span>
                             </button>
@@ -292,9 +264,7 @@
 
                         <div class="management-grid">
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="users">
+                            <button type="button" class="management-card" data-go-section="users">
 
                                 <span class="management-icon">♙</span>
 
@@ -308,9 +278,7 @@
                             </button>
 
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="events">
+                            <button type="button" class="management-card" data-go-section="events">
 
                                 <span class="management-icon">▦</span>
 
@@ -324,9 +292,7 @@
                             </button>
 
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="registrations">
+                            <button type="button" class="management-card" data-go-section="registrations">
 
                                 <span class="management-icon">☷</span>
 
@@ -340,9 +306,7 @@
                             </button>
 
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="reports">
+                            <button type="button" class="management-card" data-go-section="reports">
 
                                 <span class="management-icon">▥</span>
 
@@ -362,47 +326,114 @@
                 </section>
 
 
-                <!-- =========================
-                     USER MANAGEMENT SECTION
-                ========================== -->
 
-                <section class="admin-section"
-                         id="usersSection">
+                <!-- =========================
+     USER MANAGEMENT SECTION
+========================== -->
+
+                <section class="admin-section" id="usersSection">
 
                     <div class="page-heading">
                         <div>
                             <p class="admin-eyebrow">PLATFORM CONTROL</p>
                             <h1>User Management</h1>
-
-                            <p>
-                                View and manage student and organizer accounts.
-                            </p>
+                            <p>View and manage student and organizer accounts.</p>
                         </div>
                     </div>
 
-                    <div class="section-placeholder">
+                    <!-- User Statistics -->
+                    <div class="user-management-stats">
 
-                        <div class="placeholder-icon">♙</div>
+                        <article class="user-stat-card">
+                            <p>Total accounts</p>
+                            <h2 id="userTotalCount">—</h2>
+                        </article>
 
-                        <h2>User management</h2>
+                        <article class="user-stat-card">
+                            <p>Students</p>
+                            <h2 id="userStudentCount">—</h2>
+                        </article>
 
-                        <p>
-                            The user directory, account details,
-                            role management and account controls
-                            will be implemented in the next step.
-                        </p>
+                        <article class="user-stat-card">
+                            <p>Organizers</p>
+                            <h2 id="userOrganizerCount">—</h2>
+                        </article>
+
+                    </div>
+
+                    <!-- User Directory -->
+                    <div class="user-directory">
+
+                        <div class="user-directory-heading">
+                            <div>
+                                <h2>All users</h2>
+                                <p>Browse registered CampusPulse accounts.</p>
+                            </div>
+
+                            <button type="button" class="user-refresh-button" id="refreshUsersButton">
+                                ↻ Refresh
+                            </button>
+                        </div>
+
+                        <!-- Search and Filter -->
+                        <div class="user-toolbar">
+
+                            <div class="user-search-wrapper">
+                                <span>⌕</span>
+
+                                <input type="search" id="userSearchInput" placeholder="Search by name or email..."
+                                    autocomplete="off">
+                            </div>
+
+                            <select id="userRoleFilter" aria-label="Filter users by role">
+                                <option value="all">All roles</option>
+                                <option value="student">Students</option>
+                                <option value="organizer">Organizers</option>
+                            </select>
+
+                        </div>
+
+                        <!-- Table -->
+                        <div class="user-table-wrapper">
+
+                            <table class="user-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>User</th>
+                                        <th>Email address</th>
+                                        <th>Role</th>
+                                        <th>Joined</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="usersTableBody">
+
+                                    <tr>
+                                        <td colspan="4" class="user-table-message">
+                                            Select User Management to load accounts.
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="user-directory-footer">
+                            <p id="userResultsMessage">No users loaded.</p>
+                        </div>
 
                     </div>
 
                 </section>
 
-
                 <!-- =========================
                      EVENT MANAGEMENT SECTION
                 ========================== -->
 
-                <section class="admin-section"
-                         id="eventsSection">
+                <section class="admin-section" id="eventsSection">
 
                     <div class="page-heading">
                         <div>
@@ -436,8 +467,7 @@
                      REGISTRATIONS SECTION
                 ========================== -->
 
-                <section class="admin-section"
-                         id="registrationsSection">
+                <section class="admin-section" id="registrationsSection">
 
                     <div class="page-heading">
                         <div>
@@ -471,8 +501,7 @@
                      REPORTS SECTION
                 ========================== -->
 
-                <section class="admin-section"
-                         id="reportsSection">
+                <section class="admin-section" id="reportsSection">
 
                     <div class="page-heading">
                         <div>
@@ -518,9 +547,9 @@
     </div>
 
 
-    <script src="{{ url_for('static', filename='js/admin.js') }}"
-            defer>
+    <script src="{{ url_for('static', filename='js/admin.js') }}" defer>
     </script>
 
 </body>
+
 </html>
