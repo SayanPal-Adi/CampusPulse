@@ -1,12 +1,14 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Login | CampusPulse</title>
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
@@ -27,8 +29,15 @@
             border-radius: 14px;
         }
 
-        h1 { margin-top: 0; color: #315c4c; }
-        p { color: #737c76; line-height: 1.5; }
+        h1 {
+            margin-top: 0;
+            color: #315c4c;
+        }
+
+        p {
+            color: #737c76;
+            line-height: 1.5;
+        }
 
         label {
             display: block;
@@ -64,6 +73,7 @@
         }
     </style>
 </head>
+
 <body>
     <main class="login-card">
         <h1>CampusPulse</h1>
@@ -71,12 +81,10 @@
 
         <form id="loginForm">
             <label for="email">Email address</label>
-            <input id="email" name="email" type="email"
-                   autocomplete="username" required>
+            <input id="email" name="email" type="email" autocomplete="username" required>
 
             <label for="password">Password</label>
-            <input id="password" name="password" type="password"
-                   autocomplete="current-password" required>
+            <input id="password" name="password" type="password" autocomplete="current-password" required>
 
             <button type="submit" id="loginButton">Log in</button>
             <div id="message" role="status" aria-live="polite"></div>
@@ -113,15 +121,26 @@
                     throw new Error(data.error || "Login failed.");
                 }
 
-                if (data.user.role !== "student") {
+
+                const dashboardRoutes = {
+                    student: "/student-dashboard",
+                    organizer: "/organizer-dashboard",
+                    admin: "/admin-dashboard"
+                };
+
+                const dashboardUrl = dashboardRoutes[data.user.role];
+
+                if (!dashboardUrl) {
                     await fetch("/api/auth/logout", {
                         method: "POST",
                         credentials: "same-origin"
                     });
-                    throw new Error("Please use a student account.");
+
+                    throw new Error("Invalid account role.");
                 }
 
-                window.location.href = "/student-dashboard";
+                window.location.href = dashboardUrl;
+
             } catch (error) {
                 message.textContent = error.message;
             } finally {
@@ -131,4 +150,5 @@
         });
     </script>
 </body>
+
 </html>
