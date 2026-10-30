@@ -1604,3 +1604,96 @@ a:focus-visible {
     }
 
 }
+
+
+/* =====================================
+   ADMIN EVENT ACTION BUTTONS
+===================================== */
+
+.admin-event-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    min-width: 110px;
+}
+
+/* Common action button styling */
+
+.event-status-action {
+    border: 1px solid var(--admin-border);
+    background: transparent;
+    color: var(--admin-text);
+    padding: 7px 11px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.event-status-action:hover {
+    background: var(--admin-border);
+}
+
+/* Suspend button */
+
+.event-status-action.danger {
+    color: #c0392b;
+    border-color: #e5b7b2;
+}
+
+.event-status-action.danger:hover {
+    background: #fcebea;
+    border-color: #e5b7b2;
+}
+
+/* Confirmation state */
+
+.event-status-action.confirming {
+    background: #fff3cd;
+    color: #856404;
+    border-color: #e5c76b;
+}
+
+.event-status-action.confirming:hover {
+    background: #ffe8a1;
+}
+
+/* Disabled state */
+
+.event-status-action:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =====================================
+   SUSPENDED EVENT STATUS BADGE
+===================================== */
+
+.event-status-badge.suspended {
+    background: #fff0e6;
+    color: #b45309;
+    border: 1px solid #f5d0b5;
+}
+
+
+/* =====================================
+   EVENT ACTIONS RESPONSIVENESS
+===================================== */
+
+@media (max-width: 768px) {
+
+    .admin-event-actions {
+        min-width: 100px;
+        gap: 6px;
+    }
+
+    .event-status-action {
+        padding: 6px 9px;
+        font-size: 11px;
+    }
+
+}

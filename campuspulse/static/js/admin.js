@@ -660,7 +660,11 @@ function displayAdminEvents(events) {
 
         const status = String(event.status ?? "").toLowerCase();
 
-        const statusClass = ["published", "draft"].includes(status)
+        const statusClass = [
+            "published",
+            "draft",
+            "suspended"
+        ].includes(status)
             ? status
             : "other";
 
@@ -711,12 +715,66 @@ function displayAdminEvents(events) {
                 </td>
 
                 <td>
-                    <button
-                        type="button"
-                        class="event-view-button"
-                        data-event-id="${eventId}">
-                        View details
-                    </button>
+                    <div class="admin-event-actions">
+
+                        <button
+                            type="button"
+                            class="event-view-button"
+                            data-event-id="${eventId}">
+                            View details
+                        </button>
+
+                        ${
+                            status === "published"
+                                ? `
+                                    <button
+                                        type="button"
+                                        class="event-status-action"
+                                        data-event-action="draft"
+                                        data-event-id="${eventId}">
+                                        Unpublish
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="event-status-action danger"
+                                        data-event-action="suspended"
+                                        data-event-id="${eventId}">
+                                        Suspend
+                                    </button>
+                                `
+                                : status === "suspended"
+                                    ? `
+                                        <button
+                                            type="button"
+                                            class="event-status-action"
+                                            data-event-action="published"
+                                            data-event-id="${eventId}">
+                                            Republish
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            class="event-status-action"
+                                            data-event-action="draft"
+                                            data-event-id="${eventId}">
+                                            Unpublish
+                                        </button>
+                                    `
+                                    : status === "draft"
+                                        ? `
+                                            <button
+                                                type="button"
+                                                class="event-status-action"
+                                                data-event-action="published"
+                                                data-event-id="${eventId}">
+                                                Publish
+                                            </button>
+                                        `
+                                        : ""
+                        }
+
+                    </div>
                 </td>
 
             </tr>
@@ -727,6 +785,85 @@ function displayAdminEvents(events) {
     adminEventResultsMessage.textContent =
         `Showing ${events.length} event(s).`;
 
+}
+
+
+// =====================================
+// ADMIN EVENT STATUS CONTROLS
+// =====================================
+
+async function updateAdminEventStatus(eventId, newStatus, button) {
+
+    const actionLabels = {
+        published: "Republish",
+        draft: "Unpublish",
+        suspended: "Suspend"
+    };
+
+    // First click asks for confirmation.
+    if (button.dataset.confirming !== "true") {
+
+        const actionLabel = actionLabels[newStatus];
+
+        button.dataset.confirming = "true";
+        button.textContent = `Confirm ${actionLabel}`;
+        button.classList.add("confirming");
+
+        showAdminNotification(
+            `Click "Confirm ${actionLabel}" to continue.`,
+            "success"
+        );
+
+        return;
+    }
+
+    // Second click performs the status update.
+    button.disabled = true;
+    button.textContent = "Updating...";
+
+    try {
+
+        const response = await fetch(
+            `/api/auth/admin/events/${encodeURIComponent(eventId)}/status`,
+            {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    status: newStatus
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Unable to update event status."
+            );
+        }
+
+        showAdminNotification(
+            data.message || "Event status updated successfully."
+        );
+
+        // Reload events and dashboard statistics.
+        await loadAdminEvents();
+        await loadAdminStatistics();
+
+    } catch (error) {
+
+        console.error("Event status update error:", error);
+
+        showAdminNotification(error.message, "error");
+
+        button.disabled = false;
+        button.dataset.confirming = "false";
+        button.textContent = actionLabels[newStatus];
+        button.classList.remove("confirming");
+    }
 }
 
 
@@ -793,7 +930,7 @@ function openAdminEventDetails(eventId) {
     statusElement.textContent = status;
     statusElement.className = "event-status-badge";
 
-    if (["published", "draft"].includes(status)) {
+    if (["published", "draft", "suspended"].includes(status)) {
         statusElement.classList.add(status);
     } else {
         statusElement.classList.add("other");
@@ -859,6 +996,21 @@ adminEventsTableBody.addEventListener("click", function (event) {
         return;
     }
 
+    // Handle event status actions first.
+    const newStatus = button.dataset.eventAction;
+
+    if (newStatus) {
+
+        updateAdminEventStatus(
+            button.dataset.eventId,
+            newStatus,
+            button
+        );
+
+        return;
+    }
+
+    // Otherwise, open event details.
     openAdminEventDetails(button.dataset.eventId);
 
 });
