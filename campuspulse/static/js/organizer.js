@@ -30,12 +30,27 @@ const submitEventButton = document.getElementById("submitEventButton");
 const eventModalTitle = document.getElementById("eventModalTitle");
 const eventModalEyebrow = document.getElementById("eventModalEyebrow");
 
+// Registration modal elements
+const registrationsModal = document.getElementById("registrationsModal");
+const registrationsBackdrop = document.getElementById("registrationsBackdrop");
+const closeRegistrationsButton = document.getElementById("closeRegistrationsButton");
 
-// Currently selected event being edited.
-// null means that the form is in Create mode.
+const registrationsEventTitle = document.getElementById("registrationsEventTitle");
+const totalRegistrations = document.getElementById("totalRegistrations");
+const activeRegistrations = document.getElementById("activeRegistrations");
+const cancelledRegistrations = document.getElementById("cancelledRegistrations");
+
+const registrationsMessage = document.getElementById("registrationsMessage");
+const registrationsTableBody = document.getElementById("registrationsTableBody");
+const downloadRegistrationsButton = document.getElementById("downloadRegistrationsButton");
+
+
+// Application state
 let editingEventId = null;
-
 let organizerEvents = [];
+
+let currentRegistrations = [];
+let currentRegistrationEventTitle = "";
 
 
 // =====================================
@@ -78,8 +93,7 @@ function formatDate(dateValue) {
 }
 
 
-// Convert an API date into the format required by datetime-local.
-// The input expects local time without a timezone suffix.
+// Convert API date into datetime-local format.
 function toDateTimeLocal(value) {
     if (!value) {
         return "";
@@ -102,7 +116,6 @@ function toDateTimeLocal(value) {
 // Display inline notifications.
 function showNotification(message, type = "success") {
     notification.textContent = message;
-
     notification.className = "notification";
 
     if (type === "error") {
@@ -126,7 +139,7 @@ function hideNotification() {
 
 
 // =====================================
-// Modal Controls
+// Create / Edit Event Modal
 // =====================================
 
 function openCreateModal() {
@@ -164,7 +177,6 @@ function openEditModal(eventId) {
 
     editingEventId = selectedEvent.id;
 
-    // Fill the form with existing event details.
     document.getElementById("eventTitle").value =
         selectedEvent.title || "";
 
@@ -201,12 +213,10 @@ function openEditModal(eventId) {
 
 function closeModal() {
     eventModal.hidden = true;
-
     document.body.style.overflow = "";
 
     eventForm.reset();
 
-    // Reset modal back to Create mode.
     editingEventId = null;
 
     eventModalTitle.textContent = "Create an event";
@@ -226,11 +236,46 @@ cancelEventButton.addEventListener("click", closeModal);
 modalBackdrop.addEventListener("click", closeModal);
 
 
-// Close modal using Escape key.
+// =====================================
+// Registration Modal Controls
+// =====================================
+
+function openRegistrationsModal() {
+    registrationsModal.hidden = false;
+    document.body.style.overflow = "hidden";
+}
+
+
+function closeRegistrationsModal() {
+    registrationsModal.hidden = true;
+    document.body.style.overflow = "";
+}
+
+
+closeRegistrationsButton.addEventListener(
+    "click",
+    closeRegistrationsModal
+);
+
+registrationsBackdrop.addEventListener(
+    "click",
+    closeRegistrationsModal
+);
+
+
+// Close modals using Escape key.
 document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && !eventModal.hidden) {
+
+    if (event.key !== "Escape") {
+        return;
+    }
+
+    if (!registrationsModal.hidden) {
+        closeRegistrationsModal();
+    } else if (!eventModal.hidden) {
         closeModal();
     }
+
 });
 
 
@@ -323,10 +368,9 @@ function displayEvents(events) {
 
     // Generate event cards.
     eventsContainer.innerHTML = events.map(event => {
+
         const status = escapeHTML(event.status);
-
         const category = escapeHTML(event.category);
-
         const title = escapeHTML(event.title);
 
         const description = escapeHTML(
@@ -348,7 +392,7 @@ function displayEvents(events) {
         );
 
 
-        // Edit and Publish buttons are available only for drafts.
+        // Draft-only actions.
         const draftActions = event.status === "draft"
             ? `
                 <button
@@ -416,15 +460,26 @@ function displayEvents(events) {
                 </div>
 
                 <div class="event-actions">
+
                     ${draftActions}
+
+                    <button
+                        type="button"
+                        class="registration-button"
+                        data-registrations-id="${escapeHTML(event.id)}"
+                    >
+                        View registrations
+                    </button>
+
                 </div>
 
             </article>
         `;
+
     }).join("");
 
 
-    // Attach Edit event listeners.
+    // Edit event listeners.
     document.querySelectorAll("[data-edit-id]")
         .forEach(button => {
             button.addEventListener("click", function () {
@@ -433,13 +488,20 @@ function displayEvents(events) {
         });
 
 
-    // Attach Publish event listeners.
+    // Publish event listeners.
     document.querySelectorAll("[data-publish-id]")
         .forEach(button => {
             button.addEventListener("click", function () {
-                const eventId = button.dataset.publishId;
+                publishEvent(button.dataset.publishId, button);
+            });
+        });
 
-                publishEvent(eventId, button);
+
+    // View registrations listeners.
+    document.querySelectorAll("[data-registrations-id]")
+        .forEach(button => {
+            button.addEventListener("click", function () {
+                loadRegistrations(button.dataset.registrationsId, button);
             });
         });
 }
@@ -498,24 +560,18 @@ eventForm.addEventListener("submit", async function (event) {
 
         const eventData = {
             title: formData.get("title").trim(),
-
             description: formData.get("description").trim(),
-
             category: formData.get("category"),
-
             venue: formData.get("venue").trim(),
-
             starts_at: startsAt.toISOString(),
-
             ends_at: endsAt.toISOString(),
-
             capacity: capacityValue
                 ? Number(capacityValue)
                 : null
         };
 
 
-        // Decide whether this is Create or Update.
+        // Decide Create or Update.
         const isEditing = editingEventId !== null;
 
         const url = isEditing
@@ -528,7 +584,6 @@ eventForm.addEventListener("submit", async function (event) {
         // Send request to Flask.
         const response = await fetch(url, {
             method: method,
-
             credentials: "same-origin",
 
             headers: {
@@ -541,7 +596,6 @@ eventForm.addEventListener("submit", async function (event) {
 
         const data = await response.json();
 
-
         if (!response.ok) {
             throw new Error(
                 data.error ||
@@ -552,9 +606,7 @@ eventForm.addEventListener("submit", async function (event) {
         }
 
 
-        // Close modal after success.
         closeModal();
-
 
         showNotification(
             isEditing
@@ -562,8 +614,6 @@ eventForm.addEventListener("submit", async function (event) {
                 : "Event created successfully and saved as a draft."
         );
 
-
-        // Refresh event list.
         await loadEvents();
 
     }
@@ -575,11 +625,9 @@ eventForm.addEventListener("submit", async function (event) {
     finally {
         submitEventButton.disabled = false;
 
-        if (editingEventId === null) {
-            submitEventButton.textContent = "Save as draft";
-        } else {
-            submitEventButton.textContent = "Save changes";
-        }
+        submitEventButton.textContent = editingEventId === null
+            ? "Save as draft"
+            : "Save changes";
     }
 });
 
@@ -592,23 +640,18 @@ async function publishEvent(eventId, button) {
     hideNotification();
 
     button.disabled = true;
-
     button.textContent = "Publishing...";
-
 
     try {
         const response = await fetch(
             `/api/events/${encodeURIComponent(eventId)}/publish`,
             {
                 method: "POST",
-
                 credentials: "same-origin"
             }
         );
 
-
         const data = await response.json();
-
 
         if (!response.ok) {
             throw new Error(
@@ -616,13 +659,8 @@ async function publishEvent(eventId, button) {
             );
         }
 
+        showNotification("Event published successfully!");
 
-        showNotification(
-            "Event published successfully!"
-        );
-
-
-        // Reload event list and statistics.
         await loadEvents();
 
     }
@@ -631,10 +669,227 @@ async function publishEvent(eventId, button) {
         showNotification(error.message, "error");
 
         button.disabled = false;
-
         button.textContent = "Publish event";
     }
 }
+
+
+// =====================================
+// Event Registration Management
+// =====================================
+
+async function loadRegistrations(eventId, button) {
+
+    const selectedEvent = organizerEvents.find(
+        event => String(event.id) === String(eventId)
+    );
+
+    if (!selectedEvent) {
+        showNotification("Unable to find this event.", "error");
+        return;
+    }
+
+    currentRegistrations = [];
+    currentRegistrationEventTitle = selectedEvent.title;
+
+    registrationsEventTitle.textContent = selectedEvent.title;
+
+    totalRegistrations.textContent = "0";
+    activeRegistrations.textContent = "0";
+    cancelledRegistrations.textContent = "0";
+
+    registrationsMessage.textContent = "Loading registrations...";
+
+    registrationsTableBody.innerHTML = `
+        <tr>
+            <td colspan="4">Loading registrations...</td>
+        </tr>
+    `;
+
+    downloadRegistrationsButton.disabled = true;
+
+    openRegistrationsModal();
+
+    const originalText = button.textContent;
+
+    button.disabled = true;
+    button.textContent = "Loading...";
+
+    try {
+        const response = await fetch(
+            `/api/events/${encodeURIComponent(eventId)}/registrations`,
+            {
+                method: "GET",
+                credentials: "same-origin"
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Unable to load registrations."
+            );
+        }
+
+        currentRegistrations = Array.isArray(data.registrations)
+            ? data.registrations
+            : [];
+
+
+        // Update statistics.
+        totalRegistrations.textContent =
+            data.total_registrations ?? currentRegistrations.length;
+
+        activeRegistrations.textContent =
+            data.active_registrations ?? 0;
+
+        cancelledRegistrations.textContent =
+            data.cancelled_registrations ?? 0;
+
+
+        registrationsMessage.textContent =
+            currentRegistrations.length === 0
+                ? "No registrations found for this event."
+                : `${currentRegistrations.length} registration(s) found.`;
+
+
+        displayRegistrations(currentRegistrations);
+
+        downloadRegistrationsButton.disabled =
+            currentRegistrations.length === 0;
+
+    }
+
+    catch (error) {
+        registrationsMessage.textContent = error.message;
+
+        registrationsTableBody.innerHTML = `
+            <tr>
+                <td colspan="4">${escapeHTML(error.message)}</td>
+            </tr>
+        `;
+
+        showNotification(error.message, "error");
+    }
+
+    finally {
+        button.disabled = false;
+        button.textContent = originalText;
+    }
+}
+
+
+// Display registrations in the table.
+function displayRegistrations(registrations) {
+
+    if (registrations.length === 0) {
+        registrationsTableBody.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    No students have registered for this event yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    registrationsTableBody.innerHTML = registrations.map(registration => {
+
+        const name = escapeHTML(registration.student_name);
+        const email = escapeHTML(registration.student_email);
+
+        const date = escapeHTML(
+            formatDate(registration.registered_at)
+        );
+
+        const status = escapeHTML(registration.status);
+
+        return `
+            <tr>
+                <td>${name}</td>
+                <td>${email}</td>
+                <td>${date}</td>
+                <td>
+                    <span class="registration-status ${status}">
+                        ${status}
+                    </span>
+                </td>
+            </tr>
+        `;
+
+    }).join("");
+}
+
+
+// =====================================
+// Download Registrations as CSV
+// =====================================
+
+function downloadRegistrationsCSV() {
+
+    if (currentRegistrations.length === 0) {
+        return;
+    }
+
+    function escapeCSV(value) {
+        const text = String(value ?? "");
+        return `"${text.replace(/"/g, '""')}"`;
+    }
+
+
+    const headers = [
+        "Student Name",
+        "Email",
+        "Registration Date",
+        "Status"
+    ];
+
+    const rows = currentRegistrations.map(registration => [
+        registration.student_name,
+        registration.student_email,
+        registration.registered_at,
+        registration.status
+    ]);
+
+
+    const csvContent = [
+        headers,
+        ...rows
+    ]
+        .map(row => row.map(escapeCSV).join(","))
+        .join("\r\n");
+
+
+    const blob = new Blob(
+        ["\uFEFF" + csvContent],
+        { type: "text/csv;charset=utf-8;" }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+        `${currentRegistrationEventTitle.replace(/[^a-z0-9_-]/gi, "_")}_registrations.csv`;
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+}
+
+
+downloadRegistrationsButton.addEventListener(
+    "click",
+    downloadRegistrationsCSV
+);
 
 
 // =====================================
@@ -643,7 +898,6 @@ async function publishEvent(eventId, button) {
 
 refreshButton.addEventListener("click", function () {
     hideNotification();
-
     loadEvents();
 });
 
@@ -653,20 +907,17 @@ refreshButton.addEventListener("click", function () {
 // =====================================
 
 logoutButton.addEventListener("click", async function () {
+
     hideNotification();
 
     logoutButton.disabled = true;
-
     logoutButton.textContent = "Logging out...";
-
 
     try {
         const response = await fetch("/api/auth/logout", {
             method: "POST",
-
             credentials: "same-origin"
         });
-
 
         if (!response.ok) {
             throw new Error(
@@ -674,8 +925,6 @@ logoutButton.addEventListener("click", async function () {
             );
         }
 
-
-        // Redirect after successful logout.
         window.location.href = "/login";
     }
 
@@ -683,7 +932,6 @@ logoutButton.addEventListener("click", async function () {
         showNotification(error.message, "error");
 
         logoutButton.disabled = false;
-
         logoutButton.textContent = "Log out";
     }
 });
