@@ -2,13 +2,28 @@
 from datetime import datetime
 from uuid import UUID
 
-from flask import Blueprint, jsonify, request, session
+from flask import (
+    Blueprint,
+    jsonify,
+    request,
+    session,
+    render_template,
+    redirect,
+    url_for,
+    current_app,
+)
+
 from sqlalchemy import func, select
 from sqlalchemy.exc import IntegrityError
-from werkzeug.security import check_password_hash
+
+from werkzeug.security import (
+    check_password_hash,
+    generate_password_hash,
+)
 
 from . import db
 from .models import Event, Registration, User
+
 
 events_bp = Blueprint("events", __name__, url_prefix="/api/events")
 auth_bp = Blueprint("auth", __name__, url_prefix="/api/auth")
@@ -67,6 +82,112 @@ def login():
             "role": user.role,
         },
     }), 200
+
+
+@auth_bp.route("/register", methods=["POST"])
+def register():
+
+    # Collect form data
+    full_name = request.form.get("full_name", "").strip()
+    email = request.form.get("email", "").strip().lower()
+    password = request.form.get("password", "")
+    confirm_password = request.form.get("confirm_password", "")
+    role = request.form.get("role", "").strip().lower()
+
+    # Validate required fields
+    if not all([full_name, email, password, confirm_password, role]):
+        return render_template(
+            "register.html",
+            error="Please fill in all fields."
+        ), 400
+
+    # Validate full name
+    if len(full_name) > 150:
+        return render_template(
+            "register.html",
+            error="Full name is too long."
+        ), 400
+
+    # Basic email validation
+    if (
+        len(email) > 254
+        or "@" not in email
+        or "." not in email.rsplit("@", 1)[-1]
+    ):
+        return render_template(
+            "register.html",
+            error="Please enter a valid email address."
+        ), 400
+
+    # Validate password
+    if len(password) < 8:
+        return render_template(
+            "register.html",
+            error="Password must contain at least 8 characters."
+        ), 400
+
+    if len(password.encode("utf-8")) > 1024:
+        return render_template(
+            "register.html",
+            error="Password is too long."
+        ), 400
+
+    # Confirm password
+    if password != confirm_password:
+        return render_template(
+            "register.html",
+            error="Passwords do not match."
+        ), 400
+
+    # Restrict account roles
+    if role not in ("student", "organizer"):
+        return render_template(
+            "register.html",
+            error="Please select a valid account type."
+        ), 400
+
+    # Check for an existing account
+    existing_user = db.session.execute(
+        select(User).where(User.email == email)
+    ).scalar_one_or_none()
+
+    if existing_user:
+        return render_template(
+            "register.html",
+            error="An account with this email already exists."
+        ), 409
+
+    # Hash the password before saving
+    new_user = User(
+        full_name=full_name,
+        email=email,
+        password_hash=generate_password_hash(password),
+        role=role,
+    )
+
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+
+    except IntegrityError:
+        db.session.rollback()
+
+        return render_template(
+            "register.html",
+            error="An account with this email already exists."
+        ), 409
+
+    except Exception:
+        db.session.rollback()
+        current_app.logger.exception("User registration failed")
+
+        return render_template(
+            "register.html",
+            error="Registration failed. Please try again."
+        ), 500
+
+    # Registration successful
+    return redirect(url_for("login_page"))
 
 
 @auth_bp.route("/logout", methods=["POST"])
