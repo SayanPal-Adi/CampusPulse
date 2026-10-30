@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | CampusPulse</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- Sidebar -->
+        <aside class="admin-sidebar" id="adminSidebar">
+
+            <div class="sidebar-brand">
+                <a href="{{ url_for('home') }}" class="admin-logo">
+                    <span class="logo-icon">C</span>
+                    <span>CampusPulse</span>
+                </a>
+
+                <button type="button"
+                        class="sidebar-close"
+                        id="sidebarClose"
+                        aria-label="Close sidebar">
+                    &times;
+                </button>
+            </div>
+
+            <div class="sidebar-profile">
+                <div class="profile-avatar">
+                    {{ user.full_name[0]|upper }}
+                </div>
+
+                <div class="profile-details">
+                    <h3>{{ user.full_name }}</h3>
+                    <p>Administrator</p>
+                </div>
+            </div>
+
+            <nav class="sidebar-navigation">
+
+                <p class="sidebar-label">MAIN MENU</p>
+
+                <button type="button"
+                        class="nav-item active"
+                        data-section="overview">
+                    <span class="nav-icon">⌂</span>
+                    <span>Overview</span>
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-section="users">
+                    <span class="nav-icon">♙</span>
+                    <span>User Management</span>
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-section="events">
+                    <span class="nav-icon">▦</span>
+                    <span>Event Management</span>
+                </button>
+
+                <button type="button"
+                        class="nav-item"
+                        data-section="registrations">
+                    <span class="nav-icon">☷</span>
+                    <span>Registrations</span>
+                </button>
+
+                <p class="sidebar-label sidebar-label-secondary">
+                    ANALYTICS
+                </p>
+
+                <button type="button"
+                        class="nav-item"
+                        data-section="reports">
+                    <span class="nav-icon">▥</span>
+                    <span>Reports</span>
+                </button>
+
+            </nav>
+
+            <div class="sidebar-bottom">
+
+                <div class="sidebar-version">
+                    <span class="version-dot"></span>
+                    CampusPulse Admin
+                </div>
+
+                <button type="button"
+                        class="sidebar-logout"
+                        id="adminLogoutButton">
+                    <span class="nav-icon">↪</span>
+                    <span>Log out</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- Mobile sidebar overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+        <!-- Main content -->
+        <main class="admin-main">
+
+            <!-- Topbar -->
+            <header class="admin-topbar">
+
+                <div class="topbar-left">
+
+                    <button type="button"
+                            class="menu-toggle"
+                            id="menuToggle"
+                            aria-label="Open navigation">
+                        ☰
+                    </button>
+
+                    <div>
+                        <p class="topbar-breadcrumb">
+                            CampusPulse / Admin
+                        </p>
+
+                        <h2 id="topbarTitle">Overview</h2>
+                    </div>
+
+                </div>
+
+                <div class="topbar-right">
+                    <span class="admin-status">
+                        <span class="status-dot"></span>
+                        Administrator
+                    </span>
+
+                    <div class="topbar-avatar">
+                        {{ user.full_name[0]|upper }}
+                    </div>
+                </div>
+
+            </header>
+
+
+            <!-- Notification -->
+            <div id="adminNotification"
+                 class="admin-notification"
+                 role="status"
+                 aria-live="polite"
+                 hidden>
+            </div>
+
+
+            <!-- Dashboard content -->
+            <div class="admin-content">
+
+
+                <!-- =========================
+                     OVERVIEW SECTION
+                ========================== -->
+
+                <section class="admin-section active"
+                         id="overviewSection">
+
+                    <div class="page-heading">
+                        <div>
+                            <p class="admin-eyebrow">
+                                PLATFORM OVERVIEW
+                            </p>
+
+                            <h1>Welcome back, {{ user.full_name }}!</h1>
+
+                            <p>
+                                Here's what's happening across your
+                                campus community.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <!-- Statistics -->
+                    <div class="overview-stats">
+
+                        <article class="overview-card">
+                            <div class="overview-card-top">
+                                <span>Total students</span>
+                                <span class="overview-icon">♙</span>
+                            </div>
+
+                            <h2 id="totalStudents">—</h2>
+
+                            <p>Registered student accounts</p>
+                        </article>
+
+
+                        <article class="overview-card">
+                            <div class="overview-card-top">
+                                <span>Organizers</span>
+                                <span class="overview-icon">♧</span>
+                            </div>
+
+                            <h2 id="totalOrganizers">—</h2>
+
+                            <p>Registered event organizers</p>
+                        </article>
+
+
+                        <article class="overview-card">
+                            <div class="overview-card-top">
+                                <span>Total events</span>
+                                <span class="overview-icon">▦</span>
+                            </div>
+
+                            <h2 id="totalEvents">—</h2>
+
+                            <p>Events across the platform</p>
+                        </article>
+
+
+                        <article class="overview-card">
+                            <div class="overview-card-top">
+                                <span>Registrations</span>
+                                <span class="overview-icon">☷</span>
+                            </div>
+
+                            <h2 id="totalRegistrations">—</h2>
+
+                            <p>Total event registrations</p>
+                        </article>
+
+                    </div>
+
+
+                    <!-- Welcome panel -->
+                    <section class="admin-welcome-panel">
+
+                        <div class="welcome-panel-content">
+                            <p class="admin-eyebrow">
+                                ADMINISTRATOR WORKSPACE
+                            </p>
+
+                            <h2>Manage your campus community.</h2>
+
+                            <p>
+                                Monitor platform activity, manage users,
+                                oversee events and review registrations
+                                from one place.
+                            </p>
+
+                            <button type="button"
+                                    class="welcome-action"
+                                    data-go-section="users">
+                                Manage users
+                                <span>→</span>
+                            </button>
+                        </div>
+
+                        <div class="welcome-panel-decoration">
+                            <div class="decoration-circle circle-one"></div>
+                            <div class="decoration-circle circle-two"></div>
+                            <div class="decoration-circle circle-three"></div>
+                        </div>
+
+                    </section>
+
+
+                    <!-- Quick management -->
+                    <section class="quick-management">
+
+                        <div class="section-title">
+                            <div>
+                                <p class="admin-eyebrow">
+                                    PLATFORM CONTROL
+                                </p>
+
+                                <h2>Quick management</h2>
+                            </div>
+                        </div>
+
+
+                        <div class="management-grid">
+
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="users">
+
+                                <span class="management-icon">♙</span>
+
+                                <span class="management-card-text">
+                                    <strong>Manage users</strong>
+                                    <small>View student and organizer accounts</small>
+                                </span>
+
+                                <span class="management-arrow">→</span>
+
+                            </button>
+
+
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="events">
+
+                                <span class="management-icon">▦</span>
+
+                                <span class="management-card-text">
+                                    <strong>Manage events</strong>
+                                    <small>Review and manage campus events</small>
+                                </span>
+
+                                <span class="management-arrow">→</span>
+
+                            </button>
+
+
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="registrations">
+
+                                <span class="management-icon">☷</span>
+
+                                <span class="management-card-text">
+                                    <strong>Registrations</strong>
+                                    <small>Monitor event participation</small>
+                                </span>
+
+                                <span class="management-arrow">→</span>
+
+                            </button>
+
+
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="reports">
+
+                                <span class="management-icon">▥</span>
+
+                                <span class="management-card-text">
+                                    <strong>View reports</strong>
+                                    <small>Explore platform statistics</small>
+                                </span>
+
+                                <span class="management-arrow">→</span>
+
+                            </button>
+
+                        </div>
+
+                    </section>
+
+                </section>
+
+
+                <!-- =========================
+                     USER MANAGEMENT SECTION
+                ========================== -->
+
+                <section class="admin-section"
+                         id="usersSection">
+
+                    <div class="page-heading">
+                        <div>
+                            <p class="admin-eyebrow">PLATFORM CONTROL</p>
+                            <h1>User Management</h1>
+
+                            <p>
+                                View and manage student and organizer accounts.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="section-placeholder">
+
+                        <div class="placeholder-icon">♙</div>
+
+                        <h2>User management</h2>
+
+                        <p>
+                            The user directory, account details,
+                            role management and account controls
+                            will be implemented in the next step.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     EVENT MANAGEMENT SECTION
+                ========================== -->
+
+                <section class="admin-section"
+                         id="eventsSection">
+
+                    <div class="page-heading">
+                        <div>
+                            <p class="admin-eyebrow">PLATFORM CONTROL</p>
+                            <h1>Event Management</h1>
+
+                            <p>
+                                Oversee all events created on CampusPulse.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="section-placeholder">
+
+                        <div class="placeholder-icon">▦</div>
+
+                        <h2>Event management</h2>
+
+                        <p>
+                            The event directory, event status controls
+                            and event moderation tools will be
+                            implemented in a later step.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     REGISTRATIONS SECTION
+                ========================== -->
+
+                <section class="admin-section"
+                         id="registrationsSection">
+
+                    <div class="page-heading">
+                        <div>
+                            <p class="admin-eyebrow">PARTICIPATION</p>
+                            <h1>Registrations</h1>
+
+                            <p>
+                                Monitor registrations across all campus events.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="section-placeholder">
+
+                        <div class="placeholder-icon">☷</div>
+
+                        <h2>Registration management</h2>
+
+                        <p>
+                            Registration records, student participation
+                            and event-wise registration details will
+                            be implemented in a later step.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =========================
+                     REPORTS SECTION
+                ========================== -->
+
+                <section class="admin-section"
+                         id="reportsSection">
+
+                    <div class="page-heading">
+                        <div>
+                            <p class="admin-eyebrow">ANALYTICS</p>
+                            <h1>Reports</h1>
+
+                            <p>
+                                Understand activity across the platform.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="section-placeholder">
+
+                        <div class="placeholder-icon">▥</div>
+
+                        <h2>Reports and analytics</h2>
+
+                        <p>
+                            Charts, participation reports and
+                            platform analytics will be implemented
+                            in a later step.
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+            <!-- Footer -->
+            <footer class="admin-footer">
+                <p>
+                    CampusPulse &copy; 2026.
+                    Built for campus communities.
+                </p>
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/admin.js') }}"
+            defer>
+    </script>
+
+</body>
+</html>
