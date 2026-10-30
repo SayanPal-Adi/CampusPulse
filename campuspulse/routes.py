@@ -49,6 +49,72 @@ def get_current_user():
 
 
 # -------------------------
+# Admin Dashboard Statistics
+# -------------------------
+
+@auth_bp.route("/admin/stats", methods=["GET"])
+def admin_statistics():
+
+    user = get_current_user()
+
+    # Authentication check
+    if user is None:
+        return jsonify({
+            "error": "Please log in first."
+        }), 401
+
+    # Admin authorization check
+    if user.role != "admin":
+        return jsonify({
+            "error": "Administrator permission required."
+        }), 403
+
+    try:
+
+        # Count students
+        total_students = db.session.scalar(
+            select(func.count())
+            .select_from(User)
+            .where(User.role == "student")
+        )
+
+        # Count organizers
+        total_organizers = db.session.scalar(
+            select(func.count())
+            .select_from(User)
+            .where(User.role == "organizer")
+        )
+
+        # Count all events
+        total_events = db.session.scalar(
+            select(func.count())
+            .select_from(Event)
+        )
+
+        # Count all registrations
+        total_registrations = db.session.scalar(
+            select(func.count())
+            .select_from(Registration)
+        )
+
+        return jsonify({
+            "total_students": total_students,
+            "total_organizers": total_organizers,
+            "total_events": total_events,
+            "total_registrations": total_registrations
+        }), 200
+
+    except Exception:
+
+        current_app.logger.exception(
+            "Unable to fetch admin dashboard statistics"
+        )
+
+        return jsonify({
+            "error": "Unable to load dashboard statistics."
+        }), 500
+
+# -------------------------
 # Authentication
 # -------------------------
 

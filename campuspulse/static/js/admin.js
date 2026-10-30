@@ -6,7 +6,10 @@
 // =====================================
 
 
+// =====================================
 // DOM Elements
+// =====================================
+
 const adminSidebar = document.getElementById("adminSidebar");
 const sidebarOverlay = document.getElementById("sidebarOverlay");
 
@@ -182,6 +185,70 @@ function hideAdminNotification() {
 
 
 // =====================================
+// Load Admin Dashboard Statistics
+// =====================================
+
+async function loadAdminStatistics() {
+
+    const statisticElements = {
+        students: document.getElementById("totalStudents"),
+        organizers: document.getElementById("totalOrganizers"),
+        events: document.getElementById("totalEvents"),
+        registrations: document.getElementById("totalRegistrations")
+    };
+
+    try {
+
+        const response = await fetch("/api/auth/admin/stats", {
+
+            method: "GET",
+
+            credentials: "same-origin"
+
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error || "Unable to load dashboard statistics."
+            );
+
+        }
+
+        // Display actual database counts.
+        statisticElements.students.textContent =
+            data.total_students ?? 0;
+
+        statisticElements.organizers.textContent =
+            data.total_organizers ?? 0;
+
+        statisticElements.events.textContent =
+            data.total_events ?? 0;
+
+        statisticElements.registrations.textContent =
+            data.total_registrations ?? 0;
+
+        console.log("Admin statistics loaded:", data);
+
+    }
+
+    catch (error) {
+
+        console.error("Admin statistics error:", error);
+
+        showAdminNotification(
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+// =====================================
 // Admin Logout
 // =====================================
 
@@ -242,3 +309,6 @@ adminLogoutButton.addEventListener("click", async function () {
 // =====================================
 
 showSection("overview");
+
+// Load statistics from the Flask backend.
+loadAdminStatistics();
