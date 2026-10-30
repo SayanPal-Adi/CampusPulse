@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,9 +8,11 @@
 
     <title>Admin Dashboard | CampusPulse</title>
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
 
 <body>
@@ -25,7 +28,10 @@
                     <span>CampusPulse</span>
                 </a>
 
-                <button type="button" class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
+                <button type="button"
+                        class="sidebar-close"
+                        id="sidebarClose"
+                        aria-label="Close sidebar">
                     &times;
                 </button>
             </div>
@@ -45,22 +51,30 @@
 
                 <p class="sidebar-label">MAIN MENU</p>
 
-                <button type="button" class="nav-item active" data-section="overview">
+                <button type="button"
+                        class="nav-item active"
+                        data-section="overview">
                     <span class="nav-icon">⌂</span>
                     <span>Overview</span>
                 </button>
 
-                <button type="button" class="nav-item" data-section="users">
+                <button type="button"
+                        class="nav-item"
+                        data-section="users">
                     <span class="nav-icon">♙</span>
                     <span>User Management</span>
                 </button>
 
-                <button type="button" class="nav-item" data-section="events">
+                <button type="button"
+                        class="nav-item"
+                        data-section="events">
                     <span class="nav-icon">▦</span>
                     <span>Event Management</span>
                 </button>
 
-                <button type="button" class="nav-item" data-section="registrations">
+                <button type="button"
+                        class="nav-item"
+                        data-section="registrations">
                     <span class="nav-icon">☷</span>
                     <span>Registrations</span>
                 </button>
@@ -69,7 +83,9 @@
                     ANALYTICS
                 </p>
 
-                <button type="button" class="nav-item" data-section="reports">
+                <button type="button"
+                        class="nav-item"
+                        data-section="reports">
                     <span class="nav-icon">▥</span>
                     <span>Reports</span>
                 </button>
@@ -83,7 +99,9 @@
                     CampusPulse Admin
                 </div>
 
-                <button type="button" class="sidebar-logout" id="adminLogoutButton">
+                <button type="button"
+                        class="sidebar-logout"
+                        id="adminLogoutButton">
                     <span class="nav-icon">↪</span>
                     <span>Log out</span>
                 </button>
@@ -105,7 +123,10 @@
 
                 <div class="topbar-left">
 
-                    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open navigation">
+                    <button type="button"
+                            class="menu-toggle"
+                            id="menuToggle"
+                            aria-label="Open navigation">
                         ☰
                     </button>
 
@@ -134,7 +155,11 @@
 
 
             <!-- Notification -->
-            <div id="adminNotification" class="admin-notification" role="status" aria-live="polite" hidden>
+            <div id="adminNotification"
+                 class="admin-notification"
+                 role="status"
+                 aria-live="polite"
+                 hidden>
             </div>
 
 
@@ -146,7 +171,8 @@
                      OVERVIEW SECTION
                 ========================== -->
 
-                <section class="admin-section active" id="overviewSection">
+                <section class="admin-section active"
+                         id="overviewSection">
 
                     <div class="page-heading">
                         <div>
@@ -233,7 +259,9 @@
                                 from one place.
                             </p>
 
-                            <button type="button" class="welcome-action" data-go-section="users">
+                            <button type="button"
+                                    class="welcome-action"
+                                    data-go-section="users">
                                 Manage users
                                 <span>→</span>
                             </button>
@@ -264,7 +292,9 @@
 
                         <div class="management-grid">
 
-                            <button type="button" class="management-card" data-go-section="users">
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="users">
 
                                 <span class="management-icon">♙</span>
 
@@ -278,7 +308,9 @@
                             </button>
 
 
-                            <button type="button" class="management-card" data-go-section="events">
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="events">
 
                                 <span class="management-icon">▦</span>
 
@@ -292,7 +324,9 @@
                             </button>
 
 
-                            <button type="button" class="management-card" data-go-section="registrations">
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="registrations">
 
                                 <span class="management-icon">☷</span>
 
@@ -306,7 +340,9 @@
                             </button>
 
 
-                            <button type="button" class="management-card" data-go-section="reports">
+                            <button type="button"
+                                    class="management-card"
+                                    data-go-section="reports">
 
                                 <span class="management-icon">▥</span>
 
@@ -328,8 +364,8 @@
 
 
                 <!-- =========================
-     USER MANAGEMENT SECTION
-========================== -->
+                     USER MANAGEMENT SECTION
+                ========================== -->
 
                 <section class="admin-section" id="usersSection">
 
@@ -370,7 +406,9 @@
                                 <p>Browse registered CampusPulse accounts.</p>
                             </div>
 
-                            <button type="button" class="user-refresh-button" id="refreshUsersButton">
+                            <button type="button"
+                                    class="user-refresh-button"
+                                    id="refreshUsersButton">
                                 ↻ Refresh
                             </button>
                         </div>
@@ -381,11 +419,15 @@
                             <div class="user-search-wrapper">
                                 <span>⌕</span>
 
-                                <input type="search" id="userSearchInput" placeholder="Search by name or email..."
+                                <input
+                                    type="search"
+                                    id="userSearchInput"
+                                    placeholder="Search by name or email..."
                                     autocomplete="off">
                             </div>
 
-                            <select id="userRoleFilter" aria-label="Filter users by role">
+                            <select id="userRoleFilter"
+                                    aria-label="Filter users by role">
                                 <option value="all">All roles</option>
                                 <option value="student">Students</option>
                                 <option value="organizer">Organizers</option>
@@ -429,6 +471,8 @@
 
                 </section>
 
+
+
                 <!-- =========================
                      EVENT MANAGEMENT SECTION
                 ========================== -->
@@ -439,28 +483,226 @@
                         <div>
                             <p class="admin-eyebrow">PLATFORM CONTROL</p>
                             <h1>Event Management</h1>
-
-                            <p>
-                                Oversee all events created on CampusPulse.
-                            </p>
+                            <p>Monitor and review events created across CampusPulse.</p>
                         </div>
                     </div>
 
-                    <div class="section-placeholder">
+                    <!-- Event Statistics -->
+                    <div class="event-management-stats">
 
-                        <div class="placeholder-icon">▦</div>
+                        <article class="event-stat-card">
+                            <p>Total events</p>
+                            <h2 id="adminEventTotal">—</h2>
+                        </article>
 
-                        <h2>Event management</h2>
+                        <article class="event-stat-card">
+                            <p>Published events</p>
+                            <h2 id="adminEventPublished">—</h2>
+                        </article>
 
-                        <p>
-                            The event directory, event status controls
-                            and event moderation tools will be
-                            implemented in a later step.
-                        </p>
+                        <article class="event-stat-card">
+                            <p>Draft events</p>
+                            <h2 id="adminEventDrafts">—</h2>
+                        </article>
+
+                    </div>
+
+                    <!-- Event Directory -->
+                    <div class="event-directory">
+
+                        <div class="event-directory-heading">
+                            <div>
+                                <h2>All campus events</h2>
+                                <p>Events submitted by organizers across the platform.</p>
+                            </div>
+
+                            <button type="button"
+                                    class="event-refresh-button"
+                                    id="refreshEventsButton">
+                                ↻ Refresh
+                            </button>
+                        </div>
+
+                        <!-- Search and Filter -->
+                        <div class="event-toolbar">
+
+                            <div class="event-search-wrapper">
+                                <span>⌕</span>
+
+                                <input
+                                    type="search"
+                                    id="adminEventSearch"
+                                    placeholder="Search title, venue or organizer..."
+                                    autocomplete="off">
+                            </div>
+
+                            <select id="adminEventStatusFilter"
+                                    aria-label="Filter events by status">
+
+                                <option value="all">All statuses</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Events Table -->
+                        <div class="event-table-wrapper">
+
+                            <table class="event-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Event</th>
+                                        <th>Organizer</th>
+                                        <th>Venue</th>
+                                        <th>Event date</th>
+                                        <th>Capacity</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="adminEventsTableBody">
+
+                                    <tr>
+                                        <td colspan="7" class="event-table-message">
+                                            Select Event Management to load events.
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="event-directory-footer">
+                            <p id="adminEventResultsMessage">No events loaded.</p>
+                        </div>
 
                     </div>
 
                 </section>
+
+
+                <!-- =========================
+                     EVENT DETAILS MODAL
+                ========================== -->
+
+                <div class="admin-event-modal"
+                     id="adminEventModal"
+                     hidden>
+
+                    <div class="admin-event-modal-backdrop"
+                         id="adminEventModalBackdrop"></div>
+
+                    <div class="admin-event-modal-content"
+                         role="dialog"
+                         aria-modal="true"
+                         aria-labelledby="eventDetailTitle">
+
+                        <div class="admin-event-modal-header">
+
+                            <div>
+                                <p class="admin-eyebrow">
+                                    EVENT INFORMATION
+                                </p>
+
+                                <h2 id="eventDetailTitle">
+                                    Event details
+                                </h2>
+                            </div>
+
+                            <button
+                                type="button"
+                                id="closeEventModal"
+                                class="admin-event-modal-close"
+                                aria-label="Close event details">
+                                &times;
+                            </button>
+
+                        </div>
+
+                        <div class="admin-event-modal-body">
+
+                            <div class="event-detail-status">
+
+                                <span id="eventDetailStatus"
+                                      class="event-status-badge">
+                                </span>
+
+                                <span id="eventDetailCategory"></span>
+
+                            </div>
+
+                            <div class="event-detail-description">
+                                <h3>Description</h3>
+                                <p id="eventDetailDescription"></p>
+                            </div>
+
+                            <div class="event-detail-grid">
+
+                                <div class="event-detail-item">
+                                    <span>Organizer</span>
+                                    <strong id="eventDetailOrganizer"></strong>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <span>Organizer email</span>
+                                    <strong id="eventDetailEmail"></strong>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <span>Venue</span>
+                                    <strong id="eventDetailVenue"></strong>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <span>Maximum participants</span>
+                                    <strong id="eventDetailCapacity"></strong>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <span>Starts at</span>
+                                    <strong id="eventDetailStart"></strong>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <span>Ends at</span>
+                                    <strong id="eventDetailEnd"></strong>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <span>Registration deadline</span>
+                                    <strong id="eventDetailDeadline"></strong>
+                                </div>
+
+                                <div class="event-detail-item">
+                                    <span>Created on</span>
+                                    <strong id="eventDetailCreated"></strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="admin-event-modal-footer">
+
+                            <button
+                                type="button"
+                                id="closeEventModalFooter"
+                                class="secondary-button">
+                                Close
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
 
 
                 <!-- =========================
@@ -495,6 +737,7 @@
                     </div>
 
                 </section>
+
 
 
                 <!-- =========================
@@ -547,7 +790,8 @@
     </div>
 
 
-    <script src="{{ url_for('static', filename='js/admin.js') }}" defer>
+    <script src="{{ url_for('static', filename='js/admin.js') }}"
+            defer>
     </script>
 
 </body>
