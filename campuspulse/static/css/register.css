@@ -1,0 +1,187 @@
+
+/* =================================
+   CampusPulse - Registration Page
+================================= */
+
+.register-header {
+    width: 100%;
+    min-height: 76px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fffefa;
+    border-bottom: 1px solid #dedfd5;
+}
+
+.register-logo {
+    color: #1c493b;
+    font-size: 23px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.8px;
+}
+
+.register-container {
+    min-height: calc(100vh - 76px);
+    padding: 55px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f7f6f0;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 42px;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(34, 44, 37, 0.06);
+}
+
+.register-heading {
+    margin-bottom: 30px;
+}
+
+.register-eyebrow {
+    margin-bottom: 12px;
+    color: #bd593b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.register-heading h1 {
+    margin: 0 0 12px;
+    color: #222c25;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.register-heading > p:last-child {
+    margin: 0;
+    color: #72766e;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Form fields */
+
+.form-group {
+    margin-bottom: 19px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #222c25;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    color: #222c25;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: #a1a39c;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #1c493b;
+    box-shadow: 0 0 0 3px rgba(28, 73, 59, 0.09);
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+/* Submit button */
+
+.register-submit {
+    width: 100%;
+    min-height: 49px;
+    margin-top: 8px;
+    color: #ffffff;
+    background: #1c493b;
+    border: 1px solid #1c493b;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.register-submit:hover {
+    background: #173b31;
+}
+
+.register-submit:active {
+    transform: scale(0.99);
+}
+
+/* Login link */
+
+.register-login {
+    margin: 24px 0 0;
+    color: #72766e;
+    font-size: 13px;
+    text-align: center;
+}
+
+.register-login a {
+    color: #1c493b;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.register-login a:hover,
+.login-link:hover {
+    color: #bd593b;
+}
+
+/* Responsive design */
+
+@media (max-width: 600px) {
+    .register-header {
+        min-height: 65px;
+        padding: 0 20px;
+    }
+
+    .register-logo {
+        font-size: 20px;
+    }
+
+    .register-header .login-link {
+        font-size: 11px;
+    }
+
+    .register-container {
+        min-height: calc(100vh - 65px);
+        padding: 30px 15px;
+    }
+
+    .register-card {
+        padding: 28px 22px;
+    }
+
+    .register-heading h1 {
+        font-size: 27px;
+    }
+}

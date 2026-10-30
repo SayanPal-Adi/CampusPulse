@@ -54,4 +54,9 @@ def create_app():
     @app.route("/login")
     def login_page():
         return render_template("login.html")
+
+    @app.route("/register")
+    def register_page():
+        return render_template("register.html")
+
     return app
