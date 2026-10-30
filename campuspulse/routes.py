@@ -13,7 +13,7 @@ from flask import (
     current_app,
 )
 
-from sqlalchemy import func, select
+from sqlalchemy import func, select, or_
 from sqlalchemy.exc import IntegrityError
 
 from werkzeug.security import (
@@ -202,6 +202,120 @@ def admin_list_users():
         return jsonify({
             "error": "Unable to load users."
         }), 500
+
+
+# -------------------------
+# Admin: Event Management
+# -------------------------
+
+@auth_bp.route("/admin/events", methods=["GET"])
+def admin_list_events():
+
+    user = get_current_user()
+
+    # Authentication check
+    if user is None:
+        return jsonify({
+            "error": "Please log in first."
+        }), 401
+
+    # Admin authorization check
+    if user.role != "admin":
+        return jsonify({
+            "error": "Administrator permission required."
+        }), 403
+
+    try:
+
+        # Read search and status filters.
+        search_query = request.args.get("search", "").strip()
+        status_filter = request.args.get("status", "all").strip().lower()
+
+        allowed_statuses = ["all", "draft", "published"]
+
+        if status_filter not in allowed_statuses:
+            return jsonify({
+                "error": "Invalid event status filter."
+            }), 400
+
+        # Join events with their organizers.
+        query = (
+            select(Event, User)
+            .join(User, Event.organizer_id == User.id)
+        )
+
+        # Apply status filter.
+        if status_filter != "all":
+            query = query.where(Event.status == status_filter)
+
+        # Search by event title, venue or organizer name.
+        if search_query:
+
+            search_pattern = f"%{search_query}%"
+
+            query = query.where(
+                or_(
+                    Event.title.ilike(search_pattern),
+                    Event.venue.ilike(search_pattern),
+                    User.full_name.ilike(search_pattern)
+                )
+            )
+
+        # Newest events first.
+        query = query.order_by(Event.created_at.desc())
+
+        results = db.session.execute(query).all()
+
+        events = []
+
+        for event, organizer in results:
+
+            events.append({
+                "id": str(event.id),
+                "title": event.title,
+                "description": event.description,
+                "category": event.category,
+                "venue": event.venue,
+                "starts_at": (
+                    event.starts_at.isoformat()
+                    if event.starts_at else None
+                ),
+                "ends_at": (
+                    event.ends_at.isoformat()
+                    if event.ends_at else None
+                ),
+                "registration_deadline": (
+                    event.registration_deadline.isoformat()
+                    if event.registration_deadline else None
+                ),
+                "capacity": event.capacity,
+                "status": event.status,
+                "created_at": (
+                    event.created_at.isoformat()
+                    if event.created_at else None
+                ),
+                "organizer": {
+                    "id": str(organizer.id),
+                    "name": organizer.full_name,
+                    "email": organizer.email
+                }
+            })
+
+        return jsonify({
+            "total": len(events),
+            "events": events
+        }), 200
+
+    except Exception:
+
+        current_app.logger.exception(
+            "Unable to fetch admin event list"
+        )
+
+        return jsonify({
+            "error": "Unable to load events."
+        }), 500
+
 
 
 # -------------------------
