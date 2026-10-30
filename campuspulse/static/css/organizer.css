@@ -489,3 +489,26 @@
         padding: 22px;
     }
 }
+
+/* Edit event button */
+.edit-button {
+    padding: 10px 16px;
+    border: 1px solid #d5ded8;
+    border-radius: 8px;
+    background: #f1f5f2;
+    color: #263b30;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.edit-button:hover {
+    background: #e4ece6;
+    border-color: #aebfb3;
+}
+
+.edit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
