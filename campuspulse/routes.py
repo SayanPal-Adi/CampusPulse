@@ -565,6 +565,82 @@ def publish_event(event_id):
 
 
 # -------------------------
+# Organizer: View event registrations
+# -------------------------
+
+@events_bp.route("/<event_id>/registrations", methods=["GET"])
+def event_registrations(event_id):
+
+    user = get_current_user()
+
+    if user is None:
+        return jsonify({"error": "Please log in first"}), 401
+
+    if user.role != "organizer":
+        return jsonify({
+            "error": "Organizer permission required"
+        }), 403
+
+    # Validate event ID
+    try:
+        event_uuid = UUID(event_id)
+    except (ValueError, TypeError):
+        return jsonify({"error": "Invalid event ID"}), 400
+
+    # Find event
+    event = db.session.get(Event, event_uuid)
+
+    if event is None:
+        return jsonify({"error": "Event not found"}), 404
+
+    # Verify event ownership
+    if event.organizer_id != user.id:
+        return jsonify({
+            "error": "You can only view registrations for your own events"
+        }), 403
+
+    # Fetch registrations along with student details
+    results = db.session.execute(
+        select(Registration, User)
+        .join(User, Registration.student_id == User.id)
+        .where(Registration.event_id == event.id)
+        .order_by(Registration.registered_at.desc())
+    ).all()
+
+    registrations = []
+
+    for registration, student in results:
+        registrations.append({
+            "registration_id": str(registration.id),
+            "student_id": str(student.id),
+            "student_name": student.full_name,
+            "student_email": student.email,
+            "status": registration.status,
+            "registered_at": registration.registered_at.isoformat()
+        })
+
+    # Count active registrations
+    active_count = sum(
+        1 for registration in registrations
+        if registration["status"] == "registered"
+    )
+
+    return jsonify({
+        "event": {
+            "id": str(event.id),
+            "title": event.title,
+            "status": event.status,
+            "capacity": event.capacity
+        },
+        "total_registrations": len(registrations),
+        "active_registrations": active_count,
+        "cancelled_registrations": (
+            len(registrations) - active_count
+        ),
+        "registrations": registrations
+    }), 200
+
+# -------------------------
 # Student event registration
 # -------------------------
 
