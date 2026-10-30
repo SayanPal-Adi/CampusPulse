@@ -1,4 +1,6 @@
 
+"use strict";
+
 // =====================================
 // CampusPulse - Organizer Dashboard
 // =====================================
@@ -25,16 +27,23 @@ const refreshButton = document.getElementById("refreshButton");
 const logoutButton = document.getElementById("logoutButton");
 const submitEventButton = document.getElementById("submitEventButton");
 
+const eventModalTitle = document.getElementById("eventModalTitle");
+const eventModalEyebrow = document.getElementById("eventModalEyebrow");
+
+
+// Currently selected event being edited.
+// null means that the form is in Create mode.
+let editingEventId = null;
+
+let organizerEvents = [];
+
 
 // =====================================
 // Utility Functions
 // =====================================
 
-// Escape HTML to prevent HTML injection.
 function escapeHTML(value) {
-
     return String(value ?? "").replace(/[&<>"']/g, character => {
-
         const entities = {
             "&": "&amp;",
             "<": "&lt;",
@@ -44,15 +53,11 @@ function escapeHTML(value) {
         };
 
         return entities[character];
-
     });
-
 }
 
 
-// Format date and time.
 function formatDate(dateValue) {
-
     if (!dateValue) {
         return "Not specified";
     }
@@ -70,13 +75,32 @@ function formatDate(dateValue) {
         hour: "numeric",
         minute: "2-digit"
     });
+}
 
+
+// Convert an API date into the format required by datetime-local.
+// The input expects local time without a timezone suffix.
+function toDateTimeLocal(value) {
+    if (!value) {
+        return "";
+    }
+
+    const date = new Date(value);
+
+    if (Number.isNaN(date.getTime())) {
+        return "";
+    }
+
+    const localDate = new Date(
+        date.getTime() - date.getTimezoneOffset() * 60000
+    );
+
+    return localDate.toISOString().slice(0, 16);
 }
 
 
 // Display inline notifications.
 function showNotification(message, type = "success") {
-
     notification.textContent = message;
 
     notification.className = "notification";
@@ -91,16 +115,13 @@ function showNotification(message, type = "success") {
         top: 0,
         behavior: "smooth"
     });
-
 }
 
 
 // Hide notification.
 function hideNotification() {
-
     notification.hidden = true;
     notification.textContent = "";
-
 }
 
 
@@ -108,31 +129,95 @@ function hideNotification() {
 // Modal Controls
 // =====================================
 
-function openModal() {
+function openCreateModal() {
+    editingEventId = null;
+
+    eventForm.reset();
+
+    eventModalTitle.textContent = "Create an event";
+    eventModalEyebrow.textContent = "NEW CAMPUS EVENT";
+    submitEventButton.textContent = "Save as draft";
 
     hideNotification();
 
     eventModal.hidden = false;
-
     document.body.style.overflow = "hidden";
 
     document.getElementById("eventTitle").focus();
+}
 
+
+function openEditModal(eventId) {
+    const selectedEvent = organizerEvents.find(
+        event => String(event.id) === String(eventId)
+    );
+
+    if (!selectedEvent) {
+        showNotification("Unable to find this event.", "error");
+        return;
+    }
+
+    if (selectedEvent.status !== "draft") {
+        showNotification("Only draft events can be edited.", "error");
+        return;
+    }
+
+    editingEventId = selectedEvent.id;
+
+    // Fill the form with existing event details.
+    document.getElementById("eventTitle").value =
+        selectedEvent.title || "";
+
+    document.getElementById("eventDescription").value =
+        selectedEvent.description || "";
+
+    document.getElementById("eventCategory").value =
+        selectedEvent.category || "General";
+
+    document.getElementById("eventVenue").value =
+        selectedEvent.venue || "";
+
+    document.getElementById("eventStart").value =
+        toDateTimeLocal(selectedEvent.starts_at);
+
+    document.getElementById("eventEnd").value =
+        toDateTimeLocal(selectedEvent.ends_at);
+
+    document.getElementById("eventCapacity").value =
+        selectedEvent.capacity ?? "";
+
+    eventModalTitle.textContent = "Edit event";
+    eventModalEyebrow.textContent = "UPDATE CAMPUS EVENT";
+    submitEventButton.textContent = "Save changes";
+
+    hideNotification();
+
+    eventModal.hidden = false;
+    document.body.style.overflow = "hidden";
+
+    document.getElementById("eventTitle").focus();
 }
 
 
 function closeModal() {
-
     eventModal.hidden = true;
 
     document.body.style.overflow = "";
 
     eventForm.reset();
 
+    // Reset modal back to Create mode.
+    editingEventId = null;
+
+    eventModalTitle.textContent = "Create an event";
+    eventModalEyebrow.textContent = "NEW CAMPUS EVENT";
+    submitEventButton.textContent = "Save as draft";
+
+    submitEventButton.disabled = false;
 }
 
 
-createEventButton.addEventListener("click", openModal);
+createEventButton.addEventListener("click", openCreateModal);
 
 closeModalButton.addEventListener("click", closeModal);
 
@@ -143,11 +228,9 @@ modalBackdrop.addEventListener("click", closeModal);
 
 // Close modal using Escape key.
 document.addEventListener("keydown", function (event) {
-
     if (event.key === "Escape" && !eventModal.hidden) {
         closeModal();
     }
-
 });
 
 
@@ -156,7 +239,6 @@ document.addEventListener("keydown", function (event) {
 // =====================================
 
 async function loadEvents() {
-
     eventsContainer.innerHTML = `
         <div class="loading-message">
             Loading your events...
@@ -166,37 +248,29 @@ async function loadEvents() {
     refreshButton.disabled = true;
 
     try {
-
         const response = await fetch("/api/events/mine", {
-
             method: "GET",
-
             credentials: "same-origin"
-
         });
 
         const data = await response.json();
 
         if (!response.ok) {
-
             throw new Error(
                 data.error || "Unable to load events."
             );
-
         }
 
         if (!Array.isArray(data.events)) {
-
             throw new Error("Invalid event data received.");
-
         }
 
-        displayEvents(data.events);
+        organizerEvents = data.events;
 
+        displayEvents(organizerEvents);
     }
 
     catch (error) {
-
         eventsContainer.innerHTML = `
             <div class="empty-message">
                 ${escapeHTML(error.message)}
@@ -204,15 +278,11 @@ async function loadEvents() {
         `;
 
         showNotification(error.message, "error");
-
     }
 
     finally {
-
         refreshButton.disabled = false;
-
     }
-
 }
 
 
@@ -221,8 +291,6 @@ async function loadEvents() {
 // =====================================
 
 function displayEvents(events) {
-
-    // Calculate statistics.
     const total = events.length;
 
     const published = events.filter(
@@ -236,15 +304,12 @@ function displayEvents(events) {
 
     // Update statistics.
     totalEvents.textContent = total;
-
     publishedEvents.textContent = published;
-
     draftEvents.textContent = drafts;
 
 
     // Empty state.
     if (events.length === 0) {
-
         eventsContainer.innerHTML = `
             <div class="empty-message">
                 You haven't created any events yet.
@@ -253,13 +318,11 @@ function displayEvents(events) {
         `;
 
         return;
-
     }
 
 
     // Generate event cards.
     eventsContainer.innerHTML = events.map(event => {
-
         const status = escapeHTML(event.status);
 
         const category = escapeHTML(event.category);
@@ -285,18 +348,25 @@ function displayEvents(events) {
         );
 
 
-        // Publish button only for drafts.
-        const publishButton = event.status === "draft"
-
+        // Edit and Publish buttons are available only for drafts.
+        const draftActions = event.status === "draft"
             ? `
                 <button
+                    type="button"
+                    class="edit-button"
+                    data-edit-id="${escapeHTML(event.id)}"
+                >
+                    Edit event
+                </button>
+
+                <button
+                    type="button"
                     class="publish-button"
                     data-publish-id="${escapeHTML(event.id)}"
                 >
                     Publish event
                 </button>
             `
-
             : `
                 <span class="event-detail">
                     This event is published.
@@ -305,7 +375,6 @@ function displayEvents(events) {
 
 
         return `
-
             <article class="event-card">
 
                 <div class="event-card-top">
@@ -320,13 +389,11 @@ function displayEvents(events) {
 
                 </div>
 
-
                 <h3>${title}</h3>
 
                 <p class="event-description">
                     ${description}
                 </p>
-
 
                 <div class="event-details">
 
@@ -348,55 +415,53 @@ function displayEvents(events) {
 
                 </div>
 
-
                 <div class="event-actions">
-
-                    ${publishButton}
-
+                    ${draftActions}
                 </div>
 
             </article>
-
         `;
-
     }).join("");
 
 
-    // Attach publish event listeners.
-    document.querySelectorAll("[data-publish-id]")
-
+    // Attach Edit event listeners.
+    document.querySelectorAll("[data-edit-id]")
         .forEach(button => {
-
             button.addEventListener("click", function () {
+                openEditModal(button.dataset.editId);
+            });
+        });
 
+
+    // Attach Publish event listeners.
+    document.querySelectorAll("[data-publish-id]")
+        .forEach(button => {
+            button.addEventListener("click", function () {
                 const eventId = button.dataset.publishId;
 
                 publishEvent(eventId, button);
-
             });
-
         });
-
 }
 
 
 // =====================================
-// Create New Event
+// Create / Update Event
 // =====================================
 
 eventForm.addEventListener("submit", async function (event) {
-
     event.preventDefault();
 
     hideNotification();
 
     submitEventButton.disabled = true;
 
-    submitEventButton.textContent = "Saving...";
+    submitEventButton.textContent = editingEventId
+        ? "Saving changes..."
+        : "Saving...";
 
 
     try {
-
         const formData = new FormData(eventForm);
 
 
@@ -414,21 +479,17 @@ eventForm.addEventListener("submit", async function (event) {
             Number.isNaN(startsAt.getTime()) ||
             Number.isNaN(endsAt.getTime())
         ) {
-
             throw new Error(
                 "Please enter valid event dates."
             );
-
         }
 
 
         // Validate event timing.
         if (endsAt <= startsAt) {
-
             throw new Error(
                 "Event end time must be after its start time."
             );
-
         }
 
 
@@ -436,7 +497,6 @@ eventForm.addEventListener("submit", async function (event) {
         const capacityValue = formData.get("capacity");
 
         const eventData = {
-
             title: formData.get("title").trim(),
 
             description: formData.get("description").trim(),
@@ -452,14 +512,22 @@ eventForm.addEventListener("submit", async function (event) {
             capacity: capacityValue
                 ? Number(capacityValue)
                 : null
-
         };
 
 
-        // Send request to Flask.
-        const response = await fetch("/api/events/", {
+        // Decide whether this is Create or Update.
+        const isEditing = editingEventId !== null;
 
-            method: "POST",
+        const url = isEditing
+            ? `/api/events/${encodeURIComponent(editingEventId)}`
+            : "/api/events/";
+
+        const method = isEditing ? "PATCH" : "POST";
+
+
+        // Send request to Flask.
+        const response = await fetch(url, {
+            method: method,
 
             credentials: "same-origin",
 
@@ -468,7 +536,6 @@ eventForm.addEventListener("submit", async function (event) {
             },
 
             body: JSON.stringify(eventData)
-
         });
 
 
@@ -476,11 +543,12 @@ eventForm.addEventListener("submit", async function (event) {
 
 
         if (!response.ok) {
-
             throw new Error(
-                data.error || "Unable to create event."
+                data.error ||
+                (isEditing
+                    ? "Unable to update event."
+                    : "Unable to create event.")
             );
-
         }
 
 
@@ -489,7 +557,9 @@ eventForm.addEventListener("submit", async function (event) {
 
 
         showNotification(
-            "Event created successfully and saved as a draft."
+            isEditing
+                ? "Event updated successfully."
+                : "Event created successfully and saved as a draft."
         );
 
 
@@ -498,22 +568,19 @@ eventForm.addEventListener("submit", async function (event) {
 
     }
 
-
     catch (error) {
-
         showNotification(error.message, "error");
-
     }
-
 
     finally {
-
         submitEventButton.disabled = false;
 
-        submitEventButton.textContent = "Save as draft";
-
+        if (editingEventId === null) {
+            submitEventButton.textContent = "Save as draft";
+        } else {
+            submitEventButton.textContent = "Save changes";
+        }
     }
-
 });
 
 
@@ -522,7 +589,6 @@ eventForm.addEventListener("submit", async function (event) {
 // =====================================
 
 async function publishEvent(eventId, button) {
-
     hideNotification();
 
     button.disabled = true;
@@ -531,19 +597,13 @@ async function publishEvent(eventId, button) {
 
 
     try {
-
         const response = await fetch(
-
             `/api/events/${encodeURIComponent(eventId)}/publish`,
-
             {
-
                 method: "POST",
 
                 credentials: "same-origin"
-
             }
-
         );
 
 
@@ -551,11 +611,9 @@ async function publishEvent(eventId, button) {
 
 
         if (!response.ok) {
-
             throw new Error(
                 data.error || "Unable to publish event."
             );
-
         }
 
 
@@ -569,17 +627,13 @@ async function publishEvent(eventId, button) {
 
     }
 
-
     catch (error) {
-
         showNotification(error.message, "error");
 
         button.disabled = false;
 
         button.textContent = "Publish event";
-
     }
-
 }
 
 
@@ -588,11 +642,9 @@ async function publishEvent(eventId, button) {
 // =====================================
 
 refreshButton.addEventListener("click", function () {
-
     hideNotification();
 
     loadEvents();
-
 });
 
 
@@ -601,7 +653,6 @@ refreshButton.addEventListener("click", function () {
 // =====================================
 
 logoutButton.addEventListener("click", async function () {
-
     hideNotification();
 
     logoutButton.disabled = true;
@@ -610,41 +661,31 @@ logoutButton.addEventListener("click", async function () {
 
 
     try {
-
         const response = await fetch("/api/auth/logout", {
-
             method: "POST",
 
             credentials: "same-origin"
-
         });
 
 
         if (!response.ok) {
-
             throw new Error(
                 "Logout failed. Please try again."
             );
-
         }
 
 
         // Redirect after successful logout.
         window.location.href = "/login";
-
     }
 
-
     catch (error) {
-
         showNotification(error.message, "error");
 
         logoutButton.disabled = false;
 
         logoutButton.textContent = "Log out";
-
     }
-
 });
 
 
