@@ -225,6 +225,52 @@ def list_events():
 
 
 # -------------------------
+# List events created by the logged-in organizer
+# -------------------------
+
+@events_bp.route("/mine", methods=["GET"])
+def my_events():
+
+    user = get_current_user()
+
+    if user is None:
+        return jsonify({"error": "Please log in first"}), 401
+
+    if user.role != "organizer":
+        return jsonify({"error": "Organizer permission required"}), 403
+
+    events = db.session.execute(
+        select(Event)
+        .where(Event.organizer_id == user.id)
+        .order_by(Event.created_at.desc())
+    ).scalars().all()
+
+    return jsonify({
+        "total": len(events),
+        "events": [
+            {
+                "id": str(event.id),
+                "title": event.title,
+                "description": event.description,
+                "category": event.category,
+                "venue": event.venue,
+                "starts_at": event.starts_at.isoformat(),
+                "ends_at": event.ends_at.isoformat(),
+                "registration_deadline": (
+                    event.registration_deadline.isoformat()
+                    if event.registration_deadline else None
+                ),
+                "capacity": event.capacity,
+                "status": event.status,
+                "created_at": event.created_at.isoformat()
+            }
+            for event in events
+        ]
+    }), 200
+
+
+
+# -------------------------
 # Create a draft event
 # -------------------------
 
