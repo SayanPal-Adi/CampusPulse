@@ -17,7 +17,7 @@ student-cookies.txt
 create_test_student.py
 create_test_organizer.py
 reset_test_password.py
-# Local password reset utilities
+create_admin.py
 reset_student_password.py
 
 # Local files
