@@ -17,9 +17,7 @@
 
 <body>
 
-    <!-- Header -->
     <header class="organizer-header">
-
         <a href="{{ url_for('home') }}" class="organizer-logo">
             CampusPulse
         </a>
@@ -27,27 +25,20 @@
         <div class="organizer-header-right">
             <span class="organizer-role">Event Organizer</span>
 
-            <button id="logoutButton" class="logout-button">
+            <button id="logoutButton" class="logout-button" type="button">
                 Log out
             </button>
         </div>
-
     </header>
 
 
     <main class="organizer-container">
 
-        <!-- Welcome section -->
         <section class="organizer-welcome">
-
             <div>
-                <p class="organizer-eyebrow">
-                    ORGANIZER WORKSPACE
-                </p>
+                <p class="organizer-eyebrow">ORGANIZER WORKSPACE</p>
 
-                <h1>
-                    Welcome, {{ user.full_name }}!
-                </h1>
+                <h1>Welcome, {{ user.full_name }}!</h1>
 
                 <p class="welcome-description">
                     Create events, manage registrations and bring
@@ -55,18 +46,22 @@
                 </p>
             </div>
 
-            <button id="createEventButton" class="primary-button">
+            <button id="createEventButton"
+                    class="primary-button"
+                    type="button">
                 + Create event
             </button>
-
         </section>
 
 
-        <!-- Notification -->
-        <div id="notification" class="notification" hidden></div>
+        <div id="notification"
+             class="notification"
+             role="status"
+             aria-live="polite"
+             hidden>
+        </div>
 
 
-        <!-- Statistics -->
         <section class="organizer-stats">
 
             <article class="stat-card">
@@ -87,34 +82,31 @@
         </section>
 
 
-        <!-- Event list -->
         <section class="organizer-events">
 
             <div class="section-heading">
-
                 <div>
                     <p class="organizer-eyebrow">YOUR ACTIVITIES</p>
                     <h2>My events</h2>
                 </div>
 
-                <button id="refreshButton" class="secondary-button">
+                <button id="refreshButton"
+                        class="secondary-button"
+                        type="button">
                     Refresh
                 </button>
-
             </div>
 
             <div id="eventsContainer" class="events-grid">
-
                 <div class="loading-message">
                     Loading your events...
                 </div>
-
             </div>
 
         </section>
 
 
-        <!-- Create event modal -->
+        <!-- Create / Edit event modal -->
         <div id="eventModal" class="modal" hidden>
 
             <div class="modal-backdrop" id="modalBackdrop"></div>
@@ -122,21 +114,20 @@
             <section class="modal-content">
 
                 <div class="modal-heading">
-
                     <div>
-                        <p class="organizer-eyebrow">NEW CAMPUS EVENT</p>
-                        <h2>Create an event</h2>
+                        <p class="organizer-eyebrow" id="eventModalEyebrow">
+                            NEW CAMPUS EVENT
+                        </p>
+
+                        <h2 id="eventModalTitle">Create an event</h2>
                     </div>
 
-                    <button
-                        type="button"
-                        id="closeModalButton"
-                        class="close-button"
-                        aria-label="Close"
-                    >
+                    <button type="button"
+                            id="closeModalButton"
+                            class="close-button"
+                            aria-label="Close">
                         &times;
                     </button>
-
                 </div>
 
 
@@ -201,7 +192,9 @@
                     <div class="form-row">
 
                         <div class="form-group">
-                            <label for="eventStart">Start date and time</label>
+                            <label for="eventStart">
+                                Start date and time
+                            </label>
 
                             <input
                                 type="datetime-local"
@@ -212,7 +205,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="eventEnd">End date and time</label>
+                            <label for="eventEnd">
+                                End date and time
+                            </label>
 
                             <input
                                 type="datetime-local"
@@ -245,16 +240,14 @@
                         <button
                             type="button"
                             id="cancelEventButton"
-                            class="secondary-button"
-                        >
+                            class="secondary-button">
                             Cancel
                         </button>
 
                         <button
                             type="submit"
                             id="submitEventButton"
-                            class="primary-button"
-                        >
+                            class="primary-button">
                             Save as draft
                         </button>
 
@@ -274,7 +267,9 @@
     </footer>
 
 
-    <script src="{{ url_for('static', filename='js/organizer.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/organizer.js') }}"
+            defer>
+    </script>
 
 </body>
 </html>
