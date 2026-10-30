@@ -31,7 +31,6 @@
         </div>
     </header>
 
-
     <main class="organizer-container">
 
         <section class="organizer-welcome">
@@ -53,14 +52,12 @@
             </button>
         </section>
 
-
         <div id="notification"
              class="notification"
              role="status"
              aria-live="polite"
              hidden>
         </div>
-
 
         <section class="organizer-stats">
 
@@ -80,7 +77,6 @@
             </article>
 
         </section>
-
 
         <section class="organizer-events">
 
@@ -104,7 +100,6 @@
             </div>
 
         </section>
-
 
         <!-- Create / Edit event modal -->
         <div id="eventModal" class="modal" hidden>
@@ -130,34 +125,27 @@
                     </button>
                 </div>
 
-
                 <form id="eventForm">
 
                     <div class="form-group">
                         <label for="eventTitle">Event title</label>
 
-                        <input
-                            type="text"
-                            id="eventTitle"
-                            name="title"
-                            placeholder="Enter event title"
-                            maxlength="200"
-                            required
-                        >
+                        <input type="text"
+                               id="eventTitle"
+                               name="title"
+                               placeholder="Enter event title"
+                               maxlength="200"
+                               required>
                     </div>
-
 
                     <div class="form-group">
                         <label for="eventDescription">Description</label>
 
-                        <textarea
-                            id="eventDescription"
-                            name="description"
-                            rows="4"
-                            placeholder="Describe your event"
-                        ></textarea>
+                        <textarea id="eventDescription"
+                                  name="description"
+                                  rows="4"
+                                  placeholder="Describe your event"></textarea>
                     </div>
-
 
                     <div class="form-row">
 
@@ -177,17 +165,14 @@
                         <div class="form-group">
                             <label for="eventVenue">Venue</label>
 
-                            <input
-                                type="text"
-                                id="eventVenue"
-                                name="venue"
-                                placeholder="Event venue"
-                                required
-                            >
+                            <input type="text"
+                                   id="eventVenue"
+                                   name="venue"
+                                   placeholder="Event venue"
+                                   required>
                         </div>
 
                     </div>
-
 
                     <div class="form-row">
 
@@ -196,12 +181,10 @@
                                 Start date and time
                             </label>
 
-                            <input
-                                type="datetime-local"
-                                id="eventStart"
-                                name="starts_at"
-                                required
-                            >
+                            <input type="datetime-local"
+                                   id="eventStart"
+                                   name="starts_at"
+                                   required>
                         </div>
 
                         <div class="form-group">
@@ -209,45 +192,37 @@
                                 End date and time
                             </label>
 
-                            <input
-                                type="datetime-local"
-                                id="eventEnd"
-                                name="ends_at"
-                                required
-                            >
+                            <input type="datetime-local"
+                                   id="eventEnd"
+                                   name="ends_at"
+                                   required>
                         </div>
 
                     </div>
-
 
                     <div class="form-group">
                         <label for="eventCapacity">
                             Maximum participants
                         </label>
 
-                        <input
-                            type="number"
-                            id="eventCapacity"
-                            name="capacity"
-                            min="1"
-                            placeholder="Leave empty for unlimited"
-                        >
+                        <input type="number"
+                               id="eventCapacity"
+                               name="capacity"
+                               min="1"
+                               placeholder="Leave empty for unlimited">
                     </div>
-
 
                     <div class="modal-actions">
 
-                        <button
-                            type="button"
-                            id="cancelEventButton"
-                            class="secondary-button">
+                        <button type="button"
+                                id="cancelEventButton"
+                                class="secondary-button">
                             Cancel
                         </button>
 
-                        <button
-                            type="submit"
-                            id="submitEventButton"
-                            class="primary-button">
+                        <button type="submit"
+                                id="submitEventButton"
+                                class="primary-button">
                             Save as draft
                         </button>
 
@@ -259,13 +234,103 @@
 
         </div>
 
-    </main>
+        <!-- Event registrations modal -->
+        <div id="registrationsModal" class="modal" hidden>
 
+            <div class="modal-backdrop"
+                 id="registrationsBackdrop"></div>
+
+            <section class="modal-content registrations-modal-content">
+
+                <div class="modal-heading">
+                    <div>
+                        <p class="organizer-eyebrow">
+                            EVENT MANAGEMENT
+                        </p>
+
+                        <h2 id="registrationsEventTitle">
+                            Event registrations
+                        </h2>
+                    </div>
+
+                    <button type="button"
+                            id="closeRegistrationsButton"
+                            class="close-button"
+                            aria-label="Close">
+                        &times;
+                    </button>
+                </div>
+
+                <div class="registration-stats">
+
+                    <article class="registration-stat">
+                        <p>Total registrations</p>
+                        <h3 id="totalRegistrations">0</h3>
+                    </article>
+
+                    <article class="registration-stat">
+                        <p>Active</p>
+                        <h3 id="activeRegistrations">0</h3>
+                    </article>
+
+                    <article class="registration-stat">
+                        <p>Cancelled</p>
+                        <h3 id="cancelledRegistrations">0</h3>
+                    </article>
+
+                </div>
+
+                <div class="registrations-toolbar">
+
+                    <p id="registrationsMessage"
+                       role="status"
+                       aria-live="polite">
+                        Loading registrations...
+                    </p>
+
+                    <button type="button"
+                            id="downloadRegistrationsButton"
+                            class="secondary-button"
+                            disabled>
+                        Download CSV
+                    </button>
+
+                </div>
+
+                <div class="registrations-table-wrapper">
+
+                    <table class="registrations-table">
+
+                        <thead>
+                            <tr>
+                                <th>Student name</th>
+                                <th>Email</th>
+                                <th>Registration date</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="registrationsTableBody">
+                            <tr>
+                                <td colspan="4">
+                                    Loading registrations...
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
 
     <footer class="organizer-footer">
         <p>CampusPulse &copy; 2026. Built for campus communities.</p>
     </footer>
-
 
     <script src="{{ url_for('static', filename='js/organizer.js') }}"
             defer>
