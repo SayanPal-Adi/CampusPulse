@@ -366,6 +366,151 @@ def create_event():
 
 
 # -------------------------
+# Edit an existing event
+# -------------------------
+
+@events_bp.route("/<event_id>", methods=["PATCH"])
+def update_event(event_id):
+
+    user = get_current_user()
+
+    if user is None:
+        return jsonify({"error": "Please log in first"}), 401
+
+    if user.role != "organizer":
+        return jsonify({"error": "Organizer permission required"}), 403
+
+    # Validate event ID
+    try:
+        event_uuid = UUID(event_id)
+    except (ValueError, TypeError):
+        return jsonify({"error": "Invalid event ID"}), 400
+
+    # Find event
+    event = db.session.get(Event, event_uuid)
+
+    if event is None:
+        return jsonify({"error": "Event not found"}), 404
+
+    # Check ownership
+    if event.organizer_id != user.id:
+        return jsonify({
+            "error": "You can only edit your own events"
+        }), 403
+
+    # Initially, only draft events can be edited
+    if event.status != "draft":
+        return jsonify({
+            "error": "Only draft events can be edited"
+        }), 409
+
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({"error": "Invalid request data"}), 400
+
+    required_fields = [
+        "title",
+        "venue",
+        "starts_at",
+        "ends_at"
+    ]
+
+    missing = [
+        field for field in required_fields
+        if not isinstance(data.get(field), str)
+        or not data[field].strip()
+    ]
+
+    if missing:
+        return jsonify({
+            "error": "Missing required fields",
+            "fields": missing
+        }), 400
+
+    # Validate text fields
+    title = data["title"].strip()
+    venue = data["venue"].strip()
+    description = data.get("description", "")
+    category = data.get("category", "General")
+
+    if len(title) > 200 or len(venue) > 255:
+        return jsonify({
+            "error": "Title or venue is too long"
+        }), 400
+
+    if not isinstance(description, str) or not isinstance(category, str):
+        return jsonify({
+            "error": "Description and category must be text"
+        }), 400
+
+    try:
+        starts_at = datetime.fromisoformat(
+            data["starts_at"].replace("Z", "+00:00")
+        )
+
+        ends_at = datetime.fromisoformat(
+            data["ends_at"].replace("Z", "+00:00")
+        )
+
+        if starts_at.tzinfo is None or ends_at.tzinfo is None:
+            return jsonify({
+                "error": "Dates must include timezone information"
+            }), 400
+
+        if ends_at <= starts_at:
+            return jsonify({
+                "error": "End time must be after start time"
+            }), 400
+
+        capacity = data.get("capacity")
+
+        if capacity is not None:
+            if type(capacity) is not int or capacity <= 0:
+                return jsonify({
+                    "error": "Capacity must be a positive integer"
+                }), 400
+
+        # Update event fields
+        event.title = title
+        event.description = description.strip()
+        event.category = category.strip() or "General"
+        event.venue = venue
+        event.starts_at = starts_at
+        event.ends_at = ends_at
+        event.capacity = capacity
+
+        db.session.commit()
+
+        return jsonify({
+            "message": "Event updated successfully",
+            "event": {
+                "id": str(event.id),
+                "title": event.title,
+                "description": event.description,
+                "category": event.category,
+                "venue": event.venue,
+                "starts_at": event.starts_at.isoformat(),
+                "ends_at": event.ends_at.isoformat(),
+                "capacity": event.capacity,
+                "status": event.status
+            }
+        }), 200
+
+    except ValueError:
+        db.session.rollback()
+        return jsonify({
+            "error": "Invalid date or event data"
+        }), 400
+
+    except Exception:
+        db.session.rollback()
+        current_app.logger.exception("Event update failed")
+        return jsonify({
+            "error": "Unable to update event"
+        }), 500
+
+# -------------------------
 # Publish your own event
 # -------------------------
 
