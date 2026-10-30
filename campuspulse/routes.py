@@ -114,6 +114,96 @@ def admin_statistics():
             "error": "Unable to load dashboard statistics."
         }), 500
 
+
+# -------------------------
+# Admin: User Management
+# -------------------------
+
+@auth_bp.route("/admin/users", methods=["GET"])
+def admin_list_users():
+
+    user = get_current_user()
+
+    # Authentication check
+    if user is None:
+        return jsonify({
+            "error": "Please log in first."
+        }), 401
+
+    # Admin authorization check
+    if user.role != "admin":
+        return jsonify({
+            "error": "Administrator permission required."
+        }), 403
+
+    try:
+
+        # Read optional search and role filters.
+        search_query = request.args.get("search", "").strip()
+        role_filter = request.args.get("role", "all").strip().lower()
+
+        # Start with students and organizers only.
+        query = select(User).where(
+            User.role.in_(["student", "organizer"])
+        )
+
+        # Filter by role.
+        if role_filter in ("student", "organizer"):
+            query = query.where(User.role == role_filter)
+
+        elif role_filter != "all":
+            return jsonify({
+                "error": "Invalid role filter."
+            }), 400
+
+        # Search by name or email.
+        if search_query:
+            search_pattern = f"%{search_query}%"
+
+            query = query.where(
+                db.or_(
+                    User.full_name.ilike(search_pattern),
+                    User.email.ilike(search_pattern)
+                )
+            )
+
+        # Newest accounts first.
+        query = query.order_by(User.created_at.desc())
+
+        users = db.session.execute(query).scalars().all()
+
+        # Prepare safe user data.
+        user_list = []
+
+        for account in users:
+            user_list.append({
+                "id": str(account.id),
+                "full_name": account.full_name,
+                "email": account.email,
+                "role": account.role,
+                "created_at": (
+                    account.created_at.isoformat()
+                    if account.created_at
+                    else None
+                )
+            })
+
+        return jsonify({
+            "total": len(user_list),
+            "users": user_list
+        }), 200
+
+    except Exception:
+
+        current_app.logger.exception(
+            "Unable to fetch admin user list"
+        )
+
+        return jsonify({
+            "error": "Unable to load users."
+        }), 500
+
+
 # -------------------------
 # Authentication
 # -------------------------
