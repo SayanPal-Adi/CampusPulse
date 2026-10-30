@@ -231,7 +231,7 @@ def admin_list_events():
         search_query = request.args.get("search", "").strip()
         status_filter = request.args.get("status", "all").strip().lower()
 
-        allowed_statuses = ["all", "draft", "published"]
+        allowed_statuses = ["all", "draft", "published","suspended"]
 
         if status_filter not in allowed_statuses:
             return jsonify({
@@ -316,6 +316,106 @@ def admin_list_events():
             "error": "Unable to load events."
         }), 500
 
+
+# -------------------------
+# Admin: Update Event Status
+# -------------------------
+
+@auth_bp.route("/admin/events/<event_id>/status", methods=["POST"])
+def admin_update_event_status(event_id):
+
+    user = get_current_user()
+
+    # Authentication check
+    if user is None:
+        return jsonify({
+            "error": "Please log in first."
+        }), 401
+
+    # Admin authorization check
+    if user.role != "admin":
+        return jsonify({
+            "error": "Administrator permission required."
+        }), 403
+
+    # Validate event ID
+    try:
+        event_uuid = UUID(event_id)
+    except (ValueError, TypeError):
+        return jsonify({
+            "error": "Invalid event ID."
+        }), 400
+
+    # Validate request body
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "Invalid request data."
+        }), 400
+
+    new_status = data.get("status")
+
+    allowed_statuses = {"draft", "published", "suspended"}
+
+    if new_status not in allowed_statuses:
+        return jsonify({
+            "error": "Invalid event status."
+        }), 400
+
+    try:
+        event = db.session.get(Event, event_uuid)
+
+        if event is None:
+            return jsonify({
+                "error": "Event not found."
+            }), 404
+
+        # Do not publish an event that has already started.
+        if new_status == "published":
+
+            if event.starts_at is None:
+                return jsonify({
+                    "error": "This event has no valid start time."
+                }), 400
+
+            now = datetime.now(event.starts_at.tzinfo)
+
+            if event.starts_at <= now:
+                return jsonify({
+                    "error": "Only future events can be published."
+                }), 409
+
+        old_status = event.status
+
+        if old_status == new_status:
+            return jsonify({
+                "message": "The event already has this status.",
+                "id": str(event.id),
+                "status": event.status
+            }), 200
+
+        event.status = new_status
+
+        db.session.commit()
+
+        return jsonify({
+            "message": "Event status updated successfully.",
+            "id": str(event.id),
+            "old_status": old_status,
+            "status": event.status
+        }), 200
+
+    except Exception:
+        db.session.rollback()
+
+        current_app.logger.exception(
+            "Admin event status update failed"
+        )
+
+        return jsonify({
+            "error": "Unable to update event status."
+        }), 500
 
 
 # -------------------------
