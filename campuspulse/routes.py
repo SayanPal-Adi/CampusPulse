@@ -742,7 +742,12 @@ def create_event():
             "error": "Organizer permission required"
         }), 403
 
-    data = request.get_json(silent=True) or {}
+    data = request.get_json(silent=True)
+
+    if not isinstance(data, dict):
+        return jsonify({
+            "error": "Invalid request data. Expected a JSON object."
+        }), 400
 
     required = ["title", "venue", "starts_at", "ends_at"]
 
@@ -756,6 +761,27 @@ def create_event():
         return jsonify({
             "error": "Missing required fields",
             "fields": missing,
+        }), 400
+
+    title = data["title"].strip()
+    venue = data["venue"].strip()
+
+    if len(title) > 200:
+        return jsonify({
+            "error": "Title must not exceed 200 characters."
+        }), 400
+
+    if len(venue) > 255:
+        return jsonify({
+            "error": "Venue must not exceed 255 characters."
+        }), 400
+
+    description = data.get("description", "")
+    category = data.get("category", "General")
+
+    if not isinstance(description, str) or not isinstance(category, str):
+        return jsonify({
+            "error": "Description and category must be text"
         }), 400
 
     try:
@@ -772,7 +798,6 @@ def create_event():
                 "error": "Timestamps must include a timezone"
             }), 400
 
-        # NEW: Reject past event start dates.
         now = datetime.now(starts_at.tzinfo)
 
         if starts_at <= now:
@@ -793,20 +818,12 @@ def create_event():
                     "error": "capacity must be a positive integer"
                 }), 400
 
-        description = data.get("description", "")
-        category = data.get("category", "General")
-
-        if not isinstance(description, str) or not isinstance(category, str):
-            return jsonify({
-                "error": "Description and category must be text"
-            }), 400
-
         event = Event(
             organizer_id=user.id,
-            title=data["title"].strip(),
+            title=title,
             description=description.strip(),
             category=category.strip() or "General",
-            venue=data["venue"].strip(),
+            venue=venue,
             starts_at=starts_at,
             ends_at=ends_at,
             capacity=capacity,
@@ -875,7 +892,6 @@ def update_event(event_id):
             "error": "You can only edit your own events"
         }), 403
 
-    # Only draft events can be edited.
     if event.status != "draft":
         return jsonify({
             "error": "Only draft events can be edited"
@@ -936,7 +952,6 @@ def update_event(event_id):
                 "error": "Dates must include timezone information"
             }), 400
 
-        # NEW: Reject past event start dates.
         now = datetime.now(starts_at.tzinfo)
 
         if starts_at <= now:
@@ -957,7 +972,6 @@ def update_event(event_id):
                     "error": "Capacity must be a positive integer"
                 }), 400
 
-        # Update only after all validations pass.
         event.title = title
         event.description = description.strip()
         event.category = category.strip() or "General"
