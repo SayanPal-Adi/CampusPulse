@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 from flask import (
     Flask,
     abort,
-    app,
     redirect,
     render_template,
     session,
@@ -70,14 +69,20 @@ def create_app():
 
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+    # =====================================
     # Session Cookie Security
+    # =====================================
+
     app.config.update(
-       SESSION_COOKIE_HTTPONLY=True,
-       SESSION_COOKIE_SAMESITE="Lax",
-       SESSION_COOKIE_SECURE=False,  # Local HTTP development only
+        SESSION_COOKIE_HTTPONLY=True,
+        SESSION_COOKIE_SAMESITE="Lax",
+        SESSION_COOKIE_SECURE=False,  # Local HTTP development only
     )
 
-    # Validate environment variables
+    # =====================================
+    # Validate Environment Variables
+    # =====================================
+
     if not app.config["SECRET_KEY"]:
         raise RuntimeError(
             "SECRET_KEY is missing from .env"
@@ -88,10 +93,16 @@ def create_app():
             "DATABASE_URL is missing from .env"
         )
 
-    # Initialize database
+    # =====================================
+    # Initialize Database
+    # =====================================
+
     db.init_app(app)
 
-    # Register blueprints
+    # =====================================
+    # Register Blueprints
+    # =====================================
+
     from .routes import auth_bp, events_bp
 
     app.register_blueprint(auth_bp)
@@ -215,5 +226,14 @@ def create_app():
     def register_page():
 
         return render_template("register.html")
+
+    # =====================================
+    # Custom 404 Error Page
+    # =====================================
+
+    @app.errorhandler(404)
+    def page_not_found(error):
+
+        return render_template("404.html"), 404
 
     return app
