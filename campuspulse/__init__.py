@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from flask import (
     Flask,
     abort,
+    app,
     redirect,
     render_template,
     session,
@@ -68,6 +69,13 @@ def create_app():
     )
 
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    # Session Cookie Security
+    app.config.update(
+       SESSION_COOKIE_HTTPONLY=True,
+       SESSION_COOKIE_SAMESITE="Lax",
+       SESSION_COOKIE_SECURE=False,  # Local HTTP development only
+    )
 
     # Validate environment variables
     if not app.config["SECRET_KEY"]:
