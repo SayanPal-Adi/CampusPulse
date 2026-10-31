@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#f7f6f0">
+    <meta name="robots" content="noindex">
+
+    <title>404 — Page Not Found | CampusPulse</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400,20,1;9..144,500,20,1;9..144,600,20,1&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/404.css') }}">
+</head>
+
+<body>
+
+    <main class="error-page">
+
+        <header class="error-header">
+            <a href="{{ url_for('home') }}" class="brand">
+                <span class="brand-mark">C</span>
+                <span>campus<span class="brand-light">pulse</span></span>
+            </a>
+
+            <span class="header-label">PAGE NOT FOUND</span>
+        </header>
+
+
+        <section class="error-content">
+
+            <div class="error-copy">
+
+                <div class="error-eyebrow">
+                    <span class="eyebrow-line"></span>
+                    LOST YOUR WAY?
+                </div>
+
+                <h1>
+                    Well, this is<br>
+                    <span>awkward.</span>
+                </h1>
+
+                <p class="error-description">
+                    Looks like this page has skipped campus today.
+                    It may have moved, been removed, or never existed.
+                </p>
+
+                <div class="error-actions">
+                    <a href="{{ url_for('home') }}"
+                       class="home-button">
+                        <span>Back to home</span>
+                        <span class="button-arrow" aria-hidden="true">↗</span>
+                    </a>
+
+                    <button type="button"
+                            class="back-button"
+                            id="goBackButton">
+                        Go back
+                    </button>
+                </div>
+
+                <p class="error-code">
+                    ERROR CODE <strong>404</strong>
+                    <span class="error-code-divider">/</span>
+                    NOTHING TO SEE HERE
+                </p>
+
+            </div>
+
+
+            <div class="error-visual"
+                 aria-label="An illustration of a lost campus location"
+                 role="img">
+
+                <div class="visual-orbit orbit-one"></div>
+                <div class="visual-orbit orbit-two"></div>
+
+                <div class="visual-label label-top">
+                    <span class="label-dot"></span>
+                    LOCATION UNKNOWN
+                </div>
+
+                <div class="visual-number">404</div>
+
+                <div class="lost-card">
+                    <div class="lost-card-top">
+                        <span>DESTINATION</span>
+                        <span class="lost-status">NOT FOUND</span>
+                    </div>
+
+                    <div class="lost-card-icon">
+                        <svg viewBox="0 0 80 80"
+                             fill="none"
+                             aria-hidden="true">
+                            <path d="M40 8C25.64 8 14 19.64 14 34c0 19.5 26 39 26 39s26-19.5 26-39C66 19.64 54.36 8 40 8Z"
+                                  stroke="currentColor"
+                                  stroke-width="2.5"/>
+
+                            <circle cx="40" cy="34"
+                                    r="9"
+                                    stroke="currentColor"
+                                    stroke-width="2.5"/>
+
+                            <path d="M37 31l6 6m0-6-6 6"
+                                  stroke="#bd593b"
+                                  stroke-width="2.5"
+                                  stroke-linecap="round"/>
+                        </svg>
+                    </div>
+
+                    <div class="lost-card-bottom">
+                        <span>Somewhere out there...</span>
+                        <span class="lost-coordinates">— / —</span>
+                    </div>
+                </div>
+
+                <div class="visual-decoration decoration-one"></div>
+                <div class="visual-decoration decoration-two"></div>
+
+                <span class="visual-caption">
+                    CAMPUSPULSE · LOST & FOUND
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <footer class="error-footer">
+            <span>© 2026 CampusPulse</span>
+            <span>YOUR CAMPUS, YOUR EVENTS.</span>
+        </footer>
+
+    </main>
+
+
+    <script>
+        const goBackButton = document.getElementById("goBackButton");
+
+        goBackButton.addEventListener("click", function () {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = "{{ url_for('home') }}";
+            }
+        });
+    </script>
+
+</body>
+</html>
