@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +7,9 @@
 
     <title>Admin Dashboard | CampusPulse</title>
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/admin.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
 </head>
 
 <body>
@@ -28,10 +25,7 @@
                     <span>CampusPulse</span>
                 </a>
 
-                <button type="button"
-                        class="sidebar-close"
-                        id="sidebarClose"
-                        aria-label="Close sidebar">
+                <button type="button" class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
                     &times;
                 </button>
             </div>
@@ -51,30 +45,22 @@
 
                 <p class="sidebar-label">MAIN MENU</p>
 
-                <button type="button"
-                        class="nav-item active"
-                        data-section="overview">
+                <button type="button" class="nav-item active" data-section="overview">
                     <span class="nav-icon">⌂</span>
                     <span>Overview</span>
                 </button>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="users">
+                <button type="button" class="nav-item" data-section="users">
                     <span class="nav-icon">♙</span>
                     <span>User Management</span>
                 </button>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="events">
+                <button type="button" class="nav-item" data-section="events">
                     <span class="nav-icon">▦</span>
                     <span>Event Management</span>
                 </button>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="registrations">
+                <button type="button" class="nav-item" data-section="registrations">
                     <span class="nav-icon">☷</span>
                     <span>Registrations</span>
                 </button>
@@ -83,9 +69,7 @@
                     ANALYTICS
                 </p>
 
-                <button type="button"
-                        class="nav-item"
-                        data-section="reports">
+                <button type="button" class="nav-item" data-section="reports">
                     <span class="nav-icon">▥</span>
                     <span>Reports</span>
                 </button>
@@ -99,9 +83,7 @@
                     CampusPulse Admin
                 </div>
 
-                <button type="button"
-                        class="sidebar-logout"
-                        id="adminLogoutButton">
+                <button type="button" class="sidebar-logout" id="adminLogoutButton">
                     <span class="nav-icon">↪</span>
                     <span>Log out</span>
                 </button>
@@ -123,10 +105,7 @@
 
                 <div class="topbar-left">
 
-                    <button type="button"
-                            class="menu-toggle"
-                            id="menuToggle"
-                            aria-label="Open navigation">
+                    <button type="button" class="menu-toggle" id="menuToggle" aria-label="Open navigation">
                         ☰
                     </button>
 
@@ -155,11 +134,7 @@
 
 
             <!-- Notification -->
-            <div id="adminNotification"
-                 class="admin-notification"
-                 role="status"
-                 aria-live="polite"
-                 hidden>
+            <div id="adminNotification" class="admin-notification" role="status" aria-live="polite" hidden>
             </div>
 
 
@@ -171,8 +146,7 @@
                      OVERVIEW SECTION
                 ========================== -->
 
-                <section class="admin-section active"
-                         id="overviewSection">
+                <section class="admin-section active" id="overviewSection">
 
                     <div class="page-heading">
                         <div>
@@ -259,9 +233,7 @@
                                 from one place.
                             </p>
 
-                            <button type="button"
-                                    class="welcome-action"
-                                    data-go-section="users">
+                            <button type="button" class="welcome-action" data-go-section="users">
                                 Manage users
                                 <span>→</span>
                             </button>
@@ -292,9 +264,7 @@
 
                         <div class="management-grid">
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="users">
+                            <button type="button" class="management-card" data-go-section="users">
 
                                 <span class="management-icon">♙</span>
 
@@ -308,9 +278,7 @@
                             </button>
 
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="events">
+                            <button type="button" class="management-card" data-go-section="events">
 
                                 <span class="management-icon">▦</span>
 
@@ -324,9 +292,7 @@
                             </button>
 
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="registrations">
+                            <button type="button" class="management-card" data-go-section="registrations">
 
                                 <span class="management-icon">☷</span>
 
@@ -340,9 +306,7 @@
                             </button>
 
 
-                            <button type="button"
-                                    class="management-card"
-                                    data-go-section="reports">
+                            <button type="button" class="management-card" data-go-section="reports">
 
                                 <span class="management-icon">▥</span>
 
@@ -406,9 +370,7 @@
                                 <p>Browse registered CampusPulse accounts.</p>
                             </div>
 
-                            <button type="button"
-                                    class="user-refresh-button"
-                                    id="refreshUsersButton">
+                            <button type="button" class="user-refresh-button" id="refreshUsersButton">
                                 ↻ Refresh
                             </button>
                         </div>
@@ -419,15 +381,11 @@
                             <div class="user-search-wrapper">
                                 <span>⌕</span>
 
-                                <input
-                                    type="search"
-                                    id="userSearchInput"
-                                    placeholder="Search by name or email..."
+                                <input type="search" id="userSearchInput" placeholder="Search by name or email..."
                                     autocomplete="off">
                             </div>
 
-                            <select id="userRoleFilter"
-                                    aria-label="Filter users by role">
+                            <select id="userRoleFilter" aria-label="Filter users by role">
                                 <option value="all">All roles</option>
                                 <option value="student">Students</option>
                                 <option value="organizer">Organizers</option>
@@ -516,9 +474,7 @@
                                 <p>Events submitted by organizers across the platform.</p>
                             </div>
 
-                            <button type="button"
-                                    class="event-refresh-button"
-                                    id="refreshEventsButton">
+                            <button type="button" class="event-refresh-button" id="refreshEventsButton">
                                 ↻ Refresh
                             </button>
                         </div>
@@ -529,15 +485,11 @@
                             <div class="event-search-wrapper">
                                 <span>⌕</span>
 
-                                <input
-                                    type="search"
-                                    id="adminEventSearch"
-                                    placeholder="Search title, venue or organizer..."
-                                    autocomplete="off">
+                                <input type="search" id="adminEventSearch"
+                                    placeholder="Search title, venue or organizer..." autocomplete="off">
                             </div>
 
-                            <select id="adminEventStatusFilter"
-                                    aria-label="Filter events by status">
+                            <select id="adminEventStatusFilter" aria-label="Filter events by status">
 
                                 <option value="all">All statuses</option>
                                 <option value="published">Published</option>
@@ -591,17 +543,12 @@
                      EVENT DETAILS MODAL
                 ========================== -->
 
-                <div class="admin-event-modal"
-                     id="adminEventModal"
-                     hidden>
+                <div class="admin-event-modal" id="adminEventModal" hidden>
 
-                    <div class="admin-event-modal-backdrop"
-                         id="adminEventModalBackdrop"></div>
+                    <div class="admin-event-modal-backdrop" id="adminEventModalBackdrop"></div>
 
-                    <div class="admin-event-modal-content"
-                         role="dialog"
-                         aria-modal="true"
-                         aria-labelledby="eventDetailTitle">
+                    <div class="admin-event-modal-content" role="dialog" aria-modal="true"
+                        aria-labelledby="eventDetailTitle">
 
                         <div class="admin-event-modal-header">
 
@@ -615,10 +562,7 @@
                                 </h2>
                             </div>
 
-                            <button
-                                type="button"
-                                id="closeEventModal"
-                                class="admin-event-modal-close"
+                            <button type="button" id="closeEventModal" class="admin-event-modal-close"
                                 aria-label="Close event details">
                                 &times;
                             </button>
@@ -629,8 +573,7 @@
 
                             <div class="event-detail-status">
 
-                                <span id="eventDetailStatus"
-                                      class="event-status-badge">
+                                <span id="eventDetailStatus" class="event-status-badge">
                                 </span>
 
                                 <span id="eventDetailCategory"></span>
@@ -690,10 +633,7 @@
 
                         <div class="admin-event-modal-footer">
 
-                            <button
-                                type="button"
-                                id="closeEventModalFooter"
-                                class="secondary-button">
+                            <button type="button" id="closeEventModalFooter" class="secondary-button">
                                 Close
                             </button>
 
@@ -709,30 +649,115 @@
                      REGISTRATIONS SECTION
                 ========================== -->
 
+                <!-- =========================
+     REGISTRATIONS SECTION
+========================== -->
+
                 <section class="admin-section" id="registrationsSection">
 
                     <div class="page-heading">
                         <div>
                             <p class="admin-eyebrow">PARTICIPATION</p>
                             <h1>Registrations</h1>
-
-                            <p>
-                                Monitor registrations across all campus events.
-                            </p>
+                            <p>Monitor registrations across all campus events.</p>
                         </div>
                     </div>
 
-                    <div class="section-placeholder">
+                    <!-- Registration Statistics -->
+                    <div class="registration-stats">
 
-                        <div class="placeholder-icon">☷</div>
+                        <article class="registration-stat-card">
+                            <p>Total registrations</p>
+                            <h2 id="registrationTotalCount">—</h2>
+                        </article>
 
-                        <h2>Registration management</h2>
+                        <article class="registration-stat-card">
+                            <p>Active registrations</p>
+                            <h2 id="registrationActiveCount">—</h2>
+                        </article>
 
-                        <p>
-                            Registration records, student participation
-                            and event-wise registration details will
-                            be implemented in a later step.
-                        </p>
+                        <article class="registration-stat-card">
+                            <p>Cancelled registrations</p>
+                            <h2 id="registrationCancelledCount">—</h2>
+                        </article>
+
+                    </div>
+
+                    <!-- Registration Directory -->
+                    <div class="registration-directory">
+
+                        <div class="registration-directory-heading">
+                            <div>
+                                <h2>All registrations</h2>
+                                <p>Browse student participation across campus events.</p>
+                            </div>
+
+                            <button type="button" class="registration-refresh-button" id="refreshRegistrationsButton">
+                                ↻ Refresh
+                            </button>
+                        </div>
+
+                        <!-- Search and Filters -->
+                        <div class="registration-toolbar">
+
+                            <div class="registration-search-wrapper">
+                                <span>⌕</span>
+
+                                <input type="search" id="registrationSearchInput"
+                                    placeholder="Search student, email or event..." autocomplete="off">
+                            </div>
+
+                            <select id="registrationStatusFilter" aria-label="Filter registrations by status">
+
+                                <option value="all">All statuses</option>
+                                <option value="registered">Registered</option>
+                                <option value="cancelled">Cancelled</option>
+
+                            </select>
+
+                            <select id="registrationEventFilter" aria-label="Filter registrations by event">
+
+                                <option value="all">All events</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Registrations Table -->
+                        <div class="registration-table-wrapper">
+
+                            <table class="registration-table">
+
+                                <thead>
+                                    <tr>
+                                        <th>Student</th>
+                                        <th>Email address</th>
+                                        <th>Event</th>
+                                        <th>Venue</th>
+                                        <th>Registered on</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="registrationsTableBody">
+
+                                    <tr>
+                                        <td colspan="6" class="registration-table-message">
+                                            Select Registrations to load records.
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                        <div class="registration-directory-footer">
+                            <p id="registrationResultsMessage">
+                                No registrations loaded.
+                            </p>
+                        </div>
 
                     </div>
 
@@ -790,8 +815,7 @@
     </div>
 
 
-    <script src="{{ url_for('static', filename='js/admin.js') }}"
-            defer>
+    <script src="{{ url_for('static', filename='js/admin.js') }}" defer>
     </script>
 
 </body>

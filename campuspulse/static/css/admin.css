@@ -1697,3 +1697,261 @@ a:focus-visible {
     }
 
 }
+
+/* =====================================
+   REGISTRATION MANAGEMENT
+===================================== */
+
+.registration-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 25px;
+}
+
+.registration-stat-card {
+    padding: 20px;
+    border: 1px solid var(--admin-border);
+    border-radius: 11px;
+    background: white;
+}
+
+.registration-stat-card p {
+    margin: 0 0 12px;
+    color: var(--admin-muted);
+    font-size: 12px;
+}
+
+.registration-stat-card h2 {
+    margin: 0;
+    color: var(--admin-green);
+    font-size: 27px;
+}
+
+/* Registration Directory */
+
+.registration-directory {
+    padding: 24px;
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+    background: white;
+}
+
+.registration-directory-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.registration-directory-heading h2 {
+    margin: 0 0 7px;
+    color: var(--admin-text);
+    font-size: 18px;
+}
+
+.registration-directory-heading p {
+    margin: 0;
+    color: var(--admin-muted);
+    font-size: 12px;
+}
+
+.registration-refresh-button {
+    padding: 10px 14px;
+    border: 1px solid var(--admin-border);
+    border-radius: 7px;
+    background: white;
+    color: var(--admin-green);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.registration-refresh-button:hover {
+    background: var(--admin-green-light);
+}
+
+.registration-refresh-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Search and Filters */
+
+.registration-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.registration-search-wrapper {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 13px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: white;
+    color: var(--admin-muted);
+}
+
+.registration-search-wrapper span {
+    font-size: 20px;
+}
+
+.registration-search-wrapper input {
+    width: 100%;
+    min-width: 0;
+    height: 42px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--admin-text);
+    font-size: 12px;
+}
+
+.registration-toolbar select {
+    min-width: 150px;
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid var(--admin-border);
+    border-radius: 8px;
+    background: white;
+    color: var(--admin-text);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+/* Registration Table */
+
+.registration-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.registration-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.registration-table th {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--admin-border);
+    background: #f8faf8;
+    color: #78867d;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.registration-table td {
+    padding: 15px 12px;
+    border-bottom: 1px solid #edf0ed;
+    color: #526158;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.registration-table tbody tr:hover {
+    background: #fafcfa;
+}
+
+.registration-student-cell,
+.registration-event-cell {
+    min-width: 145px;
+}
+
+.registration-student-cell strong,
+.registration-event-cell strong {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--admin-text);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.registration-event-cell small {
+    color: var(--admin-muted);
+    font-size: 10px;
+}
+
+.registration-date-cell {
+    min-width: 130px;
+    white-space: nowrap;
+}
+
+/* Registration Status */
+
+.registration-status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: capitalize;
+    white-space: nowrap;
+}
+
+.registration-status-badge.registered {
+    background: #eaf4ec;
+    color: #34734a;
+}
+
+.registration-status-badge.cancelled {
+    background: #fcebea;
+    color: #a33d35;
+}
+
+/* Loading and Empty States */
+
+.registration-table-message {
+    padding: 35px 15px !important;
+    color: var(--admin-muted) !important;
+    text-align: center;
+}
+
+/* Footer */
+
+.registration-directory-footer {
+    padding-top: 15px;
+}
+
+.registration-directory-footer p {
+    margin: 0;
+    color: var(--admin-muted);
+    font-size: 11px;
+}
+
+/* Responsive */
+
+@media (max-width: 760px) {
+
+    .registration-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .registration-directory {
+        padding: 16px;
+    }
+
+    .registration-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .registration-toolbar select {
+        width: 100%;
+    }
+
+    .registration-directory-heading {
+        align-items: flex-start;
+    }
+
+}

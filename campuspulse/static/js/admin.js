@@ -66,6 +66,18 @@ const adminEventModalBackdrop = document.getElementById("adminEventModalBackdrop
 const closeEventModalButton = document.getElementById("closeEventModal");
 const closeEventModalFooter = document.getElementById("closeEventModalFooter");
 
+// Registration Management
+const registrationsTableBody = document.getElementById("registrationsTableBody");
+const registrationSearchInput = document.getElementById("registrationSearchInput");
+const registrationStatusFilter = document.getElementById("registrationStatusFilter");
+const registrationEventFilter = document.getElementById("registrationEventFilter");
+const refreshRegistrationsButton = document.getElementById("refreshRegistrationsButton");
+
+const registrationTotalCount = document.getElementById("registrationTotalCount");
+const registrationActiveCount = document.getElementById("registrationActiveCount");
+const registrationCancelledCount = document.getElementById("registrationCancelledCount");
+const registrationResultsMessage = document.getElementById("registrationResultsMessage");
+
 
 // =====================================
 // APPLICATION STATE
@@ -76,6 +88,12 @@ let usersLoaded = false;
 
 let allAdminEvents = [];
 let adminEventsLoaded = false;
+
+let allAdminRegistrations = [];
+let registrationsLoaded = false;
+
+let registrationSearchTimer = null;
+let registrationRequestController = null;
 
 
 // =====================================
@@ -136,14 +154,17 @@ function showSection(sectionName) {
         behavior: "smooth"
     });
 
-    // Load User Management when opened.
+    // Load sections when first opened.
     if (sectionName === "users" && !usersLoaded) {
         loadUsers();
     }
 
-    // Load Event Management when opened.
     if (sectionName === "events" && !adminEventsLoaded) {
         loadAdminEvents();
+    }
+
+    if (sectionName === "registrations" && !registrationsLoaded) {
+        loadAdminRegistrations();
     }
 
 }
@@ -248,6 +269,58 @@ function escapeAdminHTML(value) {
 
 
 // =====================================
+// API RESPONSE HANDLING
+// =====================================
+
+async function readAdminResponse(response) {
+
+    const data = await response.json().catch(() => ({}));
+
+    if (response.status === 401) {
+        throw new Error("Your session has expired. Please log in again.");
+    }
+
+    if (!response.ok) {
+        throw new Error(
+            data.error ||
+            data.message ||
+            `Request failed (${response.status}).`
+        );
+    }
+
+    return data;
+
+}
+
+
+// =====================================
+// DATE FORMATTING
+// =====================================
+
+function formatAdminEventDate(dateValue) {
+
+    if (!dateValue) {
+        return "Not available";
+    }
+
+    const date = new Date(dateValue);
+
+    if (Number.isNaN(date.getTime())) {
+        return "Invalid date";
+    }
+
+    return date.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+    });
+
+}
+
+
+// =====================================
 // LOAD DASHBOARD STATISTICS
 // =====================================
 
@@ -260,13 +333,7 @@ async function loadAdminStatistics() {
             credentials: "same-origin"
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(
-                data.error || "Unable to load dashboard statistics."
-            );
-        }
+        const data = await readAdminResponse(response);
 
         totalStudents.textContent = data.total_students ?? 0;
         totalOrganizers.textContent = data.total_organizers ?? 0;
@@ -312,13 +379,7 @@ async function loadUsers() {
             credentials: "same-origin"
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(
-                data.error || "Unable to load users."
-            );
-        }
+        const data = await readAdminResponse(response);
 
         allUsers = Array.isArray(data.users) ? data.users : [];
         usersLoaded = true;
@@ -506,13 +567,7 @@ async function loadAdminEvents() {
             credentials: "same-origin"
         });
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(
-                data.error || "Unable to load events."
-            );
-        }
+        const data = await readAdminResponse(response);
 
         allAdminEvents = Array.isArray(data.events)
             ? data.events
@@ -520,7 +575,6 @@ async function loadAdminEvents() {
 
         adminEventsLoaded = true;
 
-        // Update global event counts.
         adminEventTotal.textContent = allAdminEvents.length;
 
         adminEventPublished.textContent = allAdminEvents.filter(
@@ -532,6 +586,11 @@ async function loadAdminEvents() {
         ).length;
 
         filterAndDisplayAdminEvents();
+
+        // Keep registration event filter options updated.
+        if (registrationEventFilter) {
+            populateRegistrationEventFilter();
+        }
 
         console.log("Admin events loaded:", data);
 
@@ -595,30 +654,6 @@ function filterAndDisplayAdminEvents() {
 }
 
 
-// Format date and time.
-function formatAdminEventDate(dateValue) {
-
-    if (!dateValue) {
-        return "Not available";
-    }
-
-    const date = new Date(dateValue);
-
-    if (Number.isNaN(date.getTime())) {
-        return "Invalid date";
-    }
-
-    return date.toLocaleString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-    });
-
-}
-
-
 // Display events in the table.
 function displayAdminEvents(events) {
 
@@ -670,7 +705,6 @@ function displayAdminEvents(events) {
 
         const statusLabel = escapeAdminHTML(status || "Unknown");
 
-        // UUIDs are generated by the backend.
         const eventId = escapeAdminHTML(event.id);
 
         return `
@@ -788,10 +822,7 @@ function displayAdminEvents(events) {
 }
 
 
-// =====================================
-// ADMIN EVENT STATUS CONTROLS
-// =====================================
-
+// Event status update.
 async function updateAdminEventStatus(eventId, newStatus, button) {
 
     const actionLabels = {
@@ -837,19 +868,12 @@ async function updateAdminEventStatus(eventId, newStatus, button) {
             }
         );
 
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(
-                data.error || "Unable to update event status."
-            );
-        }
+        const data = await readAdminResponse(response);
 
         showAdminNotification(
             data.message || "Event status updated successfully."
         );
 
-        // Reload events and dashboard statistics.
         await loadAdminEvents();
         await loadAdminStatistics();
 
@@ -864,6 +888,7 @@ async function updateAdminEventStatus(eventId, newStatus, button) {
         button.textContent = actionLabels[newStatus];
         button.classList.remove("confirming");
     }
+
 }
 
 
@@ -911,7 +936,6 @@ function openAdminEventDetails(eventId) {
         return;
     }
 
-    // Basic event information.
     document.getElementById("eventDetailTitle").textContent =
         event.title || "Untitled event";
 
@@ -920,7 +944,6 @@ function openAdminEventDetails(eventId) {
 
     document.getElementById("eventDetailCategory").textContent =
         event.category || "General";
-
 
     // Event status.
     const statusElement = document.getElementById("eventDetailStatus");
@@ -936,7 +959,6 @@ function openAdminEventDetails(eventId) {
         statusElement.classList.add("other");
     }
 
-
     // Organizer details.
     document.getElementById("eventDetailOrganizer").textContent =
         event.organizer?.name || "Unknown organizer";
@@ -944,14 +966,12 @@ function openAdminEventDetails(eventId) {
     document.getElementById("eventDetailEmail").textContent =
         event.organizer?.email || "Not available";
 
-
     // Venue and capacity.
     document.getElementById("eventDetailVenue").textContent =
         event.venue || "Not specified";
 
     document.getElementById("eventDetailCapacity").textContent =
         event.capacity == null ? "Unlimited" : event.capacity;
-
 
     // Event schedule.
     document.getElementById("eventDetailStart").textContent =
@@ -967,7 +987,6 @@ function openAdminEventDetails(eventId) {
 
     document.getElementById("eventDetailCreated").textContent =
         formatAdminEventDate(event.created_at);
-
 
     // Display modal.
     adminEventModal.hidden = false;
@@ -1035,7 +1054,315 @@ adminEventModalBackdrop.addEventListener(
 );
 
 
-// Close sidebar and modal using Escape.
+// =====================================
+// REGISTRATION MANAGEMENT
+// =====================================
+
+
+// Populate the event dropdown using the admin event list.
+function populateRegistrationEventFilter() {
+
+    const selectedValue = registrationEventFilter.value;
+
+    const options = [
+        `<option value="all">All events</option>`
+    ];
+
+    allAdminEvents.forEach(event => {
+
+        const eventId = escapeAdminHTML(event.id);
+        const eventTitle = escapeAdminHTML(event.title);
+
+        options.push(`
+            <option value="${eventId}">
+                ${eventTitle}
+            </option>
+        `);
+
+    });
+
+    registrationEventFilter.innerHTML = options.join("");
+
+    // Preserve the selected event when refreshing.
+    if (
+        selectedValue !== "all" &&
+        allAdminEvents.some(
+            event => String(event.id) === selectedValue
+        )
+    ) {
+        registrationEventFilter.value = selectedValue;
+    }
+
+}
+
+
+// Load registrations from Flask API.
+async function loadAdminRegistrations() {
+
+    // Cancel an older request if one is still running.
+    if (registrationRequestController) {
+        registrationRequestController.abort();
+    }
+
+    registrationRequestController = new AbortController();
+
+    const controller = registrationRequestController;
+
+    registrationsTableBody.innerHTML = `
+        <tr>
+            <td colspan="6" class="registration-table-message">
+                Loading registrations...
+            </td>
+        </tr>
+    `;
+
+    refreshRegistrationsButton.disabled = true;
+
+    try {
+
+        // Load the event list for the event filter.
+        if (!adminEventsLoaded) {
+            await loadAdminEvents();
+        }
+
+        populateRegistrationEventFilter();
+
+        const search = registrationSearchInput.value.trim();
+        const status = registrationStatusFilter.value;
+        const eventId = registrationEventFilter.value;
+
+        const params = new URLSearchParams();
+
+        if (search) {
+            params.set("q", search);
+        }
+
+        if (status !== "all") {
+            params.set("status", status);
+        }
+
+        if (eventId !== "all") {
+            params.set("event_id", eventId);
+        }
+
+        const queryString = params.toString();
+
+        const endpoint = queryString
+            ? `/api/auth/admin/registrations?${queryString}`
+            : "/api/auth/admin/registrations";
+
+        const response = await fetch(endpoint, {
+            method: "GET",
+            credentials: "same-origin",
+            signal: controller.signal
+        });
+
+        const data = await readAdminResponse(response);
+
+        allAdminRegistrations = Array.isArray(data.registrations)
+            ? data.registrations
+            : [];
+
+        registrationsLoaded = true;
+
+        // Update statistics returned by the backend.
+        const counts = data.counts || {};
+
+        registrationTotalCount.textContent =
+            counts.total ?? allAdminRegistrations.length;
+
+        registrationActiveCount.textContent =
+            counts.active ?? 0;
+
+        registrationCancelledCount.textContent =
+            counts.cancelled ?? 0;
+
+        displayAdminRegistrations(allAdminRegistrations);
+
+        console.log("Admin registrations loaded:", data);
+
+    }
+
+    catch (error) {
+
+        if (error.name === "AbortError") {
+            return;
+        }
+
+        console.error("Registration loading error:", error);
+
+        registrationsTableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="registration-table-message">
+                    ${escapeAdminHTML(error.message)}
+                </td>
+            </tr>
+        `;
+
+        registrationResultsMessage.textContent =
+            "Unable to load registrations.";
+
+        showAdminNotification(error.message, "error");
+
+    }
+
+    finally {
+
+        if (registrationRequestController === controller) {
+            registrationRequestController = null;
+            refreshRegistrationsButton.disabled = false;
+        }
+
+    }
+
+}
+
+
+// Display registrations in the table.
+function displayAdminRegistrations(registrations) {
+
+    if (registrations.length === 0) {
+
+        registrationsTableBody.innerHTML = `
+            <tr>
+                <td colspan="6" class="registration-table-message">
+                    No matching registrations found.
+                </td>
+            </tr>
+        `;
+
+        registrationResultsMessage.textContent =
+            "0 registrations found.";
+
+        return;
+    }
+
+    registrationsTableBody.innerHTML = registrations.map(registration => {
+
+        const studentName = escapeAdminHTML(
+            registration.student_name || "Unknown student"
+        );
+
+        const studentEmail = escapeAdminHTML(
+            registration.student_email || "Not available"
+        );
+
+        const eventTitle = escapeAdminHTML(
+            registration.event_title || "Unknown event"
+        );
+
+        const venue = escapeAdminHTML(
+            registration.event_venue || "Not specified"
+        );
+
+        const registeredDate = escapeAdminHTML(
+            formatAdminEventDate(registration.registered_at)
+        );
+
+        const status = String(
+            registration.status || "unknown"
+        ).toLowerCase();
+
+        const allowedStatus = [
+            "registered",
+            "cancelled"
+        ].includes(status);
+
+        const statusClass = allowedStatus
+            ? status
+            : "unknown";
+
+        const statusLabel = escapeAdminHTML(status);
+
+        return `
+            <tr>
+
+                <td>
+                    <div class="registration-student-cell">
+                        <strong>${studentName}</strong>
+                    </div>
+                </td>
+
+                <td>${studentEmail}</td>
+
+                <td>
+                    <div class="registration-event-cell">
+                        <strong>${eventTitle}</strong>
+                    </div>
+                </td>
+
+                <td>${venue}</td>
+
+                <td>
+                    <div class="registration-date-cell">
+                        ${registeredDate}
+                    </div>
+                </td>
+
+                <td>
+                    <span class="registration-status-badge ${statusClass}">
+                        ${statusLabel}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+
+    }).join("");
+
+    registrationResultsMessage.textContent =
+        `Showing ${registrations.length} registration(s).`;
+
+}
+
+
+// Search registrations with a small debounce.
+registrationSearchInput.addEventListener("input", function () {
+
+    if (!registrationsLoaded) {
+        return;
+    }
+
+    clearTimeout(registrationSearchTimer);
+
+    registrationSearchTimer = setTimeout(() => {
+        loadAdminRegistrations();
+    }, 350);
+
+});
+
+
+// Filter registrations by status.
+registrationStatusFilter.addEventListener("change", function () {
+
+    if (registrationsLoaded) {
+        loadAdminRegistrations();
+    }
+
+});
+
+
+// Filter registrations by event.
+registrationEventFilter.addEventListener("change", function () {
+
+    if (registrationsLoaded) {
+        loadAdminRegistrations();
+    }
+
+});
+
+
+// Refresh registrations.
+refreshRegistrationsButton.addEventListener(
+    "click",
+    loadAdminRegistrations
+);
+
+
+// =====================================
+// ESCAPE KEY HANDLING
+// =====================================
+
 document.addEventListener("keydown", function (event) {
 
     if (event.key === "Escape") {
