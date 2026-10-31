@@ -1,0 +1,273 @@
+
+/* =================================
+   CAMPUSPULSE - LOGIN PAGE
+================================= */
+
+.login-header {
+    width: 100%;
+    min-height: 76px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fffefa;
+    border-bottom: 1px solid #dedfd5;
+
+    animation: cp-fade-down 0.65s ease both;
+}
+
+.login-logo {
+    color: #1c493b;
+    font-size: 23px;
+    font-weight: 700;
+    letter-spacing: -0.8px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-logo:hover {
+    color: #bd593b;
+}
+
+.login-register-link {
+    color: #72766e;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-register-link:hover {
+    color: #bd593b;
+}
+
+.login-container {
+    min-height: calc(100vh - 76px);
+    padding: 55px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f7f6f0;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 42px;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(34, 44, 37, 0.06);
+
+    animation: cp-card-enter 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.login-heading {
+    margin-bottom: 30px;
+    animation: cp-rise-in 0.65s ease 0.12s both;
+}
+
+.login-eyebrow {
+    margin-bottom: 12px;
+    color: #bd593b;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.login-heading h1 {
+    margin: 0 0 12px;
+    color: #1c493b;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: -1.2px;
+    line-height: 1.2;
+}
+
+.login-heading > p:last-child {
+    margin: 0;
+    color: #72766e;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Form fields */
+
+.login-form-group {
+    margin-bottom: 21px;
+    animation: cp-rise-in 0.55s ease both;
+}
+
+.login-form-group:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.login-form-group:nth-child(2) {
+    animation-delay: 0.28s;
+}
+
+.login-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #222c25;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.login-form-group input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    color: #222c25;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
+}
+
+.login-form-group input::placeholder {
+    color: #a1a39c;
+}
+
+.login-form-group input:hover {
+    border-color: #aab8ac;
+}
+
+.login-form-group input:focus {
+    border-color: #1c493b;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(28, 73, 59, 0.09);
+}
+
+/* Login button */
+
+.login-submit {
+    width: 100%;
+    min-height: 49px;
+    margin-top: 8px;
+    color: #ffffff;
+    background: #1c493b;
+    border: 1px solid #1c493b;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition:
+        background 0.22s ease,
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+.login-submit:hover {
+    background: #173b31;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(28, 73, 59, 0.15);
+}
+
+.login-submit:active {
+    transform: translateY(0) scale(0.99);
+}
+
+.login-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Login messages */
+
+.login-message {
+    min-height: 0;
+    margin-top: 0;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.login-message.is-error {
+    margin-top: 14px;
+    padding: 10px 12px;
+    color: #a43f3f;
+    background: #f8ece9;
+    border: 1px solid #edd5ce;
+    border-radius: 6px;
+    animation: cp-rise-in 0.25s ease both;
+}
+
+/* Registration link */
+
+.login-register {
+    margin: 25px 0 0;
+    color: #72766e;
+    font-size: 13px;
+    text-align: center;
+}
+
+.login-register a {
+    color: #1c493b;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-register a:hover {
+    color: #bd593b;
+}
+
+/* Responsive */
+
+@media (max-width: 600px) {
+    .login-header {
+        min-height: 65px;
+        padding: 0 20px;
+    }
+
+    .login-logo {
+        font-size: 20px;
+    }
+
+    .login-register-link {
+        font-size: 11px;
+    }
+
+    .login-container {
+        min-height: calc(100vh - 65px);
+        padding: 30px 15px;
+    }
+
+    .login-card {
+        padding: 28px 22px;
+    }
+
+    .login-heading h1 {
+        font-size: 30px;
+    }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .login-header,
+    .login-card,
+    .login-heading,
+    .login-form-group {
+        animation: none !important;
+    }
+
+    .login-logo,
+    .login-register-link,
+    .login-form-group input,
+    .login-submit,
+    .login-register a {
+        transition: none !important;
+    }
+}
