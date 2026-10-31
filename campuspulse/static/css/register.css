@@ -1,6 +1,6 @@
 
 /* =================================
-   CampusPulse - Registration Page
+   CAMPUSPULSE - REGISTRATION PAGE
 ================================= */
 
 .register-header {
@@ -12,6 +12,8 @@
     justify-content: space-between;
     background: #fffefa;
     border-bottom: 1px solid #dedfd5;
+
+    animation: cp-fade-down 0.65s ease both;
 }
 
 .register-logo {
@@ -20,6 +22,11 @@
     font-weight: 700;
     text-decoration: none;
     letter-spacing: -0.8px;
+    transition: color 0.25s ease;
+}
+
+.register-logo:hover {
+    color: #bd593b;
 }
 
 .register-container {
@@ -39,10 +46,13 @@
     border: 1px solid #dedfd5;
     border-radius: 12px;
     box-shadow: 0 12px 35px rgba(34, 44, 37, 0.06);
+
+    animation: cp-card-enter 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) both;
 }
 
 .register-heading {
     margin-bottom: 30px;
+    animation: cp-rise-in 0.65s ease 0.12s both;
 }
 
 .register-eyebrow {
@@ -56,7 +66,9 @@
 .register-heading h1 {
     margin: 0 0 12px;
     color: #222c25;
-    font-size: 32px;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 34px;
+    font-weight: 500;
     line-height: 1.2;
     letter-spacing: -1px;
 }
@@ -72,7 +84,14 @@
 
 .form-group {
     margin-bottom: 19px;
+    animation: cp-rise-in 0.55s ease both;
 }
+
+.form-group:nth-child(1) { animation-delay: 0.16s; }
+.form-group:nth-child(2) { animation-delay: 0.21s; }
+.form-group:nth-child(3) { animation-delay: 0.26s; }
+.form-group:nth-child(4) { animation-delay: 0.31s; }
+.form-group:nth-child(5) { animation-delay: 0.36s; }
 
 .form-group label {
     display: block;
@@ -94,16 +113,27 @@
     outline: none;
     font-family: inherit;
     font-size: 13px;
-    transition: border-color 0.2s, box-shadow 0.2s;
+
+    transition:
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        transform 0.22s ease;
 }
 
 .form-group input::placeholder {
     color: #a1a39c;
 }
 
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #aab8ac;
+}
+
 .form-group input:focus,
 .form-group select:focus {
     border-color: #1c493b;
+    background: #ffffff;
     box-shadow: 0 0 0 3px rgba(28, 73, 59, 0.09);
 }
 
@@ -125,15 +155,28 @@
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+
+    transition:
+        background 0.22s ease,
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
 }
 
 .register-submit:hover {
     background: #173b31;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(28, 73, 59, 0.15);
 }
 
 .register-submit:active {
-    transform: scale(0.99);
+    transform: translateY(0) scale(0.99);
+}
+
+.register-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 /* Login link */
@@ -149,11 +192,21 @@
     color: #1c493b;
     font-weight: 700;
     text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 .register-login a:hover,
 .login-link:hover {
     color: #bd593b;
+}
+
+/* Header login link */
+
+.register-header .login-link {
+    color: #72766e;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
 /* Responsive design */
@@ -182,6 +235,26 @@
     }
 
     .register-heading h1 {
-        font-size: 27px;
+        font-size: 29px;
+    }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .register-header,
+    .register-card,
+    .register-heading,
+    .form-group {
+        animation: none !important;
+    }
+
+    .register-logo,
+    .register-header .login-link,
+    .register-login a,
+    .form-group input,
+    .form-group select,
+    .register-submit {
+        transition: none !important;
     }
 }
