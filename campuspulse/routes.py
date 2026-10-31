@@ -417,6 +417,119 @@ def admin_update_event_status(event_id):
             "error": "Unable to update event status."
         }), 500
 
+@auth_bp.get("/admin/registrations")
+def admin_list_registrations():
+    # Admin-only access
+    user_id = session.get("user_id")
+
+    if not user_id:
+        return jsonify({
+            "success": False,
+            "message": "Authentication required."
+        }), 401
+
+    user = db.session.get(User, user_id)
+
+    if not user or user.role != "admin":
+        return jsonify({
+            "success": False,
+            "message": "Admin access required."
+        }), 403
+
+    # Read query parameters
+    search = request.args.get("q", "").strip()
+    status = request.args.get("status", "all").strip().lower()
+    event_id = request.args.get("event_id", "").strip()
+
+    # Validate registration status
+    allowed_statuses = ["all", "registered", "cancelled"]
+
+    if status not in allowed_statuses:
+        return jsonify({
+            "success": False,
+            "message": "Invalid registration status."
+        }), 400
+
+    # Base query: Registration + Student + Event
+    query = (
+        select(Registration, User, Event)
+        .join(User, Registration.student_id == User.id)
+        .join(Event, Registration.event_id == Event.id)
+    )
+
+    # Search student name, email or event title
+    if search:
+        query = query.where(
+            or_(
+                User.full_name.ilike(f"%{search}%"),
+                User.email.ilike(f"%{search}%"),
+                Event.title.ilike(f"%{search}%")
+            )
+        )
+
+    # Filter by registration status
+    if status != "all":
+        query = query.where(Registration.status == status)
+
+    # Filter by event
+    if event_id:
+        try:
+            parsed_event_id = UUID(event_id)
+        except ValueError:
+            return jsonify({
+                "success": False,
+                "message": "Invalid event ID."
+            }), 400
+
+        query = query.where(Event.id == parsed_event_id)
+
+    # Latest registrations first
+    query = query.order_by(Registration.registered_at.desc())
+
+    results = db.session.execute(query).all()
+
+    registrations = []
+
+    for registration, student, event in results:
+        registrations.append({
+            "registration_id": str(registration.id),
+            "student_id": str(student.id),
+            "student_name": student.full_name,
+            "student_email": student.email,
+            "event_id": str(event.id),
+            "event_title": event.title,
+            "event_venue": event.venue,
+            "event_starts_at": (
+                event.starts_at.isoformat()
+                if event.starts_at else None
+            ),
+            "status": registration.status,
+            "registered_at": (
+                registration.registered_at.isoformat()
+                if registration.registered_at else None
+            )
+        })
+
+    # Counts for the currently filtered result set
+    total = len(registrations)
+    active = sum(
+        1 for item in registrations
+        if item["status"] == "registered"
+    )
+    cancelled = sum(
+        1 for item in registrations
+        if item["status"] == "cancelled"
+    )
+
+    return jsonify({
+        "success": True,
+        "registrations": registrations,
+        "counts": {
+            "total": total,
+            "active": active,
+            "cancelled": cancelled
+        }
+    }), 200
 
 # -------------------------
 # Authentication
