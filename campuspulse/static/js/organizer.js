@@ -30,6 +30,11 @@ const submitEventButton = document.getElementById("submitEventButton");
 const eventModalTitle = document.getElementById("eventModalTitle");
 const eventModalEyebrow = document.getElementById("eventModalEyebrow");
 
+// Registration deadline input
+const registrationDeadlineInput = document.getElementById(
+    "eventRegistrationDeadline"
+);
+
 // Registration modal elements
 const registrationsModal = document.getElementById("registrationsModal");
 const registrationsBackdrop = document.getElementById("registrationsBackdrop");
@@ -45,7 +50,10 @@ const registrationsTableBody = document.getElementById("registrationsTableBody")
 const downloadRegistrationsButton = document.getElementById("downloadRegistrationsButton");
 
 
-// Application state
+// =====================================
+// Application State
+// =====================================
+
 let editingEventId = null;
 let organizerEvents = [];
 
@@ -194,6 +202,9 @@ function openEditModal(eventId) {
 
     document.getElementById("eventEnd").value =
         toDateTimeLocal(selectedEvent.ends_at);
+
+    registrationDeadlineInput.value =
+        toDateTimeLocal(selectedEvent.registration_deadline);
 
     document.getElementById("eventCapacity").value =
         selectedEvent.capacity ?? "";
@@ -387,6 +398,10 @@ function displayEvents(events) {
             formatDate(event.ends_at)
         );
 
+        const deadline = escapeHTML(
+            formatDate(event.registration_deadline)
+        );
+
         const capacity = escapeHTML(
             event.capacity ?? "Unlimited"
         );
@@ -451,6 +466,10 @@ function displayEvents(events) {
 
                     <div class="event-detail">
                         <strong>Ends:</strong> ${end}
+                    </div>
+
+                    <div class="event-detail">
+                        <strong>Registration deadline:</strong> ${deadline}
                     </div>
 
                     <div class="event-detail">
@@ -527,7 +546,7 @@ eventForm.addEventListener("submit", async function (event) {
         const formData = new FormData(eventForm);
 
 
-        // Convert date values.
+        // Convert event date values.
         const startsAt = new Date(
             formData.get("starts_at")
         );
@@ -555,6 +574,30 @@ eventForm.addEventListener("submit", async function (event) {
         }
 
 
+        // Convert optional registration deadline.
+        const deadlineValue = formData.get("registration_deadline");
+
+        let registrationDeadline = null;
+
+        if (deadlineValue) {
+            const deadlineDate = new Date(deadlineValue);
+
+            if (Number.isNaN(deadlineDate.getTime())) {
+                throw new Error(
+                    "Please enter a valid registration deadline."
+                );
+            }
+
+            if (deadlineDate > startsAt) {
+                throw new Error(
+                    "Registration deadline cannot be after the event start."
+                );
+            }
+
+            registrationDeadline = deadlineDate.toISOString();
+        }
+
+
         // Prepare event data.
         const capacityValue = formData.get("capacity");
 
@@ -565,6 +608,7 @@ eventForm.addEventListener("submit", async function (event) {
             venue: formData.get("venue").trim(),
             starts_at: startsAt.toISOString(),
             ends_at: endsAt.toISOString(),
+            registration_deadline: registrationDeadline,
             capacity: capacityValue
                 ? Number(capacityValue)
                 : null
