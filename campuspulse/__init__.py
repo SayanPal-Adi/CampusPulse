@@ -236,4 +236,28 @@ def create_app():
 
         return render_template("404.html"), 404
 
+    # =====================================
+    # Custom 403 Error Page
+    # =====================================
+
+    @app.errorhandler(403)
+    def forbidden(error):
+
+        return render_template("403.html"), 403
+
+    # =====================================
+    # Custom 500 Error Page
+    # =====================================
+
+    @app.errorhandler(500)
+    def internal_server_error(error):
+
+        db.session.rollback()
+
+        app.logger.exception(
+            "Internal server error"
+        )
+
+        return render_template("500.html"), 500
+
     return app
