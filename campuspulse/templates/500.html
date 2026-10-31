@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f6f0">
+    <title>500 — Something Went Wrong | CampusPulse</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/500.css') }}">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            overflow: hidden;
+            background: #f7f6f0;
+            color: #1c493b;
+            font-family: "DM Sans", sans-serif;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1100px;
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            align-items: center;
+            gap: 70px;
+        }
+
+        .content {
+            animation: fadeUp 0.8s ease both;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 65px;
+            color: inherit;
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            width: 34px;
+            height: 34px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: #1c493b;
+            color: #f7f6f0;
+            font-size: 19px;
+        }
+
+        .eyebrow {
+            margin-bottom: 14px;
+            color: #bd593b;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .error-code {
+            margin-bottom: 12px;
+            color: #bd593b;
+            font-family: "Fraunces", serif;
+            font-size: clamp(90px, 13vw, 150px);
+            font-weight: 600;
+            line-height: 0.9;
+            letter-spacing: -8px;
+            animation: shake 5s ease-in-out infinite;
+        }
+
+        h1 {
+            margin-bottom: 17px;
+            font-family: "Fraunces", serif;
+            font-size: clamp(34px, 4vw, 52px);
+            font-weight: 600;
+            line-height: 1.12;
+            letter-spacing: -1.5px;
+        }
+
+        .description {
+            max-width: 430px;
+            color: #69766d;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 22px;
+            border: 1px solid #1c493b;
+            border-radius: 8px;
+            background: #1c493b;
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.25s ease, background 0.25s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: #28624e;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1c493b;
+        }
+
+        .btn-secondary:hover {
+            background: #e9e9df;
+        }
+
+        .illustration {
+            position: relative;
+            min-height: 410px;
+            display: grid;
+            place-items: center;
+            animation: fadeIn 1s ease 0.2s both;
+        }
+
+        .orbit {
+            position: absolute;
+            width: 330px;
+            height: 330px;
+            border: 1px dashed #d9ddd1;
+            border-radius: 50%;
+            animation: rotate 30s linear infinite;
+        }
+
+        .orbit::before,
+        .orbit::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #bd593b;
+        }
+
+        .orbit::before {
+            top: 35px;
+            left: 55px;
+        }
+
+        .orbit::after {
+            right: 12px;
+            bottom: 90px;
+            width: 7px;
+            height: 7px;
+            background: #1c493b;
+        }
+
+        .error-card {
+            position: relative;
+            z-index: 1;
+            width: 270px;
+            padding: 35px 25px;
+            border: 1px solid #e5e3d8;
+            border-radius: 22px;
+            background: #fffefa;
+            box-shadow: 0 25px 70px rgba(28, 73, 59, 0.09);
+            text-align: center;
+            animation: cardFloat 5s ease-in-out infinite;
+        }
+
+        .illustration-icon {
+            width: 105px;
+            height: 105px;
+            display: grid;
+            place-items: center;
+            margin: 0 auto 22px;
+            border-radius: 30px;
+            background: #f5e9e2;
+            color: #bd593b;
+        }
+
+        .illustration-icon svg {
+            width: 58px;
+            height: 58px;
+        }
+
+        .error-card h2 {
+            margin-bottom: 8px;
+            font-family: "Fraunces", serif;
+            font-size: 23px;
+        }
+
+        .error-card p {
+            color: #879087;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .floating-tag {
+            position: absolute;
+            right: 0;
+            bottom: 35px;
+            padding: 13px 18px;
+            border: 1px solid #e5e3d8;
+            border-radius: 10px;
+            background: #fffefa;
+            box-shadow: 0 10px 30px rgba(28, 73, 59, 0.07);
+            color: #bd593b;
+            font-size: 12px;
+            font-weight: 600;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .footer {
+            margin-top: 55px;
+            color: #a0a69e;
+            font-size: 11px;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes cardFloat {
+            0%, 100% { transform: translateY(0) rotate(1deg); }
+            50% { transform: translateY(-12px) rotate(-1deg); }
+        }
+
+        @keyframes shake {
+            0%, 90%, 100% { transform: rotate(0); }
+            92% { transform: rotate(-2deg); }
+            94% { transform: rotate(2deg); }
+            96% { transform: rotate(-1deg); }
+            98% { transform: rotate(0); }
+        }
+
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 800px) {
+            body {
+                overflow-y: auto;
+            }
+
+            .page {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                max-width: 550px;
+            }
+
+            .brand {
+                margin-bottom: 40px;
+            }
+
+            .illustration {
+                min-height: 330px;
+            }
+
+            .orbit {
+                width: 270px;
+                height: 270px;
+            }
+
+            .footer {
+                margin-top: 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body { padding: 24px; }
+
+            .error-code {
+                font-size: 105px;
+            }
+
+            .illustration {
+                min-height: 290px;
+            }
+
+            .error-card {
+                width: 235px;
+            }
+
+            .orbit {
+                width: 240px;
+                height: 240px;
+            }
+
+            .floating-tag {
+                right: -5px;
+                bottom: 10px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+
+        <section class="content">
+            <a href="{{ url_for('home') }}" class="brand">
+                <span class="brand-mark">C</span>
+                CampusPulse
+            </a>
+
+            <p class="eyebrow">Unexpected error</p>
+            <div class="error-code">500</div>
+
+            <h1>Well, that<br>wasn't supposed to happen.</h1>
+
+            <p class="description">
+                Something went wrong on our end.
+                Our server couldn't complete your request.
+                Don't worry — your next campus adventure is still waiting.
+            </p>
+
+            <div class="actions">
+                <a href="{{ url_for('home') }}" class="btn">
+                    Back to home &nbsp; →
+                </a>
+
+                <a href="javascript:location.reload()" class="btn btn-secondary">
+                    Try again
+                </a>
+            </div>
+
+            <p class="footer">
+                CAMPUSPULSE · YOUR CAMPUS, CONNECTED
+            </p>
+        </section>
+
+        <section class="illustration" aria-hidden="true">
+            <div class="orbit"></div>
+
+            <div class="error-card">
+                <div class="illustration-icon">
+                    <svg viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="1.6"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3v10"/>
+                        <path d="M8 9l4 4 4-4"/>
+                        <path d="M5 16v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/>
+                        <path d="M9 18h.01M12 18h.01M15 18h.01"/>
+                    </svg>
+                </div>
+
+                <h2>Taking a break</h2>
+                <p>Our server hit an unexpected<br>roadblock. Please try again.</p>
+            </div>
+
+            <div class="floating-tag">✦ We're on it</div>
+        </section>
+
+    </main>
+</body>
+</html>
