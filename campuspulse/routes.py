@@ -57,41 +57,34 @@ def admin_statistics():
 
     user = get_current_user()
 
-    # Authentication check
     if user is None:
         return jsonify({
             "error": "Please log in first."
         }), 401
 
-    # Admin authorization check
     if user.role != "admin":
         return jsonify({
             "error": "Administrator permission required."
         }), 403
 
     try:
-
-        # Count students
         total_students = db.session.scalar(
             select(func.count())
             .select_from(User)
             .where(User.role == "student")
         )
 
-        # Count organizers
         total_organizers = db.session.scalar(
             select(func.count())
             .select_from(User)
             .where(User.role == "organizer")
         )
 
-        # Count all events
         total_events = db.session.scalar(
             select(func.count())
             .select_from(Event)
         )
 
-        # Count all registrations
         total_registrations = db.session.scalar(
             select(func.count())
             .select_from(Registration)
@@ -105,7 +98,6 @@ def admin_statistics():
         }), 200
 
     except Exception:
-
         current_app.logger.exception(
             "Unable to fetch admin dashboard statistics"
         )
@@ -124,30 +116,24 @@ def admin_list_users():
 
     user = get_current_user()
 
-    # Authentication check
     if user is None:
         return jsonify({
             "error": "Please log in first."
         }), 401
 
-    # Admin authorization check
     if user.role != "admin":
         return jsonify({
             "error": "Administrator permission required."
         }), 403
 
     try:
-
-        # Read optional search and role filters.
         search_query = request.args.get("search", "").strip()
         role_filter = request.args.get("role", "all").strip().lower()
 
-        # Start with students and organizers only.
         query = select(User).where(
             User.role.in_(["student", "organizer"])
         )
 
-        # Filter by role.
         if role_filter in ("student", "organizer"):
             query = query.where(User.role == role_filter)
 
@@ -156,23 +142,20 @@ def admin_list_users():
                 "error": "Invalid role filter."
             }), 400
 
-        # Search by name or email.
         if search_query:
             search_pattern = f"%{search_query}%"
 
             query = query.where(
-                db.or_(
+                or_(
                     User.full_name.ilike(search_pattern),
                     User.email.ilike(search_pattern)
                 )
             )
 
-        # Newest accounts first.
         query = query.order_by(User.created_at.desc())
 
         users = db.session.execute(query).scalars().all()
 
-        # Prepare safe user data.
         user_list = []
 
         for account in users:
@@ -194,7 +177,6 @@ def admin_list_users():
         }), 200
 
     except Exception:
-
         current_app.logger.exception(
             "Unable to fetch admin user list"
         )
@@ -213,44 +195,41 @@ def admin_list_events():
 
     user = get_current_user()
 
-    # Authentication check
     if user is None:
         return jsonify({
             "error": "Please log in first."
         }), 401
 
-    # Admin authorization check
     if user.role != "admin":
         return jsonify({
             "error": "Administrator permission required."
         }), 403
 
     try:
-
-        # Read search and status filters.
         search_query = request.args.get("search", "").strip()
         status_filter = request.args.get("status", "all").strip().lower()
 
-        allowed_statuses = ["all", "draft", "published","suspended"]
+        allowed_statuses = [
+            "all",
+            "draft",
+            "published",
+            "suspended"
+        ]
 
         if status_filter not in allowed_statuses:
             return jsonify({
                 "error": "Invalid event status filter."
             }), 400
 
-        # Join events with their organizers.
         query = (
             select(Event, User)
             .join(User, Event.organizer_id == User.id)
         )
 
-        # Apply status filter.
         if status_filter != "all":
             query = query.where(Event.status == status_filter)
 
-        # Search by event title, venue or organizer name.
         if search_query:
-
             search_pattern = f"%{search_query}%"
 
             query = query.where(
@@ -261,7 +240,6 @@ def admin_list_events():
                 )
             )
 
-        # Newest events first.
         query = query.order_by(Event.created_at.desc())
 
         results = db.session.execute(query).all()
@@ -269,7 +247,6 @@ def admin_list_events():
         events = []
 
         for event, organizer in results:
-
             events.append({
                 "id": str(event.id),
                 "title": event.title,
@@ -307,7 +284,6 @@ def admin_list_events():
         }), 200
 
     except Exception:
-
         current_app.logger.exception(
             "Unable to fetch admin event list"
         )
@@ -326,19 +302,16 @@ def admin_update_event_status(event_id):
 
     user = get_current_user()
 
-    # Authentication check
     if user is None:
         return jsonify({
             "error": "Please log in first."
         }), 401
 
-    # Admin authorization check
     if user.role != "admin":
         return jsonify({
             "error": "Administrator permission required."
         }), 403
 
-    # Validate event ID
     try:
         event_uuid = UUID(event_id)
     except (ValueError, TypeError):
@@ -346,7 +319,6 @@ def admin_update_event_status(event_id):
             "error": "Invalid event ID."
         }), 400
 
-    # Validate request body
     data = request.get_json(silent=True)
 
     if not isinstance(data, dict):
@@ -371,7 +343,6 @@ def admin_update_event_status(event_id):
                 "error": "Event not found."
             }), 404
 
-        # Do not publish an event that has already started.
         if new_status == "published":
 
             if event.starts_at is None:
@@ -417,9 +388,14 @@ def admin_update_event_status(event_id):
             "error": "Unable to update event status."
         }), 500
 
+
+# -------------------------
+# Admin: Registration Management
+# -------------------------
+
 @auth_bp.get("/admin/registrations")
 def admin_list_registrations():
-    # Admin-only access
+
     user_id = session.get("user_id")
 
     if not user_id:
@@ -428,7 +404,7 @@ def admin_list_registrations():
             "message": "Authentication required."
         }), 401
 
-    user = db.session.get(User, user_id)
+    user = get_current_user()
 
     if not user or user.role != "admin":
         return jsonify({
@@ -436,12 +412,10 @@ def admin_list_registrations():
             "message": "Admin access required."
         }), 403
 
-    # Read query parameters
     search = request.args.get("q", "").strip()
     status = request.args.get("status", "all").strip().lower()
     event_id = request.args.get("event_id", "").strip()
 
-    # Validate registration status
     allowed_statuses = ["all", "registered", "cancelled"]
 
     if status not in allowed_statuses:
@@ -450,14 +424,12 @@ def admin_list_registrations():
             "message": "Invalid registration status."
         }), 400
 
-    # Base query: Registration + Student + Event
     query = (
         select(Registration, User, Event)
         .join(User, Registration.student_id == User.id)
         .join(Event, Registration.event_id == Event.id)
     )
 
-    # Search student name, email or event title
     if search:
         query = query.where(
             or_(
@@ -467,15 +439,13 @@ def admin_list_registrations():
             )
         )
 
-    # Filter by registration status
     if status != "all":
         query = query.where(Registration.status == status)
 
-    # Filter by event
     if event_id:
         try:
             parsed_event_id = UUID(event_id)
-        except ValueError:
+        except (ValueError, TypeError):
             return jsonify({
                 "success": False,
                 "message": "Invalid event ID."
@@ -483,7 +453,6 @@ def admin_list_registrations():
 
         query = query.where(Event.id == parsed_event_id)
 
-    # Latest registrations first
     query = query.order_by(Registration.registered_at.desc())
 
     results = db.session.execute(query).all()
@@ -510,12 +479,13 @@ def admin_list_registrations():
             )
         })
 
-    # Counts for the currently filtered result set
     total = len(registrations)
+
     active = sum(
         1 for item in registrations
         if item["status"] == "registered"
     )
+
     cancelled = sum(
         1 for item in registrations
         if item["status"] == "cancelled"
@@ -531,19 +501,23 @@ def admin_list_registrations():
         }
     }), 200
 
+
 # -------------------------
 # Authentication
 # -------------------------
 
 @auth_bp.route("/login", methods=["POST"])
 def login():
+
     data = request.get_json(silent=True) or {}
 
     email = data.get("email")
     password = data.get("password")
 
     if not isinstance(email, str) or not isinstance(password, str):
-        return jsonify({"error": "Email and password are required"}), 400
+        return jsonify({
+            "error": "Email and password are required"
+        }), 400
 
     user = db.session.execute(
         select(User).where(User.email == email.strip().lower())
@@ -552,7 +526,9 @@ def login():
     if user is None or not check_password_hash(
         user.password_hash, password
     ):
-        return jsonify({"error": "Invalid email or password"}), 401
+        return jsonify({
+            "error": "Invalid email or password"
+        }), 401
 
     session.clear()
     session["user_id"] = str(user.id)
@@ -570,28 +546,24 @@ def login():
 @auth_bp.route("/register", methods=["POST"])
 def register():
 
-    # Collect form data
     full_name = request.form.get("full_name", "").strip()
     email = request.form.get("email", "").strip().lower()
     password = request.form.get("password", "")
     confirm_password = request.form.get("confirm_password", "")
     role = request.form.get("role", "").strip().lower()
 
-    # Validate required fields
     if not all([full_name, email, password, confirm_password, role]):
         return render_template(
             "register.html",
             error="Please fill in all fields."
         ), 400
 
-    # Validate full name
     if len(full_name) > 150:
         return render_template(
             "register.html",
             error="Full name is too long."
         ), 400
 
-    # Basic email validation
     if (
         len(email) > 254
         or "@" not in email
@@ -602,7 +574,6 @@ def register():
             error="Please enter a valid email address."
         ), 400
 
-    # Validate password
     if len(password) < 8:
         return render_template(
             "register.html",
@@ -615,21 +586,18 @@ def register():
             error="Password is too long."
         ), 400
 
-    # Confirm password
     if password != confirm_password:
         return render_template(
             "register.html",
             error="Passwords do not match."
         ), 400
 
-    # Restrict account roles
     if role not in ("student", "organizer"):
         return render_template(
             "register.html",
             error="Please select a valid account type."
         ), 400
 
-    # Check for an existing account
     existing_user = db.session.execute(
         select(User).where(User.email == email)
     ).scalar_one_or_none()
@@ -640,7 +608,6 @@ def register():
             error="An account with this email already exists."
         ), 409
 
-    # Hash the password before saving
     new_user = User(
         full_name=full_name,
         email=email,
@@ -669,7 +636,6 @@ def register():
             error="Registration failed. Please try again."
         ), 500
 
-    # Registration successful
     return redirect(url_for("login_page"))
 
 
@@ -685,6 +651,7 @@ def logout():
 
 @events_bp.route("/", methods=["GET"])
 def list_events():
+
     events = db.session.execute(
         select(Event)
         .where(Event.status == "published")
@@ -708,7 +675,7 @@ def list_events():
 
 
 # -------------------------
-# List events created by the logged-in organizer
+# Organizer: List Own Events
 # -------------------------
 
 @events_bp.route("/mine", methods=["GET"])
@@ -717,10 +684,14 @@ def my_events():
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role != "organizer":
-        return jsonify({"error": "Organizer permission required"}), 403
+        return jsonify({
+            "error": "Organizer permission required"
+        }), 403
 
     events = db.session.execute(
         select(Event)
@@ -752,20 +723,24 @@ def my_events():
     }), 200
 
 
-
 # -------------------------
-# Create a draft event
+# Create a Draft Event
 # -------------------------
 
 @events_bp.route("/", methods=["POST"])
 def create_event():
+
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role not in ("organizer", "admin"):
-        return jsonify({"error": "Organizer permission required"}), 403
+        return jsonify({
+            "error": "Organizer permission required"
+        }), 403
 
     data = request.get_json(silent=True) or {}
 
@@ -787,6 +762,7 @@ def create_event():
         starts_at = datetime.fromisoformat(
             data["starts_at"].replace("Z", "+00:00")
         )
+
         ends_at = datetime.fromisoformat(
             data["ends_at"].replace("Z", "+00:00")
         )
@@ -794,6 +770,14 @@ def create_event():
         if starts_at.tzinfo is None or ends_at.tzinfo is None:
             return jsonify({
                 "error": "Timestamps must include a timezone"
+            }), 400
+
+        # NEW: Reject past event start dates.
+        now = datetime.now(starts_at.tzinfo)
+
+        if starts_at <= now:
+            return jsonify({
+                "error": "Event start date must be in the future."
             }), 400
 
         if ends_at <= starts_at:
@@ -841,15 +825,20 @@ def create_event():
 
     except ValueError:
         db.session.rollback()
-        return jsonify({"error": "Invalid date or event data"}), 400
+        return jsonify({
+            "error": "Invalid date or event data"
+        }), 400
 
     except Exception:
         db.session.rollback()
-        raise
+        current_app.logger.exception("Event creation failed")
+        return jsonify({
+            "error": "Unable to create event"
+        }), 500
 
 
 # -------------------------
-# Edit an existing event
+# Edit an Existing Event
 # -------------------------
 
 @events_bp.route("/<event_id>", methods=["PATCH"])
@@ -858,30 +847,35 @@ def update_event(event_id):
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role != "organizer":
-        return jsonify({"error": "Organizer permission required"}), 403
+        return jsonify({
+            "error": "Organizer permission required"
+        }), 403
 
-    # Validate event ID
     try:
         event_uuid = UUID(event_id)
     except (ValueError, TypeError):
-        return jsonify({"error": "Invalid event ID"}), 400
+        return jsonify({
+            "error": "Invalid event ID"
+        }), 400
 
-    # Find event
     event = db.session.get(Event, event_uuid)
 
     if event is None:
-        return jsonify({"error": "Event not found"}), 404
+        return jsonify({
+            "error": "Event not found"
+        }), 404
 
-    # Check ownership
     if event.organizer_id != user.id:
         return jsonify({
             "error": "You can only edit your own events"
         }), 403
 
-    # Initially, only draft events can be edited
+    # Only draft events can be edited.
     if event.status != "draft":
         return jsonify({
             "error": "Only draft events can be edited"
@@ -890,7 +884,9 @@ def update_event(event_id):
     data = request.get_json(silent=True)
 
     if not isinstance(data, dict):
-        return jsonify({"error": "Invalid request data"}), 400
+        return jsonify({
+            "error": "Invalid request data"
+        }), 400
 
     required_fields = [
         "title",
@@ -911,7 +907,6 @@ def update_event(event_id):
             "fields": missing
         }), 400
 
-    # Validate text fields
     title = data["title"].strip()
     venue = data["venue"].strip()
     description = data.get("description", "")
@@ -941,6 +936,14 @@ def update_event(event_id):
                 "error": "Dates must include timezone information"
             }), 400
 
+        # NEW: Reject past event start dates.
+        now = datetime.now(starts_at.tzinfo)
+
+        if starts_at <= now:
+            return jsonify({
+                "error": "Event start date must be in the future."
+            }), 400
+
         if ends_at <= starts_at:
             return jsonify({
                 "error": "End time must be after start time"
@@ -954,7 +957,7 @@ def update_event(event_id):
                     "error": "Capacity must be a positive integer"
                 }), 400
 
-        # Update event fields
+        # Update only after all validations pass.
         event.title = title
         event.description = description.strip()
         event.category = category.strip() or "General"
@@ -993,29 +996,39 @@ def update_event(event_id):
             "error": "Unable to update event"
         }), 500
 
+
 # -------------------------
-# Publish your own event
+# Publish Your Own Event
 # -------------------------
 
 @events_bp.route("/<event_id>/publish", methods=["POST"])
 def publish_event(event_id):
+
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role not in ("organizer", "admin"):
-        return jsonify({"error": "Organizer permission required"}), 403
+        return jsonify({
+            "error": "Organizer permission required"
+        }), 403
 
     try:
         event_uuid = UUID(event_id)
     except (ValueError, TypeError):
-        return jsonify({"error": "Invalid event ID"}), 400
+        return jsonify({
+            "error": "Invalid event ID"
+        }), 400
 
     event = db.session.get(Event, event_uuid)
 
     if event is None:
-        return jsonify({"error": "Event not found"}), 404
+        return jsonify({
+            "error": "Event not found"
+        }), 404
 
     if user.role != "admin" and event.organizer_id != user.id:
         return jsonify({
@@ -1026,6 +1039,11 @@ def publish_event(event_id):
         return jsonify({
             "error": "Only draft events can be published"
         }), 409
+
+    if event.starts_at is None:
+        return jsonify({
+            "error": "Event has no valid start time"
+        }), 400
 
     if event.starts_at <= datetime.now(event.starts_at.tzinfo):
         return jsonify({
@@ -1038,7 +1056,10 @@ def publish_event(event_id):
         db.session.commit()
     except Exception:
         db.session.rollback()
-        raise
+        current_app.logger.exception("Event publishing failed")
+        return jsonify({
+            "error": "Unable to publish event"
+        }), 500
 
     return jsonify({
         "message": "Event published successfully",
@@ -1048,7 +1069,7 @@ def publish_event(event_id):
 
 
 # -------------------------
-# Organizer: View event registrations
+# Organizer: View Event Registrations
 # -------------------------
 
 @events_bp.route("/<event_id>/registrations", methods=["GET"])
@@ -1057,32 +1078,34 @@ def event_registrations(event_id):
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role != "organizer":
         return jsonify({
             "error": "Organizer permission required"
         }), 403
 
-    # Validate event ID
     try:
         event_uuid = UUID(event_id)
     except (ValueError, TypeError):
-        return jsonify({"error": "Invalid event ID"}), 400
+        return jsonify({
+            "error": "Invalid event ID"
+        }), 400
 
-    # Find event
     event = db.session.get(Event, event_uuid)
 
     if event is None:
-        return jsonify({"error": "Event not found"}), 404
+        return jsonify({
+            "error": "Event not found"
+        }), 404
 
-    # Verify event ownership
     if event.organizer_id != user.id:
         return jsonify({
             "error": "You can only view registrations for your own events"
         }), 403
 
-    # Fetch registrations along with student details
     results = db.session.execute(
         select(Registration, User)
         .join(User, Registration.student_id == User.id)
@@ -1099,10 +1122,12 @@ def event_registrations(event_id):
             "student_name": student.full_name,
             "student_email": student.email,
             "status": registration.status,
-            "registered_at": registration.registered_at.isoformat()
+            "registered_at": (
+                registration.registered_at.isoformat()
+                if registration.registered_at else None
+            )
         })
 
-    # Count active registrations
     active_count = sum(
         1 for registration in registrations
         if registration["status"] == "registered"
@@ -1123,40 +1148,54 @@ def event_registrations(event_id):
         "registrations": registrations
     }), 200
 
+
 # -------------------------
-# Student event registration
+# Student Event Registration
 # -------------------------
 
 @events_bp.route("/<event_id>/register", methods=["POST"])
 def register_for_event(event_id):
+
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role != "student":
-        return jsonify({"error": "Student account required"}), 403
+        return jsonify({
+            "error": "Student account required"
+        }), 403
 
     try:
         event_uuid = UUID(event_id)
     except (ValueError, TypeError):
-        return jsonify({"error": "Invalid event ID"}), 400
+        return jsonify({
+            "error": "Invalid event ID"
+        }), 400
 
     event = db.session.get(Event, event_uuid)
 
     if event is None or event.status != "published":
-        return jsonify({"error": "Published event not found"}), 404
+        return jsonify({
+            "error": "Published event not found"
+        }), 404
 
     now = datetime.now(event.starts_at.tzinfo)
 
     if event.starts_at <= now:
-        return jsonify({"error": "Registration is closed for this event"}), 409
+        return jsonify({
+            "error": "Registration is closed for this event"
+        }), 409
 
     if (
         event.registration_deadline is not None
         and now >= event.registration_deadline
     ):
-        return jsonify({"error": "Registration deadline has passed"}), 409
+        return jsonify({
+            "error": "Registration deadline has passed"
+        }), 409
 
     existing = db.session.execute(
         select(Registration).where(
@@ -1179,7 +1218,9 @@ def register_for_event(event_id):
         ).scalar_one()
 
         if registered_count >= event.capacity:
-            return jsonify({"error": "Event is full"}), 409
+            return jsonify({
+                "error": "Event is full"
+            }), 409
 
     if existing:
         existing.status = "registered"
@@ -1200,7 +1241,10 @@ def register_for_event(event_id):
         }), 409
     except Exception:
         db.session.rollback()
-        raise
+        current_app.logger.exception("Student event registration failed")
+        return jsonify({
+            "error": "Unable to complete registration"
+        }), 500
 
     return jsonify({
         "message": "Registration successful",
@@ -1211,23 +1255,30 @@ def register_for_event(event_id):
 
 
 # -------------------------
-# Cancel a student registration
+# Cancel a Student Registration
 # -------------------------
 
 @events_bp.route("/<event_id>/cancel", methods=["POST"])
 def cancel_registration(event_id):
+
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role != "student":
-        return jsonify({"error": "Student account required"}), 403
+        return jsonify({
+            "error": "Student account required"
+        }), 403
 
     try:
         event_uuid = UUID(event_id)
     except (ValueError, TypeError):
-        return jsonify({"error": "Invalid event ID"}), 400
+        return jsonify({
+            "error": "Invalid event ID"
+        }), 400
 
     registration = db.session.execute(
         select(Registration).where(
@@ -1248,7 +1299,10 @@ def cancel_registration(event_id):
         db.session.commit()
     except Exception:
         db.session.rollback()
-        raise
+        current_app.logger.exception("Registration cancellation failed")
+        return jsonify({
+            "error": "Unable to cancel registration"
+        }), 500
 
     return jsonify({
         "message": "Registration cancelled",
@@ -1256,19 +1310,25 @@ def cancel_registration(event_id):
         "status": registration.status,
     }), 200
 
+
 # -------------------------
-# Student dashboard: my registrations
+# Student Dashboard: My Registrations
 # -------------------------
 
 @events_bp.route("/my-registrations", methods=["GET"])
 def my_registrations():
+
     user = get_current_user()
 
     if user is None:
-        return jsonify({"error": "Please log in first"}), 401
+        return jsonify({
+            "error": "Please log in first"
+        }), 401
 
     if user.role != "student":
-        return jsonify({"error": "Student account required"}), 403
+        return jsonify({
+            "error": "Student account required"
+        }), 403
 
     results = db.session.execute(
         select(Registration, Event)
@@ -1283,15 +1343,24 @@ def my_registrations():
         registrations.append({
             "registration_id": str(registration.id),
             "registration_status": registration.status,
-            "registered_at": registration.registered_at.isoformat(),
+            "registered_at": (
+                registration.registered_at.isoformat()
+                if registration.registered_at else None
+            ),
             "event": {
                 "id": str(event.id),
                 "title": event.title,
                 "description": event.description,
                 "category": event.category,
                 "venue": event.venue,
-                "starts_at": event.starts_at.isoformat(),
-                "ends_at": event.ends_at.isoformat(),
+                "starts_at": (
+                    event.starts_at.isoformat()
+                    if event.starts_at else None
+                ),
+                "ends_at": (
+                    event.ends_at.isoformat()
+                    if event.ends_at else None
+                ),
                 "status": event.status,
             },
         })
