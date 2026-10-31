@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from uuid import UUID
 
@@ -46,6 +45,22 @@ def get_current_user():
         session.clear()
 
     return user
+
+
+def parse_optional_datetime(value, field_name):
+    """Parse an optional ISO datetime and require timezone information."""
+    if value is None or value == "":
+        return None
+
+    if not isinstance(value, str):
+        raise ValueError(f"{field_name} must be a valid date and time.")
+
+    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+
+    if parsed.tzinfo is None:
+        raise ValueError(f"{field_name} must include timezone information.")
+
+    return parsed
 
 
 # -------------------------
@@ -793,6 +808,11 @@ def create_event():
             data["ends_at"].replace("Z", "+00:00")
         )
 
+        registration_deadline = parse_optional_datetime(
+            data.get("registration_deadline"),
+            "registration_deadline"
+        )
+
         if starts_at.tzinfo is None or ends_at.tzinfo is None:
             return jsonify({
                 "error": "Timestamps must include a timezone"
@@ -808,6 +828,14 @@ def create_event():
         if ends_at <= starts_at:
             return jsonify({
                 "error": "ends_at must be after starts_at"
+            }), 400
+
+        if (
+            registration_deadline is not None
+            and registration_deadline > starts_at
+        ):
+            return jsonify({
+                "error": "Registration deadline cannot be after the event start."
             }), 400
 
         capacity = data.get("capacity")
@@ -826,6 +854,7 @@ def create_event():
             venue=venue,
             starts_at=starts_at,
             ends_at=ends_at,
+            registration_deadline=registration_deadline,
             capacity=capacity,
             status="draft",
         )
@@ -837,6 +866,10 @@ def create_event():
             "message": "Event saved as draft",
             "id": str(event.id),
             "title": event.title,
+            "registration_deadline": (
+                event.registration_deadline.isoformat()
+                if event.registration_deadline else None
+            ),
             "status": event.status,
         }), 201
 
@@ -947,6 +980,14 @@ def update_event(event_id):
             data["ends_at"].replace("Z", "+00:00")
         )
 
+        if "registration_deadline" in data:
+            registration_deadline = parse_optional_datetime(
+                data.get("registration_deadline"),
+                "registration_deadline"
+            )
+        else:
+            registration_deadline = event.registration_deadline
+
         if starts_at.tzinfo is None or ends_at.tzinfo is None:
             return jsonify({
                 "error": "Dates must include timezone information"
@@ -964,6 +1005,14 @@ def update_event(event_id):
                 "error": "End time must be after start time"
             }), 400
 
+        if (
+            registration_deadline is not None
+            and registration_deadline > starts_at
+        ):
+            return jsonify({
+                "error": "Registration deadline cannot be after the event start."
+            }), 400
+
         capacity = data.get("capacity")
 
         if capacity is not None:
@@ -978,6 +1027,7 @@ def update_event(event_id):
         event.venue = venue
         event.starts_at = starts_at
         event.ends_at = ends_at
+        event.registration_deadline = registration_deadline
         event.capacity = capacity
 
         db.session.commit()
@@ -992,6 +1042,10 @@ def update_event(event_id):
                 "venue": event.venue,
                 "starts_at": event.starts_at.isoformat(),
                 "ends_at": event.ends_at.isoformat(),
+                "registration_deadline": (
+                    event.registration_deadline.isoformat()
+                    if event.registration_deadline else None
+                ),
                 "capacity": event.capacity,
                 "status": event.status
             }
@@ -1196,19 +1250,24 @@ def register_for_event(event_id):
             "error": "Published event not found"
         }), 404
 
+    if event.starts_at is None:
+        return jsonify({
+            "error": "Event has no valid start time."
+        }), 400
+
     now = datetime.now(event.starts_at.tzinfo)
+
+    if event.registration_deadline is not None:
+        deadline_now = datetime.now(event.registration_deadline.tzinfo)
+
+        if deadline_now >= event.registration_deadline:
+            return jsonify({
+                "error": "Registration deadline has passed"
+            }), 409
 
     if event.starts_at <= now:
         return jsonify({
             "error": "Registration is closed for this event"
-        }), 409
-
-    if (
-        event.registration_deadline is not None
-        and now >= event.registration_deadline
-    ):
-        return jsonify({
-            "error": "Registration deadline has passed"
         }), 409
 
     existing = db.session.execute(
