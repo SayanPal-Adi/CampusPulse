@@ -1204,3 +1204,223 @@ svg {
         font-size: 11px;
     }
 }
+
+
+/* =========================================
+   CAMPUSPULSE - GLOBAL ANIMATION SYSTEM
+========================================= */
+
+/* Shared entrance animations */
+
+@keyframes cp-rise-in {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cp-fade-down {
+    from {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cp-card-enter {
+    from {
+        opacity: 0;
+        transform: translateY(22px) scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Home page entrance */
+
+.site-header {
+    animation: cp-fade-down 0.65s ease both;
+}
+
+.hero-copy {
+    animation: cp-rise-in 0.75s ease 0.12s both;
+}
+
+.hero-visual {
+    animation: cp-card-enter 0.85s ease 0.2s both;
+}
+
+.events-section {
+    animation: cp-rise-in 0.8s ease 0.25s both;
+}
+
+.how-section {
+    animation: cp-rise-in 0.8s ease 0.3s both;
+}
+
+.organizer-section {
+    animation: cp-rise-in 0.8s ease 0.35s both;
+}
+
+.site-footer {
+    animation: cp-rise-in 0.8s ease 0.4s both;
+}
+
+/* Navigation transitions */
+
+.nav-link {
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease;
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+}
+
+.nav-link::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: var(--color-orange);
+    content: "";
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-active::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Buttons */
+
+.button,
+.header-cta {
+    transition:
+        background 0.25s ease,
+        color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.button-primary:hover,
+.header-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(28, 73, 59, 0.13);
+}
+
+.button-primary:active,
+.header-cta:active {
+    transform: translateY(0);
+}
+
+/* Hero visual */
+
+.visual-board {
+    transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease;
+}
+
+.visual-board:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 35px rgba(28, 73, 59, 0.14);
+}
+
+.category-row svg {
+    transition: transform 0.25s ease;
+}
+
+.category-row:hover svg {
+    transform: translate(2px, -2px);
+}
+
+/* Event empty state */
+
+.empty-state-icon {
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+}
+
+.empty-state:hover .empty-state-icon {
+    transform: translateY(-4px);
+    background: #dce7dc;
+}
+
+/* How it works */
+
+.step {
+    transition:
+        padding-left 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.step:hover {
+    padding-left: 8px;
+    border-color: #d9ad82;
+}
+
+.step-number {
+    transition: color 0.25s ease;
+}
+
+.step:hover .step-number {
+    color: #f1d4b5;
+}
+
+/* Organizer section */
+
+.organizer-mark {
+    transition:
+        transform 0.3s ease,
+        border-radius 0.3s ease;
+}
+
+.organizer-section:hover .organizer-mark {
+    transform: rotate(-5deg);
+    border-radius: 10px;
+}
+
+/* Footer links */
+
+.back-to-top {
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.back-to-top:hover {
+    transform: translateY(-2px);
+}
+
+/* Accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
