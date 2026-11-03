@@ -9,8 +9,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #f7fcfe;
-    border-bottom: 1px solid #c8e2ed;
+    background: #ffffff;
+    border-bottom: 1px solid #b8dce9;
 }
 
 .organizer-logo {
@@ -28,7 +28,7 @@
 }
 
 .organizer-role {
-    color: #468faf;
+    color: #2a6f97;
     font-size: 12px;
 }
 
@@ -37,7 +37,7 @@
     padding: 11px 18px;
     color: #013a63;
     background: transparent;
-    border: 1px solid #c8e2ed;
+    border: 1px solid #b8dce9;
     border-radius: 5px;
     font: inherit;
     font-size: 12px;
@@ -47,7 +47,7 @@
 
 .logout-button:hover,
 .secondary-button:hover {
-    background: #d9edf5;
+    background: #e7f5fb;
 }
 
 .organizer-container {
@@ -68,7 +68,7 @@
 
 .organizer-eyebrow {
     margin: 0 0 13px;
-    color: #468faf;
+    color: #2a6f97;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.6px;
@@ -86,7 +86,7 @@
 .welcome-description {
     max-width: 550px;
     margin-top: 13px;
-    color: #468faf;
+    color: #2a6f97;
     font-size: 14px;
     line-height: 1.7;
 }
@@ -122,15 +122,15 @@
     margin-bottom: 25px;
     padding: 14px 18px;
     border-left: 3px solid #013a63;
-    background: #f7fcfe;
+    background: #ffffff;
     color: #2c7da0;
     font-size: 13px;
     line-height: 1.5;
 }
 
 .notification.error {
-    color: #01497c;
-    border-left-color: #468faf;
+    color: #014f86;
+    border-left-color: #2a6f97;
 }
 
 /* Statistics */
@@ -145,13 +145,13 @@
 .stat-card {
     min-height: 145px;
     padding: 25px;
-    background: #f7fcfe;
-    border: 1px solid #c8e2ed;
+    background: #ffffff;
+    border: 1px solid #b8dce9;
 }
 
 .stat-card p {
     margin: 0;
-    color: #468faf;
+    color: #2a6f97;
     font-size: 13px;
 }
 
@@ -174,7 +174,7 @@
     align-items: center;
     justify-content: space-between;
     padding-bottom: 22px;
-    border-bottom: 1px solid #c8e2ed;
+    border-bottom: 1px solid #b8dce9;
 }
 
 .section-heading h2 {
@@ -196,9 +196,9 @@
 .empty-message {
     grid-column: 1 / -1;
     padding: 35px;
-    color: #468faf;
-    background: #f7fcfe;
-    border: 1px dashed #c8e2ed;
+    color: #2a6f97;
+    background: #ffffff;
+    border: 1px dashed #b8dce9;
     font-size: 14px;
     text-align: center;
 }
@@ -207,8 +207,8 @@
 
 .event-card {
     padding: 25px;
-    background: #f7fcfe;
-    border: 1px solid #c8e2ed;
+    background: #ffffff;
+    border: 1px solid #b8dce9;
     transition: border-color 0.2s;
 }
 
@@ -225,7 +225,7 @@
 }
 
 .event-category {
-    color: #468faf;
+    color: #2a6f97;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -242,7 +242,7 @@
 
 .event-status.published {
     color: #2c7da0;
-    background: #d9edf5;
+    background: #e7f5fb;
 }
 
 .event-status.draft {
@@ -260,7 +260,7 @@
 
 .event-description {
     min-height: 42px;
-    color: #468faf;
+    color: #2a6f97;
     font-size: 13px;
     line-height: 1.6;
 }
@@ -270,7 +270,7 @@
     gap: 10px;
     margin: 22px 0;
     padding-top: 18px;
-    border-top: 1px solid #c8e2ed;
+    border-top: 1px solid #b8dce9;
 }
 
 .event-detail {
@@ -334,7 +334,7 @@
     max-height: 90vh;
     overflow-y: auto;
     padding: 32px;
-    background: #f7fcfe;
+    background: #ffffff;
     border-radius: 9px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
 }
@@ -356,7 +356,7 @@
 
 .close-button {
     padding: 0;
-    color: #468faf;
+    color: #2a6f97;
     background: none;
     border: none;
     font-size: 29px;
@@ -385,7 +385,7 @@
     padding: 11px 13px;
     color: #012a4a;
     background: white;
-    border: 1px solid #c8e2ed;
+    border: 1px solid #b8dce9;
     border-radius: 5px;
     outline: none;
     font-family: inherit;
@@ -416,15 +416,15 @@
     gap: 12px;
     margin-top: 25px;
     padding-top: 20px;
-    border-top: 1px solid #c8e2ed;
+    border-top: 1px solid #b8dce9;
 }
 
 /* Footer */
 
 .organizer-footer {
     padding: 25px;
-    color: #468faf;
-    border-top: 1px solid #c8e2ed;
+    color: #2a6f97;
+    border-top: 1px solid #b8dce9;
     font-size: 12px;
     text-align: center;
 }
@@ -505,7 +505,7 @@
 
 .edit-button:hover {
     background: #e4ece6;
-    border-color: #89c2d9;
+    border-color: #d5edf7;
 }
 
 .edit-button:disabled {
@@ -531,7 +531,7 @@
 
 .registration-button:hover {
     background: #e4ece6;
-    border-color: #89c2d9;
+    border-color: #d5edf7;
 }
 
 .registration-button:disabled {
@@ -611,7 +611,7 @@
 .registrations-table th,
 .registrations-table td {
     padding: 14px 12px;
-    border-bottom: 1px solid #e4f2f8;
+    border-bottom: 1px solid #edf8fc;
     white-space: nowrap;
 }
 
