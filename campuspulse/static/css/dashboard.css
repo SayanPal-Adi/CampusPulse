@@ -4,15 +4,15 @@
    ===================================================== */
 
 :root {
-    --dash-bg: var(--color-bg, #f7f0dc);
-    --dash-paper: var(--color-paper, #fffdf7df7);
-    --dash-ink: var(--color-ink, #001219);
-    --dash-green: var(--color-green, #005f73);
-    --dash-green-dark: var(--color-green-dark, #001219);
-    --dash-green-soft: var(--color-green-soft, #d9eee7);
-    --dash-orange: var(--color-orange, #ee9b00);
-    --dash-muted: var(--color-muted, #557078);
-    --dash-border: var(--color-border, #e6dfc8);
+    --dash-bg: var(--color-bg, #eaf6fb);
+    --dash-paper: var(--color-paper, #f7fcfe);
+    --dash-ink: var(--color-ink, #012a4a);
+    --dash-green: var(--color-green, #013a63);
+    --dash-green-dark: var(--color-green-dark, #012a4a);
+    --dash-green-soft: var(--color-green-soft, #d9edf5);
+    --dash-orange: var(--color-orange, #468faf);
+    --dash-muted: var(--color-muted, #468faf);
+    --dash-border: var(--color-border, #c8e2ed);
 }
 
 /* Reset */
@@ -112,8 +112,8 @@ button {
 }
 
 .message.error {
-    color: #9b2226;
-    border-left-color: #9b2226;
+    color: #01497c;
+    border-left-color: #01497c;
 }
 
 /* Statistics */
@@ -220,7 +220,7 @@ button {
     display: inline-block;
     padding: 5px 10px;
     color: var(--dash-orange);
-    background: #f7f0dc;
+    background: #eaf6fb;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -242,7 +242,7 @@ button {
 }
 
 .status.cancelled {
-    color: #9b2226;
+    color: #01497c;
 }
 
 .muted {
@@ -284,15 +284,15 @@ button {
 }
 
 .cancel-button {
-    color: #9b2226;
+    color: #01497c;
     background: transparent;
-    border: 1px solid #e9b9ad;
+    border: 1px solid #e8caca;
 }
 
 .cancel-button:hover {
     color: white;
-    background: #9b2226;
-    border-color: #9b2226;
+    background: #01497c;
+    border-color: #01497c;
 }
 
 button:disabled {
@@ -317,7 +317,7 @@ button:disabled {
 footer {
     padding: 27px 20px;
     color: var(--dash-muted);
-    background: #f7f0dc;
+    background: #efeee6;
     border-top: 1px solid var(--dash-border);
     text-align: center;
     font-size: 11px;
