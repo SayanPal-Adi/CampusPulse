@@ -1,0 +1,19 @@
+CampusPulse contrast palette
+============================
+
+Core text / dark surfaces: #012a4a
+Primary navigation / strong dark surfaces: #013a63
+Primary action / CTA: #014f86
+Secondary action / links: #2c7da0
+Supporting accent: #2a6f97
+Muted text: #42677c
+Page background: #f4fbff
+Cards / inputs: #ffffff
+Soft blue surface: #e7f5fb
+Borders: #b8dce9
+
+Contrast direction:
+- Use dark navy text on white or pale-blue surfaces.
+- Use white text on #012a4a, #013a63, or #014f86.
+- Avoid using pale blues for small text or icons on white.
+- Reserve saturated blues for buttons, links, active states, and key highlights.
