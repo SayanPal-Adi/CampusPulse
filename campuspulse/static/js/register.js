@@ -1,44 +1,35 @@
+/**
+ * CampusPulse — account registration
+ * Keeps the password confirmation check native to the browser so the
+ * existing Flask form submission and validation flow remain unchanged.
+ */
+"use strict";
 
-// =================================
-// CampusPulse - Registration Logic
-// =================================
+(() => {
+  const form = document.getElementById("registerForm");
+  const password = document.getElementById("password");
+  const confirmation = document.getElementById("confirm_password");
 
-const registerForm = document.getElementById("registerForm");
+  // The script may be included on pages that do not contain the form.
+  if (!form || !password || !confirmation) return;
 
-const passwordInput = document.getElementById("password");
-const confirmPasswordInput = document.getElementById("confirm_password");
+  function validatePasswordMatch() {
+    const matches = password.value === confirmation.value;
+    confirmation.setCustomValidity(
+      matches ? "" : "Passwords do not match."
+    );
+    return matches;
+  }
 
-// Check whether both passwords match
-function validatePasswords() {
+  password.addEventListener("input", validatePasswordMatch);
+  confirmation.addEventListener("input", validatePasswordMatch);
 
-    if (passwordInput.value !== confirmPasswordInput.value) {
+  form.addEventListener("submit", (event) => {
+    validatePasswordMatch();
 
-        confirmPasswordInput.setCustomValidity(
-            "Passwords do not match."
-        );
-
-    } else {
-
-        confirmPasswordInput.setCustomValidity("");
-
+    if (!form.checkValidity()) {
+      event.preventDefault();
+      form.reportValidity();
     }
-}
-
-// Validate when the user types
-passwordInput.addEventListener("input", validatePasswords);
-
-confirmPasswordInput.addEventListener("input", validatePasswords);
-
-// Validate before submitting the form
-registerForm.addEventListener("submit", function (event) {
-
-    validatePasswords();
-
-    if (!registerForm.checkValidity()) {
-
-        event.preventDefault();
-        registerForm.reportValidity();
-
-    }
-
-});
+  });
+})();
