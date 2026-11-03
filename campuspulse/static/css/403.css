@@ -12,8 +12,8 @@ body {
     justify-content: center;
     padding: 30px;
     overflow: hidden;
-    background: #f7f0dc;
-    color: #005f73;
+    background: #eaf6fb;
+    color: #013a63;
     font-family: "DM Sans", sans-serif;
 }
 
@@ -47,14 +47,14 @@ body {
     display: grid;
     place-items: center;
     border-radius: 11px;
-    background: #005f73;
-    color: #f7f0dc;
+    background: #013a63;
+    color: #eaf6fb;
     font-size: 19px;
 }
 
 .eyebrow {
     margin-bottom: 14px;
-    color: #ee9b00;
+    color: #468faf;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -63,7 +63,7 @@ body {
 
 .error-code {
     margin-bottom: 12px;
-    color: #ee9b00;
+    color: #468faf;
     font-family: "Fraunces", serif;
     font-size: clamp(90px, 13vw, 150px);
     font-weight: 600;
@@ -83,7 +83,7 @@ h1 {
 
 .description {
     max-width: 420px;
-    color: #557078;
+    color: #468faf;
     font-size: 15px;
     line-height: 1.8;
 }
@@ -101,10 +101,10 @@ h1 {
     justify-content: center;
     min-height: 48px;
     padding: 0 22px;
-    border: 1px solid #005f73;
+    border: 1px solid #013a63;
     border-radius: 8px;
-    background: #005f73;
-    color: #fffdf7;
+    background: #013a63;
+    color: #fff;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
@@ -113,16 +113,16 @@ h1 {
 
 .btn:hover {
     transform: translateY(-3px);
-    background: #0a9396;
+    background: #2c7da0;
 }
 
 .btn-secondary {
     background: transparent;
-    color: #005f73;
+    color: #013a63;
 }
 
 .btn-secondary:hover {
-    background: #f7f0dc;
+    background: #e9e9df;
 }
 
 .illustration {
@@ -137,7 +137,7 @@ h1 {
     position: absolute;
     width: 330px;
     height: 330px;
-    border: 1px solid #e6dfc8;
+    border: 1px solid #d9ddd1;
     border-radius: 50%;
     animation: rotate 25s linear infinite;
 }
@@ -149,7 +149,7 @@ h1 {
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background: #ee9b00;
+    background: #468faf;
 }
 
 .orbit::before {
@@ -162,7 +162,7 @@ h1 {
     bottom: 85px;
     width: 7px;
     height: 7px;
-    background: #005f73;
+    background: #013a63;
 }
 
 .lock-card {
@@ -170,9 +170,9 @@ h1 {
     z-index: 1;
     width: 260px;
     padding: 36px 25px;
-    border: 1px solid #e6dfc8;
+    border: 1px solid #e5e3d8;
     border-radius: 22px;
-    background: #f7f0dc;
+    background: #f7fcfe;
     box-shadow: 0 25px 70px rgba(28, 73, 59, 0.09);
     text-align: center;
     animation: cardFloat 5s ease-in-out infinite;
@@ -185,8 +185,8 @@ h1 {
     place-items: center;
     margin: 0 auto 22px;
     border-radius: 28px;
-    background: #f7f0dc;
-    color: #ee9b00;
+    background: #f5e9e2;
+    color: #468faf;
 }
 
 .lock-icon svg {
@@ -201,7 +201,7 @@ h1 {
 }
 
 .lock-card p {
-    color: #557078;
+    color: #879087;
     font-size: 12px;
     line-height: 1.6;
 }
@@ -211,11 +211,11 @@ h1 {
     right: 0;
     bottom: 35px;
     padding: 13px 18px;
-    border: 1px solid #e6dfc8;
+    border: 1px solid #e5e3d8;
     border-radius: 10px;
-    background: #f7f0dc;
+    background: #f7fcfe;
     box-shadow: 0 10px 30px rgba(28, 73, 59, 0.07);
-    color: #ee9b00;
+    color: #468faf;
     font-size: 12px;
     font-weight: 600;
     animation: float 4s ease-in-out infinite;
@@ -223,7 +223,7 @@ h1 {
 
 .footer {
     margin-top: 55px;
-    color: #94d2bd;
+    color: #89c2d9;
     font-size: 11px;
 }
 
