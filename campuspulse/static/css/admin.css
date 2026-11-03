@@ -2,14 +2,14 @@
 :root {
     --deep-space-blue: #012a4a;
     --yale-blue: #013a63;
-    --yale-blue-2: #01497c;
+    --yale-blue-2: #014f86;
     --yale-blue-3: #014f86;
     --rich-cerulean: #2a6f97;
     --cerulean: #2c7da0;
-    --air-force-blue: #468faf;
-    --steel-blue: #61a5c2;
-    --sky-blue-light: #89c2d9;
-    --light-blue: #a9d6e5;
+    --air-force-blue: #2a6f97;
+    --steel-blue: #468faf;
+    --sky-blue-light: #d5edf7;
+    --light-blue: #e7f5fb;
 }
 
 
@@ -20,12 +20,12 @@
 :root {
     --admin-green: #013a63;
     --admin-green-dark: #012a4a;
-    --admin-green-light: #d9edf5;
-    --admin-background: #eaf6fb;
+    --admin-green-light: #e7f5fb;
+    --admin-background: #f4fbff;
     --admin-white: #ffffff;
     --admin-text: #012a4a;
-    --admin-muted: #468faf;
-    --admin-border: #c8e2ed;
+    --admin-muted: #42677c;
+    --admin-border: #b8dce9;
     --admin-sidebar-width: 260px;
 }
 
@@ -193,7 +193,7 @@ a:focus-visible {
 .sidebar-label {
     margin: 0 0 10px;
     padding: 0 10px;
-    color: #89c2d9;
+    color: #d5edf7;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.2px;
@@ -283,7 +283,7 @@ a:focus-visible {
 }
 
 .sidebar-logout:hover {
-    background: #d9edf5;
+    background: #e7f5fb;
 }
 
 .sidebar-logout:disabled {
@@ -463,7 +463,7 @@ a:focus-visible {
 
 .overview-card > p {
     margin: 0;
-    color: #89c2d9;
+    color: #d5edf7;
     font-size: 11px;
 }
 
@@ -526,7 +526,7 @@ a:focus-visible {
 }
 
 .welcome-action:hover {
-    background: #d9edf5;
+    background: #e7f5fb;
 }
 
 .welcome-action span {
@@ -702,14 +702,14 @@ a:focus-visible {
     padding: 13px 16px;
     border: 1px solid #cce3d2;
     border-radius: 8px;
-    background: #e4f2f8;
+    background: #edf8fc;
     color: #2c7da0;
     font-size: 13px;
 }
 
 .admin-notification.error {
     border-color: #f0ceca;
-    background: #d9edf5;
+    background: #e7f5fb;
     color: #a33d35;
 }
 
@@ -726,7 +726,7 @@ a:focus-visible {
 
 .admin-footer p {
     margin: 0;
-    color: #89c2d9;
+    color: #d5edf7;
     font-size: 11px;
 }
 
@@ -1096,7 +1096,7 @@ a:focus-visible {
 }
 
 .user-role-badge.organizer {
-    background: #d9edf5;
+    background: #e7f5fb;
     color: #2c7da0;
 }
 
@@ -1376,7 +1376,7 @@ a:focus-visible {
 }
 
 .event-status-badge.published {
-    background: #d9edf5;
+    background: #e7f5fb;
     color: #2c7da0;
 }
 
@@ -1445,7 +1445,7 @@ a:focus-visible {
     padding: 8px 11px;
     border: 1px solid #d5e2d8;
     border-radius: 7px;
-    background: #e4f2f8;
+    background: #edf8fc;
     color: var(--admin-green);
     font-size: 11px;
     font-weight: 650;
@@ -1524,7 +1524,7 @@ a:focus-visible {
 }
 
 .admin-event-modal-close:hover {
-    background: #e4f2f8;
+    background: #edf8fc;
     color: var(--admin-green);
 }
 
@@ -1546,7 +1546,7 @@ a:focus-visible {
     padding: 17px;
     margin-bottom: 24px;
     border-radius: 9px;
-    background: #f7fcfe;
+    background: #ffffff;
 }
 
 .event-detail-description h3 {
@@ -1654,19 +1654,19 @@ a:focus-visible {
 /* Suspend button */
 
 .event-status-action.danger {
-    color: #01497c;
+    color: #014f86;
     border-color: #e5b7b2;
 }
 
 .event-status-action.danger:hover {
-    background: #d9edf5;
+    background: #e7f5fb;
     border-color: #e5b7b2;
 }
 
 /* Confirmation state */
 
 .event-status-action.confirming {
-    background: #eaf6fb;
+    background: #f4fbff;
     color: #2a6f97;
     border-color: #e5c76b;
 }
@@ -1914,12 +1914,12 @@ a:focus-visible {
 }
 
 .registration-status-badge.registered {
-    background: #d9edf5;
+    background: #e7f5fb;
     color: #2c7da0;
 }
 
 .registration-status-badge.cancelled {
-    background: #d9edf5;
+    background: #e7f5fb;
     color: #a33d35;
 }
 
