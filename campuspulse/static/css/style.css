@@ -1,3 +1,11 @@
+/* CampusPulse refreshed brand palette */
+:root {
+ --cp-ink-black: #001219; --cp-dark-teal: #005f73; --cp-dark-cyan: #0a9396;
+ --cp-pearl-aqua: #94d2bd; --cp-vanilla-custard: #e9d8a6; --cp-golden-orange: #ee9b00;
+ --cp-burnt-caramel: #ca6702; --cp-rusty-spice: #bb3e03; --cp-oxidized-iron: #ae2012;
+ --cp-brown-red: #9b2226;
+}
+
 
 /* =========================================================
    CAMPUSPULSE — DESIGN SYSTEM
@@ -7,16 +15,16 @@
 :root {
     color-scheme: light;
 
-    --color-bg: #f7f6f0;
-    --color-paper: #fffefa;
-    --color-ink: #222c25;
-    --color-green: #1c493b;
-    --color-green-dark: #173b31;
-    --color-green-soft: #e6ece5;
-    --color-orange: #bd593b;
-    --color-muted: #72766e;
-    --color-border: #dedfd5;
-    --color-border-dark: #52665a;
+    --color-bg: #f7f0dc;
+    --color-paper: #fffdf77;
+    --color-ink: #001219;
+    --color-green: #0a9396;
+    --color-green-dark: #005f73;
+    --color-green-soft: #d9eee7;
+    --color-orange: #ee9b00;
+    --color-muted: #557078;
+    --color-border: #e6dfc8;
+    --color-border-dark: #005f73;
 
     --font-display: "Fraunces", Georgia, serif;
     --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -172,7 +180,7 @@ svg {
 .nav-link {
     position: relative;
     padding: 8px 0;
-    color: #62685f;
+    color: #557078;
     font-size: 13px;
     font-weight: 500;
     text-decoration: none;
@@ -277,7 +285,7 @@ svg {
 .hero-description {
     max-width: 430px;
     margin: 0;
-    color: #646a60;
+    color: #557078;
     font-size: 15px;
     line-height: 1.9;
 }
@@ -324,7 +332,7 @@ svg {
     color: var(--color-green);
     font-size: 12px;
     font-weight: 600;
-    text-decoration-color: #9ba99e;
+    text-decoration-color: #94d2bd;
     text-underline-offset: 5px;
 }
 
@@ -424,7 +432,7 @@ svg {
 }
 
 .board-kicker {
-    color: #d9ad82;
+    color: #ee9b00;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 1.8px;
@@ -442,7 +450,7 @@ svg {
 .board-heading p {
     max-width: 280px;
     margin: 0;
-    color: #d0dbd2;
+    color: #94d2bd;
     font-size: 12px;
     line-height: 1.8;
 }
@@ -471,11 +479,11 @@ svg {
 .category-row svg {
     width: 17px;
     height: 17px;
-    color: #d7b291;
+    color: #ca6702;
 }
 
 .category-number {
-    color: #aebeb1;
+    color: #94d2bd;
     font-size: 10px;
     font-variant-numeric: tabular-nums;
 }
@@ -486,7 +494,7 @@ svg {
 }
 
 .category-featured .category-name {
-    color: #f1d4b5;
+    color: #e9d8a6;
 }
 
 .board-footer {
@@ -494,7 +502,7 @@ svg {
     align-items: center;
     gap: 9px;
     margin-top: 26px;
-    color: #c7d5c9;
+    color: #94d2bd;
     font-size: 10px;
 }
 
@@ -502,7 +510,7 @@ svg {
     width: 6px;
     height: 6px;
     flex-shrink: 0;
-    background: #d9ad82;
+    background: #ee9b00;
     border-radius: 50%;
 }
 
@@ -657,12 +665,12 @@ svg {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
     gap: clamp(48px, 9vw, 130px);
     padding: 95px max(var(--page-gutter), calc((100vw - 1064px) / 2));
-    color: #f7f6f0;
+    color: #f7f0dc;
     background: var(--color-green-dark);
 }
 
 .eyebrow-light {
-    color: #d9ad82;
+    color: #ee9b00;
 }
 
 .how-heading h2 {
@@ -671,14 +679,14 @@ svg {
 }
 
 .how-heading h2 span {
-    color: #d9ad82;
+    color: #ee9b00;
     font-style: italic;
 }
 
 .how-heading > p {
     max-width: 330px;
     margin-top: 22px;
-    color: #c2d0c4;
+    color: #94d2bd;
     font-size: 13px;
     line-height: 1.9;
 }
@@ -701,7 +709,7 @@ svg {
 
 .step-number {
     padding-top: 4px;
-    color: #d9ad82;
+    color: #ee9b00;
     font-size: 11px;
     font-variant-numeric: tabular-nums;
 }
@@ -716,7 +724,7 @@ svg {
 .step-content p {
     max-width: 330px;
     margin: 7px 0 0;
-    color: #c2d0c4;
+    color: #94d2bd;
     font-size: 12px;
     line-height: 1.85;
 }
@@ -724,7 +732,7 @@ svg {
 .step-status {
     grid-column: 2;
     margin-top: 4px;
-    color: #d9ad82;
+    color: #ee9b00;
     font-size: 8px;
     font-weight: 700;
     letter-spacing: 1.2px;
@@ -808,7 +816,7 @@ svg {
     align-items: center;
     gap: 20px;
     padding: 31px var(--page-gutter) 0;
-    background: #efeee6;
+    background: #f7f0dc;
     border-top: 1px solid var(--color-border);
 }
 
@@ -1363,7 +1371,7 @@ svg {
 
 .empty-state:hover .empty-state-icon {
     transform: translateY(-4px);
-    background: #dce7dc;
+    background: #94d2bd;
 }
 
 /* How it works */
@@ -1376,7 +1384,7 @@ svg {
 
 .step:hover {
     padding-left: 8px;
-    border-color: #d9ad82;
+    border-color: #ee9b00;
 }
 
 .step-number {
@@ -1384,7 +1392,7 @@ svg {
 }
 
 .step:hover .step-number {
-    color: #f1d4b5;
+    color: #e9d8a6;
 }
 
 /* Organizer section */
