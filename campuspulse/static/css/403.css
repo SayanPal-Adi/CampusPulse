@@ -172,7 +172,7 @@ h1 {
     padding: 36px 25px;
     border: 1px solid #e6dfc8;
     border-radius: 22px;
-    background: #fffdf7df7;
+    background: #f7f0dc;
     box-shadow: 0 25px 70px rgba(28, 73, 59, 0.09);
     text-align: center;
     animation: cardFloat 5s ease-in-out infinite;
@@ -213,7 +213,7 @@ h1 {
     padding: 13px 18px;
     border: 1px solid #e6dfc8;
     border-radius: 10px;
-    background: #fffdf7df7;
+    background: #f7f0dc;
     box-shadow: 0 10px 30px rgba(28, 73, 59, 0.07);
     color: #ee9b00;
     font-size: 12px;
