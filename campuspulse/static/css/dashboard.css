@@ -4,15 +4,15 @@
    ===================================================== */
 
 :root {
-    --dash-bg: var(--color-bg, #f7f6f0);
-    --dash-paper: var(--color-paper, #fffefa);
-    --dash-ink: var(--color-ink, #222c25);
-    --dash-green: var(--color-green, #1c493b);
-    --dash-green-dark: var(--color-green-dark, #173b31);
-    --dash-green-soft: var(--color-green-soft, #e6ece5);
-    --dash-orange: var(--color-orange, #bd593b);
-    --dash-muted: var(--color-muted, #72766e);
-    --dash-border: var(--color-border, #dedfd5);
+    --dash-bg: var(--color-bg, #f7f0dc);
+    --dash-paper: var(--color-paper, #fffdf7df7);
+    --dash-ink: var(--color-ink, #001219);
+    --dash-green: var(--color-green, #005f73);
+    --dash-green-dark: var(--color-green-dark, #001219);
+    --dash-green-soft: var(--color-green-soft, #d9eee7);
+    --dash-orange: var(--color-orange, #ee9b00);
+    --dash-muted: var(--color-muted, #557078);
+    --dash-border: var(--color-border, #e6dfc8);
 }
 
 /* Reset */
@@ -112,8 +112,8 @@ button {
 }
 
 .message.error {
-    color: #a43f3f;
-    border-left-color: #a43f3f;
+    color: #9b2226;
+    border-left-color: #9b2226;
 }
 
 /* Statistics */
@@ -220,7 +220,7 @@ button {
     display: inline-block;
     padding: 5px 10px;
     color: var(--dash-orange);
-    background: #f5ebe4;
+    background: #f7f0dc;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -242,7 +242,7 @@ button {
 }
 
 .status.cancelled {
-    color: #a43f3f;
+    color: #9b2226;
 }
 
 .muted {
@@ -284,15 +284,15 @@ button {
 }
 
 .cancel-button {
-    color: #a43f3f;
+    color: #9b2226;
     background: transparent;
-    border: 1px solid #e8caca;
+    border: 1px solid #e9b9ad;
 }
 
 .cancel-button:hover {
     color: white;
-    background: #a43f3f;
-    border-color: #a43f3f;
+    background: #9b2226;
+    border-color: #9b2226;
 }
 
 button:disabled {
@@ -317,7 +317,7 @@ button:disabled {
 footer {
     padding: 27px 20px;
     color: var(--dash-muted);
-    background: #efeee6;
+    background: #f7f0dc;
     border-top: 1px solid var(--dash-border);
     text-align: center;
     font-size: 11px;
