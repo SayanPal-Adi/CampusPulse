@@ -1,9 +1,15 @@
-/* CampusPulse refreshed brand palette */
+/* CampusPulse — Deep Blue & Sky Blue brand palette */
 :root {
- --cp-ink-black: #001219; --cp-dark-teal: #005f73; --cp-dark-cyan: #0a9396;
- --cp-pearl-aqua: #94d2bd; --cp-vanilla-custard: #e9d8a6; --cp-golden-orange: #ee9b00;
- --cp-burnt-caramel: #ca6702; --cp-rusty-spice: #bb3e03; --cp-oxidized-iron: #ae2012;
- --cp-brown-red: #9b2226;
+    --deep-space-blue: #012a4a;
+    --yale-blue: #013a63;
+    --yale-blue-2: #01497c;
+    --yale-blue-3: #014f86;
+    --rich-cerulean: #2a6f97;
+    --cerulean: #2c7da0;
+    --air-force-blue: #468faf;
+    --steel-blue: #61a5c2;
+    --sky-blue-light: #89c2d9;
+    --light-blue: #a9d6e5;
 }
 
 
@@ -12,14 +18,14 @@
 ===================================== */
 
 :root {
-    --admin-green: #005f73;
-    --admin-green-dark: #001219;
-    --admin-green-light: #d9eee7;
-    --admin-background: #f7f0dc;
-    --admin-white: #fffdf7df7;
-    --admin-text: #001219;
-    --admin-muted: #557078;
-    --admin-border: #e6dfc8;
+    --admin-green: #013a63;
+    --admin-green-dark: #012a4a;
+    --admin-green-light: #d9edf5;
+    --admin-background: #eaf6fb;
+    --admin-white: #ffffff;
+    --admin-text: #012a4a;
+    --admin-muted: #468faf;
+    --admin-border: #c8e2ed;
     --admin-sidebar-width: 260px;
 }
 
@@ -45,7 +51,7 @@ button {
 
 button:focus-visible,
 a:focus-visible {
-    outline: 3px solid #0a9396;
+    outline: 3px solid #91bca0;
     outline-offset: 3px;
 }
 
@@ -137,7 +143,7 @@ a:focus-visible {
     margin-bottom: 26px;
     border: 1px solid var(--admin-border);
     border-radius: 12px;
-    background: #fffdf7df7;
+    background: #fafcfb;
 }
 
 .profile-avatar,
@@ -187,7 +193,7 @@ a:focus-visible {
 .sidebar-label {
     margin: 0 0 10px;
     padding: 0 10px;
-    color: #94d2bd;
+    color: #89c2d9;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.2px;
@@ -206,7 +212,7 @@ a:focus-visible {
     border: none;
     border-radius: 8px;
     background: transparent;
-    color: #557078;
+    color: #68776d;
     font-size: 13px;
     font-weight: 600;
     text-align: left;
@@ -215,7 +221,7 @@ a:focus-visible {
 }
 
 .nav-item:hover {
-    background: #e5f1ed;
+    background: #f3f7f3;
     color: var(--admin-green);
 }
 
@@ -256,7 +262,7 @@ a:focus-visible {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #0a9396;
+    background: #2c7da0;
 }
 
 .sidebar-logout {
@@ -268,7 +274,7 @@ a:focus-visible {
     border: none;
     border-radius: 8px;
     background: transparent;
-    color: #bb3e03;
+    color: #a34c46;
     font-size: 13px;
     font-weight: 600;
     text-align: left;
@@ -277,7 +283,7 @@ a:focus-visible {
 }
 
 .sidebar-logout:hover {
-    background: #f9e4df;
+    background: #d9edf5;
 }
 
 .sidebar-logout:disabled {
@@ -329,7 +335,7 @@ a:focus-visible {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #557078;
+    color: #65766a;
     font-size: 12px;
     font-weight: 600;
 }
@@ -381,7 +387,7 @@ a:focus-visible {
 
 .admin-eyebrow {
     margin: 0 0 10px;
-    color: #0a9396;
+    color: #77917e;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.3px;
@@ -432,7 +438,7 @@ a:focus-visible {
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    color: #557078;
+    color: #738178;
     font-size: 12px;
     font-weight: 600;
 }
@@ -457,7 +463,7 @@ a:focus-visible {
 
 .overview-card > p {
     margin: 0;
-    color: #94d2bd;
+    color: #89c2d9;
     font-size: 11px;
 }
 
@@ -486,7 +492,7 @@ a:focus-visible {
 }
 
 .welcome-panel-content .admin-eyebrow {
-    color: #94d2bd;
+    color: #b9d2c0;
 }
 
 .welcome-panel-content h2 {
@@ -498,7 +504,7 @@ a:focus-visible {
 .welcome-panel-content > p:not(.admin-eyebrow) {
     max-width: 470px;
     margin: 0;
-    color: #94d2bd;
+    color: #d0dfd4;
     font-size: 13px;
     line-height: 1.7;
 }
@@ -520,7 +526,7 @@ a:focus-visible {
 }
 
 .welcome-action:hover {
-    background: #d9eee7;
+    background: #d9edf5;
 }
 
 .welcome-action span {
@@ -602,7 +608,7 @@ a:focus-visible {
 }
 
 .management-card:hover {
-    border-color: #94d2bd;
+    border-color: #b8cdbd;
     transform: translateY(-2px);
 }
 
@@ -638,7 +644,7 @@ a:focus-visible {
 }
 
 .management-arrow {
-    color: #557078;
+    color: #819488;
     font-size: 19px;
 }
 
@@ -654,7 +660,7 @@ a:focus-visible {
     justify-content: center;
     flex-direction: column;
     padding: 35px;
-    border: 1px dashed #d9eee7;
+    border: 1px dashed #d6e1d8;
     border-radius: 13px;
     background: var(--admin-white);
     text-align: center;
@@ -696,15 +702,15 @@ a:focus-visible {
     padding: 13px 16px;
     border: 1px solid #cce3d2;
     border-radius: 8px;
-    background: #e5f1ed;
-    color: #0a9396;
+    background: #e4f2f8;
+    color: #2c7da0;
     font-size: 13px;
 }
 
 .admin-notification.error {
-    border-color: #e9b9ad;
-    background: #f9e4df;
-    color: #9b2226;
+    border-color: #f0ceca;
+    background: #d9edf5;
+    color: #a33d35;
 }
 
 
@@ -720,7 +726,7 @@ a:focus-visible {
 
 .admin-footer p {
     margin: 0;
-    color: #94d2bd;
+    color: #89c2d9;
     font-size: 11px;
 }
 
@@ -979,7 +985,7 @@ a:focus-visible {
     padding: 0 13px;
     border: 1px solid var(--admin-border);
     border-radius: 8px;
-    background: #fffdf7;
+    background: #fff;
     color: var(--admin-muted);
 }
 
@@ -1027,8 +1033,8 @@ a:focus-visible {
 .user-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f7f0dc;
-    color: #557078;
+    background: #f8faf8;
+    color: #78867d;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1037,13 +1043,13 @@ a:focus-visible {
 
 .user-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #e5f1ed;
-    color: #005f73;
+    border-bottom: 1px solid #edf0ed;
+    color: #526158;
     font-size: 12px;
 }
 
 .user-table tbody tr:hover {
-    background: #fffdf7df7;
+    background: #fafcfa;
 }
 
 .user-name-cell {
@@ -1086,12 +1092,12 @@ a:focus-visible {
 
 .user-role-badge.student {
     background: #eaf1fa;
-    color: #005f73;
+    color: #416a9e;
 }
 
 .user-role-badge.organizer {
-    background: #d9eee7;
-    color: #0a9396;
+    background: #d9edf5;
+    color: #2c7da0;
 }
 
 
@@ -1289,8 +1295,8 @@ a:focus-visible {
 .event-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f7f0dc;
-    color: #557078;
+    background: #f8faf8;
+    color: #78867d;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1300,14 +1306,14 @@ a:focus-visible {
 
 .event-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #e5f1ed;
-    color: #005f73;
+    border-bottom: 1px solid #edf0ed;
+    color: #526158;
     font-size: 12px;
     vertical-align: middle;
 }
 
 .event-table tbody tr:hover {
-    background: #fffdf7df7;
+    background: #fafcfa;
 }
 
 .event-name-cell {
@@ -1370,18 +1376,18 @@ a:focus-visible {
 }
 
 .event-status-badge.published {
-    background: #d9eee7;
-    color: #0a9396;
+    background: #d9edf5;
+    color: #2c7da0;
 }
 
 .event-status-badge.draft {
-    background: #f7f0dc;
-    color: #ca6702;
+    background: #fff4e5;
+    color: #98651c;
 }
 
 .event-status-badge.other {
-    background: #e5f1ed;
-    color: #557078;
+    background: #f0f1f0;
+    color: #657168;
 }
 
 
@@ -1437,9 +1443,9 @@ a:focus-visible {
 
 .event-view-button {
     padding: 8px 11px;
-    border: 1px solid #d9eee7;
+    border: 1px solid #d5e2d8;
     border-radius: 7px;
-    background: #e5f1ed;
+    background: #e4f2f8;
     color: var(--admin-green);
     font-size: 11px;
     font-weight: 650;
@@ -1449,7 +1455,7 @@ a:focus-visible {
 }
 
 .event-view-button:hover {
-    background: #d9eee7;
+    background: #e1ece4;
 }
 
 
@@ -1518,7 +1524,7 @@ a:focus-visible {
 }
 
 .admin-event-modal-close:hover {
-    background: #e5f1ed;
+    background: #e4f2f8;
     color: var(--admin-green);
 }
 
@@ -1540,7 +1546,7 @@ a:focus-visible {
     padding: 17px;
     margin-bottom: 24px;
     border-radius: 9px;
-    background: #fffdf7df7;
+    background: #f7fcfe;
 }
 
 .event-detail-description h3 {
@@ -1551,7 +1557,7 @@ a:focus-visible {
 
 .event-detail-description p {
     margin: 0;
-    color: #557078;
+    color: #6e7d73;
     font-size: 12px;
     line-height: 1.7;
     white-space: pre-wrap;
@@ -1648,25 +1654,25 @@ a:focus-visible {
 /* Suspend button */
 
 .event-status-action.danger {
-    color: #9b2226;
-    border-color: #e9b9ad;
+    color: #01497c;
+    border-color: #e5b7b2;
 }
 
 .event-status-action.danger:hover {
-    background: #f9e4df;
-    border-color: #e9b9ad;
+    background: #d9edf5;
+    border-color: #e5b7b2;
 }
 
 /* Confirmation state */
 
 .event-status-action.confirming {
-    background: #f7f0dc;
-    color: #ca6702;
+    background: #eaf6fb;
+    color: #2a6f97;
     border-color: #e5c76b;
 }
 
 .event-status-action.confirming:hover {
-    background: #e9d8a6;
+    background: #ffe8a1;
 }
 
 /* Disabled state */
@@ -1682,9 +1688,9 @@ a:focus-visible {
 ===================================== */
 
 .event-status-badge.suspended {
-    background: #f7f0dc;
-    color: #ca6702;
-    border: 1px solid #e9d8a6;
+    background: #fff0e6;
+    color: #2a6f97;
+    border: 1px solid #f5d0b5;
 }
 
 
@@ -1850,8 +1856,8 @@ a:focus-visible {
 .registration-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f7f0dc;
-    color: #557078;
+    background: #f8faf8;
+    color: #78867d;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1861,14 +1867,14 @@ a:focus-visible {
 
 .registration-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #e5f1ed;
-    color: #005f73;
+    border-bottom: 1px solid #edf0ed;
+    color: #526158;
     font-size: 12px;
     vertical-align: middle;
 }
 
 .registration-table tbody tr:hover {
-    background: #fffdf7df7;
+    background: #fafcfa;
 }
 
 .registration-student-cell,
@@ -1908,13 +1914,13 @@ a:focus-visible {
 }
 
 .registration-status-badge.registered {
-    background: #d9eee7;
-    color: #0a9396;
+    background: #d9edf5;
+    color: #2c7da0;
 }
 
 .registration-status-badge.cancelled {
-    background: #f9e4df;
-    color: #9b2226;
+    background: #d9edf5;
+    color: #a33d35;
 }
 
 /* Loading and Empty States */
