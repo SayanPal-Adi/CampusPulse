@@ -2,14 +2,14 @@
 :root {
     --deep-space-blue: #012a4a;
     --yale-blue: #013a63;
-    --yale-blue-2: #01497c;
+    --yale-blue-2: #014f86;
     --yale-blue-3: #014f86;
     --rich-cerulean: #2a6f97;
     --cerulean: #2c7da0;
-    --air-force-blue: #468faf;
-    --steel-blue: #61a5c2;
-    --sky-blue-light: #89c2d9;
-    --light-blue: #a9d6e5;
+    --air-force-blue: #2a6f97;
+    --steel-blue: #468faf;
+    --sky-blue-light: #d5edf7;
+    --light-blue: #e7f5fb;
 }
 
 
@@ -21,16 +21,16 @@
 :root {
     color-scheme: light;
 
-    --color-bg: #eaf6fb;
-    --color-paper: #f7fcfe;
+    --color-bg: #f4fbff;
+    --color-paper: #ffffff;
     --color-ink: #012a4a;
     --color-green: #2c7da0;
     --color-green-dark: #013a63;
-    --color-green-soft: #d9edf5;
-    --color-orange: #468faf;
-    --color-muted: #468faf;
-    --color-border: #c8e2ed;
-    --color-border-dark: #013a63;
+    --color-green-soft: #e7f5fb;
+    --color-orange: #2a6f97;
+    --color-muted: #42677c;
+    --color-border: #b8dce9;
+    --color-border-dark: #014f86;
 
     --font-display: "Fraunces", Georgia, serif;
     --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -291,7 +291,7 @@ svg {
 .hero-description {
     max-width: 430px;
     margin: 0;
-    color: #468faf;
+    color: #2a6f97;
     font-size: 15px;
     line-height: 1.9;
 }
@@ -456,7 +456,7 @@ svg {
 .board-heading p {
     max-width: 280px;
     margin: 0;
-    color: #a9d6e5;
+    color: #e7f5fb;
     font-size: 12px;
     line-height: 1.8;
 }
@@ -671,7 +671,7 @@ svg {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
     gap: clamp(48px, 9vw, 130px);
     padding: 95px max(var(--page-gutter), calc((100vw - 1064px) / 2));
-    color: #eaf6fb;
+    color: #f4fbff;
     background: var(--color-green-dark);
 }
 
@@ -692,7 +692,7 @@ svg {
 .how-heading > p {
     max-width: 330px;
     margin-top: 22px;
-    color: #a9d6e5;
+    color: #e7f5fb;
     font-size: 13px;
     line-height: 1.9;
 }
@@ -730,7 +730,7 @@ svg {
 .step-content p {
     max-width: 330px;
     margin: 7px 0 0;
-    color: #a9d6e5;
+    color: #e7f5fb;
     font-size: 12px;
     line-height: 1.85;
 }
@@ -1377,7 +1377,7 @@ svg {
 
 .empty-state:hover .empty-state-icon {
     transform: translateY(-4px);
-    background: #d9edf5;
+    background: #e7f5fb;
 }
 
 /* How it works */
