@@ -4,15 +4,15 @@
    ===================================================== */
 
 :root {
-    --dash-bg: var(--color-bg, #eaf6fb);
-    --dash-paper: var(--color-paper, #f7fcfe);
+    --dash-bg: var(--color-bg, #f4fbff);
+    --dash-paper: var(--color-paper, #ffffff);
     --dash-ink: var(--color-ink, #012a4a);
     --dash-green: var(--color-green, #013a63);
     --dash-green-dark: var(--color-green-dark, #012a4a);
-    --dash-green-soft: var(--color-green-soft, #d9edf5);
-    --dash-orange: var(--color-orange, #468faf);
-    --dash-muted: var(--color-muted, #468faf);
-    --dash-border: var(--color-border, #c8e2ed);
+    --dash-green-soft: var(--color-green-soft, #e7f5fb);
+    --dash-orange: var(--color-orange, #2a6f97);
+    --dash-muted: var(--color-muted, #2a6f97);
+    --dash-border: var(--color-border, #b8dce9);
 }
 
 /* Reset */
@@ -112,8 +112,8 @@ button {
 }
 
 .message.error {
-    color: #01497c;
-    border-left-color: #01497c;
+    color: #014f86;
+    border-left-color: #014f86;
 }
 
 /* Statistics */
@@ -220,7 +220,7 @@ button {
     display: inline-block;
     padding: 5px 10px;
     color: var(--dash-orange);
-    background: #eaf6fb;
+    background: #f4fbff;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -242,7 +242,7 @@ button {
 }
 
 .status.cancelled {
-    color: #01497c;
+    color: #014f86;
 }
 
 .muted {
@@ -284,15 +284,15 @@ button {
 }
 
 .cancel-button {
-    color: #01497c;
+    color: #014f86;
     background: transparent;
     border: 1px solid #e8caca;
 }
 
 .cancel-button:hover {
     color: white;
-    background: #01497c;
-    border-color: #01497c;
+    background: #014f86;
+    border-color: #014f86;
 }
 
 button:disabled {
