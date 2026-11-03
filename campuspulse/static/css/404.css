@@ -2,14 +2,14 @@
 :root {
     color-scheme: light;
 
-    --color-bg: #f7f6f0;
-    --color-paper: #fffefa;
-    --color-green: #1c493b;
-    --color-green-dark: #173b31;
-    --color-green-soft: #e6ece5;
-    --color-orange: #bd593b;
-    --color-muted: #72766e;
-    --color-border: #dedfd5;
+    --color-bg: #f7f0dc;
+    --color-paper: #fffdf7df7;
+    --color-green: #005f73;
+    --color-green-dark: #001219;
+    --color-green-soft: #d9eee7;
+    --color-orange: #ee9b00;
+    --color-muted: #557078;
+    --color-border: #e6dfc8;
 
     --font-display: "Fraunces", Georgia, serif;
     --font-body: "DM Sans", sans-serif;
