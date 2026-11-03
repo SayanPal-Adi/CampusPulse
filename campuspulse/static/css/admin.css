@@ -1,17 +1,25 @@
+/* CampusPulse refreshed brand palette */
+:root {
+ --cp-ink-black: #001219; --cp-dark-teal: #005f73; --cp-dark-cyan: #0a9396;
+ --cp-pearl-aqua: #94d2bd; --cp-vanilla-custard: #e9d8a6; --cp-golden-orange: #ee9b00;
+ --cp-burnt-caramel: #ca6702; --cp-rusty-spice: #bb3e03; --cp-oxidized-iron: #ae2012;
+ --cp-brown-red: #9b2226;
+}
+
 
 /* =====================================
    CampusPulse - Admin Dashboard
 ===================================== */
 
 :root {
-    --admin-green: #234b38;
-    --admin-green-dark: #183b2b;
-    --admin-green-light: #eaf1ec;
-    --admin-background: #f7f9f7;
-    --admin-white: #ffffff;
-    --admin-text: #25352c;
-    --admin-muted: #7b8980;
-    --admin-border: #e6ebe7;
+    --admin-green: #005f73;
+    --admin-green-dark: #001219;
+    --admin-green-light: #d9eee7;
+    --admin-background: #f7f0dc;
+    --admin-white: #fffdf7df7;
+    --admin-text: #001219;
+    --admin-muted: #557078;
+    --admin-border: #e6dfc8;
     --admin-sidebar-width: 260px;
 }
 
@@ -37,7 +45,7 @@ button {
 
 button:focus-visible,
 a:focus-visible {
-    outline: 3px solid #91bca0;
+    outline: 3px solid #0a9396;
     outline-offset: 3px;
 }
 
@@ -129,7 +137,7 @@ a:focus-visible {
     margin-bottom: 26px;
     border: 1px solid var(--admin-border);
     border-radius: 12px;
-    background: #fafcfb;
+    background: #fffdf7df7;
 }
 
 .profile-avatar,
@@ -179,7 +187,7 @@ a:focus-visible {
 .sidebar-label {
     margin: 0 0 10px;
     padding: 0 10px;
-    color: #9aa59e;
+    color: #94d2bd;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.2px;
@@ -198,7 +206,7 @@ a:focus-visible {
     border: none;
     border-radius: 8px;
     background: transparent;
-    color: #68776d;
+    color: #557078;
     font-size: 13px;
     font-weight: 600;
     text-align: left;
@@ -207,7 +215,7 @@ a:focus-visible {
 }
 
 .nav-item:hover {
-    background: #f3f7f3;
+    background: #e5f1ed;
     color: var(--admin-green);
 }
 
@@ -248,7 +256,7 @@ a:focus-visible {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #53a46e;
+    background: #0a9396;
 }
 
 .sidebar-logout {
@@ -260,7 +268,7 @@ a:focus-visible {
     border: none;
     border-radius: 8px;
     background: transparent;
-    color: #a34c46;
+    color: #bb3e03;
     font-size: 13px;
     font-weight: 600;
     text-align: left;
@@ -269,7 +277,7 @@ a:focus-visible {
 }
 
 .sidebar-logout:hover {
-    background: #fbf0ef;
+    background: #f9e4df;
 }
 
 .sidebar-logout:disabled {
@@ -321,7 +329,7 @@ a:focus-visible {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #65766a;
+    color: #557078;
     font-size: 12px;
     font-weight: 600;
 }
@@ -373,7 +381,7 @@ a:focus-visible {
 
 .admin-eyebrow {
     margin: 0 0 10px;
-    color: #77917e;
+    color: #0a9396;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.3px;
@@ -424,7 +432,7 @@ a:focus-visible {
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    color: #738178;
+    color: #557078;
     font-size: 12px;
     font-weight: 600;
 }
@@ -449,7 +457,7 @@ a:focus-visible {
 
 .overview-card > p {
     margin: 0;
-    color: #98a39b;
+    color: #94d2bd;
     font-size: 11px;
 }
 
@@ -478,7 +486,7 @@ a:focus-visible {
 }
 
 .welcome-panel-content .admin-eyebrow {
-    color: #b9d2c0;
+    color: #94d2bd;
 }
 
 .welcome-panel-content h2 {
@@ -490,7 +498,7 @@ a:focus-visible {
 .welcome-panel-content > p:not(.admin-eyebrow) {
     max-width: 470px;
     margin: 0;
-    color: #d0dfd4;
+    color: #94d2bd;
     font-size: 13px;
     line-height: 1.7;
 }
@@ -512,7 +520,7 @@ a:focus-visible {
 }
 
 .welcome-action:hover {
-    background: #eaf1ec;
+    background: #d9eee7;
 }
 
 .welcome-action span {
@@ -594,7 +602,7 @@ a:focus-visible {
 }
 
 .management-card:hover {
-    border-color: #b8cdbd;
+    border-color: #94d2bd;
     transform: translateY(-2px);
 }
 
@@ -630,7 +638,7 @@ a:focus-visible {
 }
 
 .management-arrow {
-    color: #819488;
+    color: #557078;
     font-size: 19px;
 }
 
@@ -646,7 +654,7 @@ a:focus-visible {
     justify-content: center;
     flex-direction: column;
     padding: 35px;
-    border: 1px dashed #d6e1d8;
+    border: 1px dashed #d9eee7;
     border-radius: 13px;
     background: var(--admin-white);
     text-align: center;
@@ -688,15 +696,15 @@ a:focus-visible {
     padding: 13px 16px;
     border: 1px solid #cce3d2;
     border-radius: 8px;
-    background: #edf7ef;
-    color: #28633a;
+    background: #e5f1ed;
+    color: #0a9396;
     font-size: 13px;
 }
 
 .admin-notification.error {
-    border-color: #f0ceca;
-    background: #fff0ee;
-    color: #a33d35;
+    border-color: #e9b9ad;
+    background: #f9e4df;
+    color: #9b2226;
 }
 
 
@@ -712,7 +720,7 @@ a:focus-visible {
 
 .admin-footer p {
     margin: 0;
-    color: #98a39b;
+    color: #94d2bd;
     font-size: 11px;
 }
 
@@ -971,7 +979,7 @@ a:focus-visible {
     padding: 0 13px;
     border: 1px solid var(--admin-border);
     border-radius: 8px;
-    background: #fff;
+    background: #fffdf7;
     color: var(--admin-muted);
 }
 
@@ -1019,8 +1027,8 @@ a:focus-visible {
 .user-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f8faf8;
-    color: #78867d;
+    background: #f7f0dc;
+    color: #557078;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1029,13 +1037,13 @@ a:focus-visible {
 
 .user-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #edf0ed;
-    color: #526158;
+    border-bottom: 1px solid #e5f1ed;
+    color: #005f73;
     font-size: 12px;
 }
 
 .user-table tbody tr:hover {
-    background: #fafcfa;
+    background: #fffdf7df7;
 }
 
 .user-name-cell {
@@ -1078,12 +1086,12 @@ a:focus-visible {
 
 .user-role-badge.student {
     background: #eaf1fa;
-    color: #416a9e;
+    color: #005f73;
 }
 
 .user-role-badge.organizer {
-    background: #eaf4ec;
-    color: #34734a;
+    background: #d9eee7;
+    color: #0a9396;
 }
 
 
@@ -1281,8 +1289,8 @@ a:focus-visible {
 .event-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f8faf8;
-    color: #78867d;
+    background: #f7f0dc;
+    color: #557078;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1292,14 +1300,14 @@ a:focus-visible {
 
 .event-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #edf0ed;
-    color: #526158;
+    border-bottom: 1px solid #e5f1ed;
+    color: #005f73;
     font-size: 12px;
     vertical-align: middle;
 }
 
 .event-table tbody tr:hover {
-    background: #fafcfa;
+    background: #fffdf7df7;
 }
 
 .event-name-cell {
@@ -1362,18 +1370,18 @@ a:focus-visible {
 }
 
 .event-status-badge.published {
-    background: #eaf4ec;
-    color: #34734a;
+    background: #d9eee7;
+    color: #0a9396;
 }
 
 .event-status-badge.draft {
-    background: #fff4e5;
-    color: #98651c;
+    background: #f7f0dc;
+    color: #ca6702;
 }
 
 .event-status-badge.other {
-    background: #f0f1f0;
-    color: #657168;
+    background: #e5f1ed;
+    color: #557078;
 }
 
 
@@ -1429,9 +1437,9 @@ a:focus-visible {
 
 .event-view-button {
     padding: 8px 11px;
-    border: 1px solid #d5e2d8;
+    border: 1px solid #d9eee7;
     border-radius: 7px;
-    background: #f0f5f1;
+    background: #e5f1ed;
     color: var(--admin-green);
     font-size: 11px;
     font-weight: 650;
@@ -1441,7 +1449,7 @@ a:focus-visible {
 }
 
 .event-view-button:hover {
-    background: #e1ece4;
+    background: #d9eee7;
 }
 
 
@@ -1510,7 +1518,7 @@ a:focus-visible {
 }
 
 .admin-event-modal-close:hover {
-    background: #f3f6f3;
+    background: #e5f1ed;
     color: var(--admin-green);
 }
 
@@ -1532,7 +1540,7 @@ a:focus-visible {
     padding: 17px;
     margin-bottom: 24px;
     border-radius: 9px;
-    background: #f7faf7;
+    background: #fffdf7df7;
 }
 
 .event-detail-description h3 {
@@ -1543,7 +1551,7 @@ a:focus-visible {
 
 .event-detail-description p {
     margin: 0;
-    color: #6e7d73;
+    color: #557078;
     font-size: 12px;
     line-height: 1.7;
     white-space: pre-wrap;
@@ -1640,25 +1648,25 @@ a:focus-visible {
 /* Suspend button */
 
 .event-status-action.danger {
-    color: #c0392b;
-    border-color: #e5b7b2;
+    color: #9b2226;
+    border-color: #e9b9ad;
 }
 
 .event-status-action.danger:hover {
-    background: #fcebea;
-    border-color: #e5b7b2;
+    background: #f9e4df;
+    border-color: #e9b9ad;
 }
 
 /* Confirmation state */
 
 .event-status-action.confirming {
-    background: #fff3cd;
-    color: #856404;
+    background: #f7f0dc;
+    color: #ca6702;
     border-color: #e5c76b;
 }
 
 .event-status-action.confirming:hover {
-    background: #ffe8a1;
+    background: #e9d8a6;
 }
 
 /* Disabled state */
@@ -1674,9 +1682,9 @@ a:focus-visible {
 ===================================== */
 
 .event-status-badge.suspended {
-    background: #fff0e6;
-    color: #b45309;
-    border: 1px solid #f5d0b5;
+    background: #f7f0dc;
+    color: #ca6702;
+    border: 1px solid #e9d8a6;
 }
 
 
@@ -1842,8 +1850,8 @@ a:focus-visible {
 .registration-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f8faf8;
-    color: #78867d;
+    background: #f7f0dc;
+    color: #557078;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1853,14 +1861,14 @@ a:focus-visible {
 
 .registration-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #edf0ed;
-    color: #526158;
+    border-bottom: 1px solid #e5f1ed;
+    color: #005f73;
     font-size: 12px;
     vertical-align: middle;
 }
 
 .registration-table tbody tr:hover {
-    background: #fafcfa;
+    background: #fffdf7df7;
 }
 
 .registration-student-cell,
@@ -1900,13 +1908,13 @@ a:focus-visible {
 }
 
 .registration-status-badge.registered {
-    background: #eaf4ec;
-    color: #34734a;
+    background: #d9eee7;
+    color: #0a9396;
 }
 
 .registration-status-badge.cancelled {
-    background: #fcebea;
-    color: #a33d35;
+    background: #f9e4df;
+    color: #9b2226;
 }
 
 /* Loading and Empty States */
