@@ -74,25 +74,32 @@ a:focus-visible {
 .brand {
     display: inline-flex;
     align-items: center;
-    gap: 11px;
+    gap: 9px;
+    color: var(--color-green);
     font-size: 23px;
     font-weight: 700;
     letter-spacing: -1.2px;
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .brand-mark {
-    width: 34px;
-    height: 34px;
     display: grid;
+    width: 33px;
+    height: 33px;
     place-items: center;
-    border-radius: 7px;
     background: var(--color-green);
     color: var(--color-bg);
-    font-size: 19px;
-    font-weight: 700;
+    border-radius: 8px;
+}
+
+.brand-mark svg {
+    width: 24px;
+    height: 24px;
 }
 
 .brand-light {
+    color: var(--color-orange);
     font-weight: 400;
 }
 
