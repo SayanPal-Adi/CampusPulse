@@ -19,16 +19,40 @@
 }
 
 .login-logo {
-    color: #012a4a;
-    font-size: 23px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--color-green, #2457C5);
+    font-size: 21px;
     font-weight: 700;
-    letter-spacing: -0.8px;
+    letter-spacing: -1.1px;
     text-decoration: none;
     transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.login-logo .brand-mark {
+    display: grid;
+    width: 33px;
+    height: 33px;
+    place-items: center;
+    color: var(--color-bg, #F4F6FB);
+    background: var(--color-green, #2457C5);
+    border-radius: 6px;
+}
+
+.login-logo .brand-mark svg {
+    width: 24px;
+    height: 24px;
+}
+
+.login-logo .brand-light {
+    color: var(--color-orange, #E76F51);
+    font-weight: 400;
 }
 
 .login-logo:hover {
-    color: #2c7da0;
+    color: var(--color-green-dark, #193F96);
 }
 
 .login-register-link {
