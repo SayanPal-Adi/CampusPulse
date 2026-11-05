@@ -82,26 +82,35 @@ a:focus-visible {
 }
 
 .admin-logo {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 11px;
-    color: var(--admin-green-dark);
-    font-size: 20px;
-    font-weight: 750;
+    gap: 9px;
+    color: var(--color-green, #2457C5);
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -1.1px;
     text-decoration: none;
-    letter-spacing: -0.6px;
+    white-space: nowrap;
 }
 
-.logo-icon {
-    width: 35px;
-    height: 35px;
+.admin-logo .brand-mark {
     display: grid;
+    width: 33px;
+    height: 33px;
     place-items: center;
-    border-radius: 10px;
-    background: var(--admin-green);
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
+    border-radius: 6px;
+    background: var(--color-green, #2457C5);
+    color: var(--color-bg, #F4F6FB);
+}
+
+.admin-logo .brand-mark svg {
+    width: 24px;
+    height: 24px;
+}
+
+.admin-logo .brand-light {
+    color: var(--color-orange, #E76F51);
+    font-weight: 400;
 }
 
 .sidebar-close {
