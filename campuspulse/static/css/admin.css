@@ -4,17 +4,16 @@
 ===================================== */
 
 :root {
-    --admin-green: #234b38;
-    --admin-green-dark: #183b2b;
-    --admin-green-light: #eaf1ec;
-    --admin-background: #f7f9f7;
+    --admin-green: #01497c;
+    --admin-green-dark: #012a4a;
+    --admin-green-light: #e3f2f9;
+    --admin-background: #f4fbff;
     --admin-white: #ffffff;
-    --admin-text: #25352c;
-    --admin-muted: #7b8980;
-    --admin-border: #e6ebe7;
+    --admin-text: #183b4b;
+    --admin-muted: #42677c;
+    --admin-border: #d5e8f0;
     --admin-sidebar-width: 260px;
 }
-
 
 /* =====================================
    Global
@@ -37,10 +36,9 @@ button {
 
 button:focus-visible,
 a:focus-visible {
-    outline: 3px solid #91bca0;
+    outline: 3px solid #61a5c2;
     outline-offset: 3px;
 }
-
 
 /* =====================================
    Main Layout
@@ -56,7 +54,6 @@ a:focus-visible {
     display: flex;
     flex-direction: column;
 }
-
 
 /* =====================================
    Sidebar
@@ -116,7 +113,6 @@ a:focus-visible {
     cursor: pointer;
 }
 
-
 /* =====================================
    Sidebar Profile
 ===================================== */
@@ -129,7 +125,7 @@ a:focus-visible {
     margin-bottom: 26px;
     border: 1px solid var(--admin-border);
     border-radius: 12px;
-    background: #fafcfb;
+    background: #f4fbff;
 }
 
 .profile-avatar,
@@ -165,7 +161,6 @@ a:focus-visible {
     font-size: 11px;
 }
 
-
 /* =====================================
    Sidebar Navigation
 ===================================== */
@@ -179,7 +174,7 @@ a:focus-visible {
 .sidebar-label {
     margin: 0 0 10px;
     padding: 0 10px;
-    color: #9aa59e;
+    color: #6b8797;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.2px;
@@ -198,7 +193,7 @@ a:focus-visible {
     border: none;
     border-radius: 8px;
     background: transparent;
-    color: #68776d;
+    color: #42677c;
     font-size: 13px;
     font-weight: 600;
     text-align: left;
@@ -207,7 +202,7 @@ a:focus-visible {
 }
 
 .nav-item:hover {
-    background: #f3f7f3;
+    background: #edf7fb;
     color: var(--admin-green);
 }
 
@@ -223,7 +218,6 @@ a:focus-visible {
     justify-content: center;
     font-size: 19px;
 }
-
 
 /* =====================================
    Sidebar Bottom
@@ -248,7 +242,7 @@ a:focus-visible {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #53a46e;
+    background: #2c7da0;
 }
 
 .sidebar-logout {
@@ -260,7 +254,7 @@ a:focus-visible {
     border: none;
     border-radius: 8px;
     background: transparent;
-    color: #a34c46;
+    color: #a33d35;
     font-size: 13px;
     font-weight: 600;
     text-align: left;
@@ -269,14 +263,13 @@ a:focus-visible {
 }
 
 .sidebar-logout:hover {
-    background: #fbf0ef;
+    background: #fff0ee;
 }
 
 .sidebar-logout:disabled {
     opacity: 0.6;
     cursor: not-allowed;
 }
-
 
 /* =====================================
    Topbar
@@ -321,7 +314,7 @@ a:focus-visible {
     display: flex;
     align-items: center;
     gap: 8px;
-    color: #65766a;
+    color: #42677c;
     font-size: 12px;
     font-weight: 600;
 }
@@ -342,7 +335,6 @@ a:focus-visible {
     font-size: 20px;
     cursor: pointer;
 }
-
 
 /* =====================================
    Main Content
@@ -373,7 +365,7 @@ a:focus-visible {
 
 .admin-eyebrow {
     margin: 0 0 10px;
-    color: #77917e;
+    color: #2a6f97;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.3px;
@@ -392,7 +384,6 @@ a:focus-visible {
     font-size: 13px;
     line-height: 1.6;
 }
-
 
 /* =====================================
    Overview Statistics
@@ -416,7 +407,7 @@ a:focus-visible {
 
 .overview-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(31, 61, 43, 0.06);
+    box-shadow: 0 8px 24px rgba(1, 58, 99, 0.08);
 }
 
 .overview-card-top {
@@ -424,7 +415,7 @@ a:focus-visible {
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    color: #738178;
+    color: #547487;
     font-size: 12px;
     font-weight: 600;
 }
@@ -449,10 +440,9 @@ a:focus-visible {
 
 .overview-card > p {
     margin: 0;
-    color: #98a39b;
+    color: #7895a5;
     font-size: 11px;
 }
-
 
 /* =====================================
    Welcome Panel
@@ -478,7 +468,7 @@ a:focus-visible {
 }
 
 .welcome-panel-content .admin-eyebrow {
-    color: #b9d2c0;
+    color: #a9d6e5;
 }
 
 .welcome-panel-content h2 {
@@ -490,7 +480,7 @@ a:focus-visible {
 .welcome-panel-content > p:not(.admin-eyebrow) {
     max-width: 470px;
     margin: 0;
-    color: #d0dfd4;
+    color: #d7eaf3;
     font-size: 13px;
     line-height: 1.7;
 }
@@ -512,7 +502,7 @@ a:focus-visible {
 }
 
 .welcome-action:hover {
-    background: #eaf1ec;
+    background: #e3f2f9;
 }
 
 .welcome-action span {
@@ -555,7 +545,6 @@ a:focus-visible {
     right: 95px;
 }
 
-
 /* =====================================
    Quick Management
 ===================================== */
@@ -594,7 +583,7 @@ a:focus-visible {
 }
 
 .management-card:hover {
-    border-color: #b8cdbd;
+    border-color: #a9d6e5;
     transform: translateY(-2px);
 }
 
@@ -630,10 +619,9 @@ a:focus-visible {
 }
 
 .management-arrow {
-    color: #819488;
+    color: #547487;
     font-size: 19px;
 }
-
 
 /* =====================================
    Placeholder Sections
@@ -646,7 +634,7 @@ a:focus-visible {
     justify-content: center;
     flex-direction: column;
     padding: 35px;
-    border: 1px dashed #d6e1d8;
+    border: 1px dashed #c8e0eb;
     border-radius: 13px;
     background: var(--admin-white);
     text-align: center;
@@ -678,7 +666,6 @@ a:focus-visible {
     line-height: 1.7;
 }
 
-
 /* =====================================
    Notifications
 ===================================== */
@@ -686,10 +673,10 @@ a:focus-visible {
 .admin-notification {
     margin: 20px 38px 0;
     padding: 13px 16px;
-    border: 1px solid #cce3d2;
+    border: 1px solid #c8e5ef;
     border-radius: 8px;
-    background: #edf7ef;
-    color: #28633a;
+    background: #eaf6fb;
+    color: #014f86;
     font-size: 13px;
 }
 
@@ -698,7 +685,6 @@ a:focus-visible {
     background: #fff0ee;
     color: #a33d35;
 }
-
 
 /* =====================================
    Footer
@@ -712,10 +698,9 @@ a:focus-visible {
 
 .admin-footer p {
     margin: 0;
-    color: #98a39b;
+    color: #7895a5;
     font-size: 11px;
 }
-
 
 /* =====================================
    Mobile Sidebar Overlay
@@ -725,13 +710,11 @@ a:focus-visible {
     display: none;
 }
 
-
 /* =====================================
    Tablet
 ===================================== */
 
 @media (max-width: 1100px) {
-
     .overview-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -743,16 +726,13 @@ a:focus-visible {
     .admin-topbar {
         padding: 15px 25px;
     }
-
 }
-
 
 /* =====================================
    Mobile
 ===================================== */
 
 @media (max-width: 760px) {
-
     .admin-sidebar {
         width: 270px;
         transform: translateX(-100%);
@@ -772,7 +752,7 @@ a:focus-visible {
         inset: 0;
         z-index: 90;
         display: block;
-        background: rgba(14, 29, 19, 0.4);
+        background: rgba(1, 42, 74, 0.4);
     }
 
     .admin-main {
@@ -843,16 +823,13 @@ a:focus-visible {
     .admin-notification {
         margin: 15px 17px 0;
     }
-
 }
-
 
 /* =====================================
    Small Mobile
 ===================================== */
 
 @media (max-width: 400px) {
-
     .overview-stats {
         grid-template-columns: 1fr;
     }
@@ -869,7 +846,6 @@ a:focus-visible {
     .welcome-panel-content h2 {
         font-size: 20px;
     }
-
 }
 
 /* =====================================
@@ -901,7 +877,6 @@ a:focus-visible {
     color: var(--admin-green);
     font-size: 27px;
 }
-
 
 /* User Directory */
 
@@ -952,7 +927,6 @@ a:focus-visible {
     cursor: not-allowed;
 }
 
-
 /* Search and Filter */
 
 .user-toolbar {
@@ -1002,7 +976,6 @@ a:focus-visible {
     cursor: pointer;
 }
 
-
 /* User Table */
 
 .user-table-wrapper {
@@ -1019,8 +992,8 @@ a:focus-visible {
 .user-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f8faf8;
-    color: #78867d;
+    background: #f2f8fb;
+    color: #547487;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1029,13 +1002,13 @@ a:focus-visible {
 
 .user-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #edf0ed;
-    color: #526158;
+    border-bottom: 1px solid #e7f0f5;
+    color: #36566a;
     font-size: 12px;
 }
 
 .user-table tbody tr:hover {
-    background: #fafcfa;
+    background: #f4faff;
 }
 
 .user-name-cell {
@@ -1064,7 +1037,6 @@ a:focus-visible {
     font-weight: 700;
 }
 
-
 /* Role Badges */
 
 .user-role-badge {
@@ -1077,15 +1049,14 @@ a:focus-visible {
 }
 
 .user-role-badge.student {
-    background: #eaf1fa;
-    color: #416a9e;
+    background: #e6f2fa;
+    color: #245f85;
 }
 
 .user-role-badge.organizer {
-    background: #eaf4ec;
-    color: #34734a;
+    background: #e3f2f9;
+    color: #014f86;
 }
-
 
 /* Table Messages and Footer */
 
@@ -1105,11 +1076,9 @@ a:focus-visible {
     font-size: 11px;
 }
 
-
 /* Responsive */
 
 @media (max-width: 760px) {
-
     .user-management-stats {
         grid-template-columns: 1fr;
     }
@@ -1130,9 +1099,7 @@ a:focus-visible {
     .user-directory-heading {
         align-items: flex-start;
     }
-
 }
-
 
 /* =====================================
    Event Management
@@ -1163,7 +1130,6 @@ a:focus-visible {
     color: var(--admin-green);
     font-size: 27px;
 }
-
 
 /* Event Directory */
 
@@ -1214,7 +1180,6 @@ a:focus-visible {
     cursor: not-allowed;
 }
 
-
 /* Search and Filter */
 
 .event-toolbar {
@@ -1264,7 +1229,6 @@ a:focus-visible {
     cursor: pointer;
 }
 
-
 /* Events Table */
 
 .event-table-wrapper {
@@ -1281,8 +1245,8 @@ a:focus-visible {
 .event-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f8faf8;
-    color: #78867d;
+    background: #f2f8fb;
+    color: #547487;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1292,14 +1256,14 @@ a:focus-visible {
 
 .event-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #edf0ed;
-    color: #526158;
+    border-bottom: 1px solid #e7f0f5;
+    color: #36566a;
     font-size: 12px;
     vertical-align: middle;
 }
 
 .event-table tbody tr:hover {
-    background: #fafcfa;
+    background: #f4faff;
 }
 
 .event-name-cell {
@@ -1348,7 +1312,6 @@ a:focus-visible {
     white-space: nowrap;
 }
 
-
 /* Event Status */
 
 .event-status-badge {
@@ -1362,8 +1325,8 @@ a:focus-visible {
 }
 
 .event-status-badge.published {
-    background: #eaf4ec;
-    color: #34734a;
+    background: #e3f2f9;
+    color: #014f86;
 }
 
 .event-status-badge.draft {
@@ -1372,10 +1335,9 @@ a:focus-visible {
 }
 
 .event-status-badge.other {
-    background: #f0f1f0;
-    color: #657168;
+    background: #eef4f7;
+    color: #42677c;
 }
-
 
 /* Empty and Loading States */
 
@@ -1395,11 +1357,9 @@ a:focus-visible {
     font-size: 11px;
 }
 
-
 /* Responsive */
 
 @media (max-width: 760px) {
-
     .event-management-stats {
         grid-template-columns: 1fr;
     }
@@ -1420,7 +1380,6 @@ a:focus-visible {
     .event-directory-heading {
         align-items: flex-start;
     }
-
 }
 
 /* =====================================
@@ -1429,9 +1388,9 @@ a:focus-visible {
 
 .event-view-button {
     padding: 8px 11px;
-    border: 1px solid #d5e2d8;
+    border: 1px solid #c8e0eb;
     border-radius: 7px;
-    background: #f0f5f1;
+    background: #eaf6fb;
     color: var(--admin-green);
     font-size: 11px;
     font-weight: 650;
@@ -1441,9 +1400,8 @@ a:focus-visible {
 }
 
 .event-view-button:hover {
-    background: #e1ece4;
+    background: #dceef6;
 }
-
 
 /* =====================================
    Event Details Modal
@@ -1466,7 +1424,7 @@ a:focus-visible {
 .admin-event-modal-backdrop {
     position: absolute;
     inset: 0;
-    background: rgba(17, 35, 24, 0.48);
+    background: rgba(1, 42, 74, 0.48);
 }
 
 .admin-event-modal-content {
@@ -1510,7 +1468,7 @@ a:focus-visible {
 }
 
 .admin-event-modal-close:hover {
-    background: #f3f6f3;
+    background: #edf7fb;
     color: var(--admin-green);
 }
 
@@ -1532,7 +1490,7 @@ a:focus-visible {
     padding: 17px;
     margin-bottom: 24px;
     border-radius: 9px;
-    background: #f7faf7;
+    background: #f2f8fb;
 }
 
 .event-detail-description h3 {
@@ -1543,7 +1501,7 @@ a:focus-visible {
 
 .event-detail-description p {
     margin: 0;
-    color: #6e7d73;
+    color: #42677c;
     font-size: 12px;
     line-height: 1.7;
     white-space: pre-wrap;
@@ -1584,7 +1542,6 @@ a:focus-visible {
 }
 
 @media (max-width: 550px) {
-
     .admin-event-modal {
         padding: 10px;
     }
@@ -1602,9 +1559,7 @@ a:focus-visible {
         grid-template-columns: 1fr;
         gap: 17px;
     }
-
 }
-
 
 /* =====================================
    ADMIN EVENT ACTION BUTTONS
@@ -1645,7 +1600,7 @@ a:focus-visible {
 }
 
 .event-status-action.danger:hover {
-    background: #fcebea;
+    background: #fff0ee;
     border-color: #e5b7b2;
 }
 
@@ -1668,7 +1623,6 @@ a:focus-visible {
     cursor: not-allowed;
 }
 
-
 /* =====================================
    SUSPENDED EVENT STATUS BADGE
 ===================================== */
@@ -1679,13 +1633,11 @@ a:focus-visible {
     border: 1px solid #f5d0b5;
 }
 
-
 /* =====================================
    EVENT ACTIONS RESPONSIVENESS
 ===================================== */
 
 @media (max-width: 768px) {
-
     .admin-event-actions {
         min-width: 100px;
         gap: 6px;
@@ -1695,7 +1647,6 @@ a:focus-visible {
         padding: 6px 9px;
         font-size: 11px;
     }
-
 }
 
 /* =====================================
@@ -1842,8 +1793,8 @@ a:focus-visible {
 .registration-table th {
     padding: 14px 12px;
     border-bottom: 1px solid var(--admin-border);
-    background: #f8faf8;
-    color: #78867d;
+    background: #f2f8fb;
+    color: #547487;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.6px;
@@ -1853,14 +1804,14 @@ a:focus-visible {
 
 .registration-table td {
     padding: 15px 12px;
-    border-bottom: 1px solid #edf0ed;
-    color: #526158;
+    border-bottom: 1px solid #e7f0f5;
+    color: #36566a;
     font-size: 12px;
     vertical-align: middle;
 }
 
 .registration-table tbody tr:hover {
-    background: #fafcfa;
+    background: #f4faff;
 }
 
 .registration-student-cell,
@@ -1900,12 +1851,12 @@ a:focus-visible {
 }
 
 .registration-status-badge.registered {
-    background: #eaf4ec;
-    color: #34734a;
+    background: #e3f2f9;
+    color: #014f86;
 }
 
 .registration-status-badge.cancelled {
-    background: #fcebea;
+    background: #fff0ee;
     color: #a33d35;
 }
 
@@ -1932,7 +1883,6 @@ a:focus-visible {
 /* Responsive */
 
 @media (max-width: 760px) {
-
     .registration-stats {
         grid-template-columns: 1fr;
     }
@@ -1953,5 +1903,4 @@ a:focus-visible {
     .registration-directory-heading {
         align-items: flex-start;
     }
-
 }
