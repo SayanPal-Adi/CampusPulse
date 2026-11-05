@@ -12,8 +12,8 @@ body {
     justify-content: center;
     padding: 30px;
     overflow: hidden;
-    background: #f4fbff;
-    color: #013a63;
+    background: #f7f6f0;
+    color: #1c493b;
     font-family: "DM Sans", sans-serif;
 }
 
@@ -47,14 +47,14 @@ body {
     display: grid;
     place-items: center;
     border-radius: 11px;
-    background: #013a63;
-    color: #f4fbff;
+    background: #1c493b;
+    color: #f7f6f0;
     font-size: 19px;
 }
 
 .eyebrow {
     margin-bottom: 14px;
-    color: #2a6f97;
+    color: #bd593b;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -63,7 +63,7 @@ body {
 
 .error-code {
     margin-bottom: 12px;
-    color: #2a6f97;
+    color: #bd593b;
     font-family: "Fraunces", serif;
     font-size: clamp(90px, 13vw, 150px);
     font-weight: 600;
@@ -83,7 +83,7 @@ h1 {
 
 .description {
     max-width: 420px;
-    color: #2a6f97;
+    color: #69766d;
     font-size: 15px;
     line-height: 1.8;
 }
@@ -101,9 +101,9 @@ h1 {
     justify-content: center;
     min-height: 48px;
     padding: 0 22px;
-    border: 1px solid #013a63;
+    border: 1px solid #1c493b;
     border-radius: 8px;
-    background: #013a63;
+    background: #1c493b;
     color: #fff;
     font-size: 13px;
     font-weight: 600;
@@ -113,12 +113,12 @@ h1 {
 
 .btn:hover {
     transform: translateY(-3px);
-    background: #2c7da0;
+    background: #28624e;
 }
 
 .btn-secondary {
     background: transparent;
-    color: #013a63;
+    color: #1c493b;
 }
 
 .btn-secondary:hover {
@@ -149,7 +149,7 @@ h1 {
     width: 11px;
     height: 11px;
     border-radius: 50%;
-    background: #2a6f97;
+    background: #bd593b;
 }
 
 .orbit::before {
@@ -162,7 +162,7 @@ h1 {
     bottom: 85px;
     width: 7px;
     height: 7px;
-    background: #013a63;
+    background: #1c493b;
 }
 
 .lock-card {
@@ -172,7 +172,7 @@ h1 {
     padding: 36px 25px;
     border: 1px solid #e5e3d8;
     border-radius: 22px;
-    background: #ffffff;
+    background: #fffefa;
     box-shadow: 0 25px 70px rgba(28, 73, 59, 0.09);
     text-align: center;
     animation: cardFloat 5s ease-in-out infinite;
@@ -186,7 +186,7 @@ h1 {
     margin: 0 auto 22px;
     border-radius: 28px;
     background: #f5e9e2;
-    color: #2a6f97;
+    color: #bd593b;
 }
 
 .lock-icon svg {
@@ -213,9 +213,9 @@ h1 {
     padding: 13px 18px;
     border: 1px solid #e5e3d8;
     border-radius: 10px;
-    background: #ffffff;
+    background: #fffefa;
     box-shadow: 0 10px 30px rgba(28, 73, 59, 0.07);
-    color: #2a6f97;
+    color: #bd593b;
     font-size: 12px;
     font-weight: 600;
     animation: float 4s ease-in-out infinite;
@@ -223,7 +223,7 @@ h1 {
 
 .footer {
     margin-top: 55px;
-    color: #d5edf7;
+    color: #a0a69e;
     font-size: 11px;
 }
 
