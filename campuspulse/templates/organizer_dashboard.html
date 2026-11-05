@@ -20,8 +20,13 @@
 <body data-page="organizer_dashboard">
 
     <header class="organizer-header">
-        <a href="{{ url_for('home') }}" class="organizer-logo">
-            CampusPulse
+        <a href="{{ url_for('home') }}" class="organizer-logo brand" aria-label="CampusPulse home">
+            <span class="brand-mark" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none">
+                    <path d="M4 8h24v4H8v4h16v4H8v4h20v4H4z" fill="currentColor"/>
+                </svg>
+            </span>
+            <span>campus<span class="brand-light">pulse</span></span>
         </a>
 
         <div class="organizer-header-right">
