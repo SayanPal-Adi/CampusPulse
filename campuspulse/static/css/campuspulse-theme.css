@@ -494,5 +494,7 @@ tr+tr {
     gap: 18px;
   }
 
-  
+  .admin-content {
+    padding-inline: 18px;
+  }
 }
