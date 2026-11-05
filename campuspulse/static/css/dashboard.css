@@ -1,18 +1,19 @@
 
 /* =====================================================
    CAMPUSPULSE — STUDENT DASHBOARD
+   Deep Blue Brand Theme
    ===================================================== */
 
 :root {
-    --dash-bg: var(--color-bg, #f7f6f0);
-    --dash-paper: var(--color-paper, #fffefa);
-    --dash-ink: var(--color-ink, #222c25);
-    --dash-green: var(--color-green, #1c493b);
-    --dash-green-dark: var(--color-green-dark, #173b31);
-    --dash-green-soft: var(--color-green-soft, #e6ece5);
-    --dash-orange: var(--color-orange, #bd593b);
-    --dash-muted: var(--color-muted, #72766e);
-    --dash-border: var(--color-border, #dedfd5);
+    --dash-bg: #eaf6fb;
+    --dash-paper: #ffffff;
+    --dash-ink: #012a4a;
+    --dash-green: #013a63;
+    --dash-green-dark: #012a4a;
+    --dash-green-soft: #e7f5fb;
+    --dash-orange: #2c7da0;
+    --dash-muted: #42677c;
+    --dash-border: #b8dce9;
 }
 
 /* Reset */
@@ -42,12 +43,12 @@ button {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--dash-bg);
+    background: #ffffff;
     border-bottom: 1px solid var(--dash-border);
 }
 
 .brand {
-    color: var(--dash-green);
+    color: #012a4a;
     font-size: 22px;
     font-weight: 700;
     letter-spacing: -1px;
@@ -55,19 +56,24 @@ button {
 
 .logout-button {
     padding: 9px 17px;
-    color: var(--dash-green);
+    color: #013a63;
     background: transparent;
     border: 1px solid var(--dash-border);
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 12px;
     font-weight: 600;
-    transition: 0.2s ease;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
 }
 
 .logout-button:hover {
-    color: white;
-    background: var(--dash-green);
-    border-color: var(--dash-green);
+    color: #ffffff;
+    background: #013a63;
+    border-color: #013a63;
+    transform: translateY(-1px);
 }
 
 /* Main container */
@@ -86,7 +92,7 @@ button {
 
 .welcome h1 {
     margin: 12px 0;
-    color: var(--dash-green);
+    color: #012a4a;
     font-family: var(--font-display, Georgia, serif);
     font-size: clamp(38px, 5vw, 58px);
     font-weight: 400;
@@ -105,15 +111,17 @@ button {
 .message {
     margin: 22px 0;
     padding: 12px 16px;
-    color: var(--dash-muted);
-    background: var(--dash-paper);
-    border-left: 3px solid var(--dash-green);
+    color: #013a63;
+    background: #ffffff;
+    border-left: 3px solid #2c7da0;
+    border-radius: 4px;
     font-size: 12px;
 }
 
 .message.error {
-    color: #a43f3f;
-    border-left-color: #a43f3f;
+    color: #9b2226;
+    background: #fff4f4;
+    border-left-color: #9b2226;
 }
 
 /* Statistics */
@@ -130,11 +138,17 @@ button {
     padding: 24px;
     background: var(--dash-paper);
     border: 1px solid var(--dash-border);
-    transition: transform 0.2s ease;
+    border-radius: 9px;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
 }
 
 .summary-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-4px);
+    border-color: #61a5c2;
+    box-shadow: 0 10px 24px rgba(1, 42, 74, 0.09);
 }
 
 .summary-card p {
@@ -145,7 +159,7 @@ button {
 }
 
 .summary-card strong {
-    color: var(--dash-green);
+    color: #013a63;
     font-family: var(--font-display, Georgia, serif);
     font-size: 37px;
     font-weight: 400;
@@ -169,7 +183,7 @@ button {
 
 .section-heading h2 {
     margin: 0;
-    color: var(--dash-green);
+    color: #012a4a;
     font-family: var(--font-display, Georgia, serif);
     font-size: 32px;
     font-weight: 400;
@@ -191,17 +205,22 @@ button {
     padding: 25px;
     background: var(--dash-paper);
     border: 1px solid var(--dash-border);
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    border-radius: 9px;
+    transition:
+        border-color 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
 .event-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--dash-green);
+    transform: translateY(-4px);
+    border-color: #468faf;
+    box-shadow: 0 12px 25px rgba(1, 42, 74, 0.09);
 }
 
 .event-card h3 {
     margin: 15px 0 12px;
-    color: var(--dash-green);
+    color: #013a63;
     font-family: var(--font-display, Georgia, serif);
     font-size: 25px;
     font-weight: 400;
@@ -219,8 +238,9 @@ button {
 .category {
     display: inline-block;
     padding: 5px 10px;
-    color: var(--dash-orange);
-    background: #f5ebe4;
+    color: #014f86;
+    background: #d9edf5;
+    border-radius: 4px;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -238,11 +258,11 @@ button {
 }
 
 .status.registered {
-    color: var(--dash-green);
+    color: #013a63;
 }
 
 .status.cancelled {
-    color: #a43f3f;
+    color: #9b2226;
 }
 
 .muted {
@@ -257,47 +277,59 @@ button {
     min-height: 40px;
     margin-top: 15px;
     padding: 0 16px;
-    border-radius: 3px;
+    border-radius: 5px;
     font-size: 11px;
     font-weight: 600;
-    transition: 0.2s ease;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .primary-button {
-    color: white;
-    background: var(--dash-green);
-    border: 1px solid var(--dash-green);
+    color: #ffffff;
+    background: #014f86;
+    border: 1px solid #014f86;
 }
 
 .primary-button:hover {
-    background: var(--dash-green-dark);
+    background: #012a4a;
+    border-color: #012a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(1, 42, 74, 0.16);
 }
 
 .secondary-button {
-    color: var(--dash-green);
-    background: transparent;
+    color: #013a63;
+    background: #ffffff;
     border: 1px solid var(--dash-border);
 }
 
 .secondary-button:hover {
-    border-color: var(--dash-green);
+    color: #012a4a;
+    background: #e7f5fb;
+    border-color: #61a5c2;
 }
 
 .cancel-button {
-    color: #a43f3f;
-    background: transparent;
-    border: 1px solid #e8caca;
+    color: #9b2226;
+    background: #ffffff;
+    border: 1px solid #e8c5c8;
 }
 
 .cancel-button:hover {
-    color: white;
-    background: #a43f3f;
-    border-color: #a43f3f;
+    color: #ffffff;
+    background: #9b2226;
+    border-color: #9b2226;
 }
 
 button:disabled {
     cursor: not-allowed;
     opacity: 0.5;
+    transform: none;
+    box-shadow: none;
 }
 
 /* Empty states */
@@ -308,6 +340,7 @@ button:disabled {
     color: var(--dash-muted);
     background: var(--dash-paper);
     border: 1px dashed var(--dash-border);
+    border-radius: 8px;
     font-size: 13px;
     line-height: 1.8;
 }
@@ -316,8 +349,8 @@ button:disabled {
 
 footer {
     padding: 27px 20px;
-    color: var(--dash-muted);
-    background: #efeee6;
+    color: #42677c;
+    background: #d9edf5;
     border-top: 1px solid var(--dash-border);
     text-align: center;
     font-size: 11px;
@@ -326,7 +359,7 @@ footer {
 /* Focus accessibility */
 
 button:focus-visible {
-    outline: 3px solid var(--dash-orange);
+    outline: 3px solid #2c7da0;
     outline-offset: 3px;
 }
 
@@ -403,7 +436,6 @@ button:focus-visible {
     }
 }
 
-
 /* =====================================================
    EVENT DETAILS MODAL
    ===================================================== */
@@ -429,11 +461,12 @@ button:focus-visible {
     color: var(--dash-ink);
     background: var(--dash-paper);
     border: 1px solid var(--dash-border);
-    border-radius: 5px;
+    border-radius: 9px;
+    box-shadow: 0 20px 60px rgba(1, 42, 74, 0.20);
 }
 
 .event-details-modal::backdrop {
-    background: rgba(20, 35, 28, 0.65);
+    background: rgba(1, 20, 38, 0.68);
     backdrop-filter: blur(3px);
 }
 
@@ -454,17 +487,22 @@ button:focus-visible {
     color: var(--dash-muted);
     background: transparent;
     border: none;
+    border-radius: 5px;
     font-size: 28px;
     line-height: 1;
+    transition:
+        color 0.2s ease,
+        background 0.2s ease;
 }
 
 .modal-close:hover {
-    color: var(--dash-orange);
+    color: #012a4a;
+    background: #e7f5fb;
 }
 
 .event-details-modal h2 {
     margin: 22px 0;
-    color: var(--dash-green);
+    color: #012a4a;
     font-family: var(--font-display, Georgia, serif);
     font-size: clamp(25px, 4vw, 35px);
     font-weight: 400;
@@ -480,8 +518,9 @@ button:focus-visible {
 .detail-item {
     min-width: 0;
     padding: 15px;
-    background: var(--dash-bg);
+    background: #f4fbff;
     border: 1px solid var(--dash-border);
+    border-radius: 6px;
 }
 
 .detail-item span {
@@ -493,7 +532,7 @@ button:focus-visible {
 
 .detail-item strong {
     display: block;
-    color: var(--dash-green);
+    color: #013a63;
     font-size: 13px;
     font-weight: 600;
     overflow-wrap: anywhere;
@@ -505,7 +544,7 @@ button:focus-visible {
 
 .detail-description h3 {
     margin-bottom: 8px;
-    color: var(--dash-green);
+    color: #013a63;
     font-family: var(--font-display, Georgia, serif);
     font-size: 21px;
     font-weight: 400;
@@ -531,7 +570,7 @@ button:focus-visible {
 }
 
 .event-details-modal button:focus-visible {
-    outline: 3px solid var(--dash-orange);
+    outline: 3px solid #2c7da0;
     outline-offset: 3px;
 }
 
@@ -549,5 +588,29 @@ button:focus-visible {
 
     .event-details-modal {
         max-height: 90vh;
+    }
+}
+
+/* =====================================================
+   ANIMATIONS & ACCESSIBILITY
+   ===================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .summary-card,
+    .event-card,
+    .primary-button,
+    .secondary-button,
+    .cancel-button,
+    .logout-button,
+    .modal-close {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    .summary-card:hover,
+    .event-card:hover,
+    .primary-button:hover,
+    .logout-button:hover {
+        transform: none;
     }
 }
