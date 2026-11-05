@@ -1,17 +1,3 @@
-/* CampusPulse — Deep Blue & Sky Blue brand palette */
-:root {
-    --deep-space-blue: #012a4a;
-    --yale-blue: #013a63;
-    --yale-blue-2: #014f86;
-    --yale-blue-3: #014f86;
-    --rich-cerulean: #2a6f97;
-    --cerulean: #2c7da0;
-    --air-force-blue: #2a6f97;
-    --steel-blue: #468faf;
-    --sky-blue-light: #d5edf7;
-    --light-blue: #e7f5fb;
-}
-
 
 /* =========================================================
    CAMPUSPULSE — DESIGN SYSTEM
@@ -21,35 +7,30 @@
 :root {
     color-scheme: light;
 
-    --color-bg: #f4fbff;
-    --color-paper: #ffffff;
-    --color-ink: #012a4a;
-    --color-green: #2c7da0;
-    --color-green-dark: #013a63;
-    --color-green-soft: #e7f5fb;
-    --color-orange: #2a6f97;
-    --color-muted: #42677c;
-    --color-border: #b8dce9;
-    --color-border-dark: #014f86;
+    /* CampusPulse — New Brand */
+    --color-bg: #F4F6FB;
+    --color-paper: #FFFFFF;
+    --color-ink: #172B4D;
+
+    --color-green: #2457C5;
+    --color-green-dark: #193F96;
+    --color-green-soft: #DCE8FF;
+
+    --color-orange: #E76F51;
+
+    --color-muted: #69758A;
+    --color-border: #E1E6F0;
+    --color-border-dark: #60749B;
 
     --font-display: "Fraunces", Georgia, serif;
-    --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-body: "DM Sans", sans-serif;
 
     --page-width: 1240px;
     --page-gutter: clamp(22px, 6vw, 88px);
 
-    --radius-small: 3px;
-    --radius-medium: 8px;
-
-    --space-1: 8px;
-    --space-2: 16px;
-    --space-3: 24px;
-    --space-4: 32px;
-    --space-5: 48px;
-    --space-6: 64px;
-    --space-7: 88px;
+    --radius-small: 6px;
+    --radius-medium: 12px;
 }
-
 
 /* =========================================================
    RESET AND GLOBAL STYLES
@@ -291,7 +272,7 @@ svg {
 .hero-description {
     max-width: 430px;
     margin: 0;
-    color: #2a6f97;
+    color: #646a60;
     font-size: 15px;
     line-height: 1.9;
 }
@@ -456,7 +437,7 @@ svg {
 .board-heading p {
     max-width: 280px;
     margin: 0;
-    color: #e7f5fb;
+    color: #d0dbd2;
     font-size: 12px;
     line-height: 1.8;
 }
@@ -671,7 +652,7 @@ svg {
     grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
     gap: clamp(48px, 9vw, 130px);
     padding: 95px max(var(--page-gutter), calc((100vw - 1064px) / 2));
-    color: #f4fbff;
+    color: #f7f6f0;
     background: var(--color-green-dark);
 }
 
@@ -692,7 +673,7 @@ svg {
 .how-heading > p {
     max-width: 330px;
     margin-top: 22px;
-    color: #e7f5fb;
+    color: #c2d0c4;
     font-size: 13px;
     line-height: 1.9;
 }
@@ -730,7 +711,7 @@ svg {
 .step-content p {
     max-width: 330px;
     margin: 7px 0 0;
-    color: #e7f5fb;
+    color: #c2d0c4;
     font-size: 12px;
     line-height: 1.85;
 }
@@ -1377,7 +1358,7 @@ svg {
 
 .empty-state:hover .empty-state-icon {
     transform: translateY(-4px);
-    background: #e7f5fb;
+    background: #dce7dc;
 }
 
 /* How it works */
