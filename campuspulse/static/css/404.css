@@ -75,10 +75,10 @@ a:focus-visible {
     display: inline-flex;
     align-items: center;
     gap: 9px;
-    color: var(--color-green);
-    font-size: 23px;
+    color: var(--color-green, #2457C5);
+    font-size: 21px;
     font-weight: 700;
-    letter-spacing: -1.2px;
+    letter-spacing: -1.1px;
     text-decoration: none;
     white-space: nowrap;
 }
@@ -88,9 +88,9 @@ a:focus-visible {
     width: 33px;
     height: 33px;
     place-items: center;
-    background: var(--color-green);
-    color: var(--color-bg);
-    border-radius: 8px;
+    background: var(--color-green, #2457C5);
+    color: var(--color-bg, #F4F6FB);
+    border-radius: 6px;
 }
 
 .brand-mark svg {
@@ -99,7 +99,7 @@ a:focus-visible {
 }
 
 .brand-light {
-    color: var(--color-orange);
+    color: var(--color-orange, #E76F51);
     font-weight: 400;
 }
 
