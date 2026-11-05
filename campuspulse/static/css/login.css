@@ -10,14 +10,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
-    border-bottom: 1px solid #b8dce9;
+    background: #fffefa;
+    border-bottom: 1px solid #dedfd5;
 
     animation: cp-fade-down 0.65s ease both;
 }
 
 .login-logo {
-    color: #013a63;
+    color: #1c493b;
     font-size: 23px;
     font-weight: 700;
     letter-spacing: -0.8px;
@@ -26,18 +26,18 @@
 }
 
 .login-logo:hover {
-    color: #2a6f97;
+    color: #bd593b;
 }
 
 .login-register-link {
-    color: #2a6f97;
+    color: #72766e;
     font-size: 12px;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .login-register-link:hover {
-    color: #2a6f97;
+    color: #bd593b;
 }
 
 .login-container {
@@ -46,15 +46,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f4fbff;
+    background: #f7f6f0;
 }
 
 .login-card {
     width: 100%;
     max-width: 440px;
     padding: 42px;
-    background: #ffffff;
-    border: 1px solid #b8dce9;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
     border-radius: 12px;
     box-shadow: 0 12px 35px rgba(34, 44, 37, 0.06);
 
@@ -68,7 +68,7 @@
 
 .login-eyebrow {
     margin-bottom: 12px;
-    color: #2a6f97;
+    color: #bd593b;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -76,7 +76,7 @@
 
 .login-heading h1 {
     margin: 0 0 12px;
-    color: #013a63;
+    color: #1c493b;
     font-family: "Fraunces", Georgia, serif;
     font-size: 36px;
     font-weight: 500;
@@ -86,7 +86,7 @@
 
 .login-heading > p:last-child {
     margin: 0;
-    color: #2a6f97;
+    color: #72766e;
     font-size: 14px;
     line-height: 1.7;
 }
@@ -109,7 +109,7 @@
 .login-form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #012a4a;
+    color: #222c25;
     font-size: 13px;
     font-weight: 600;
 }
@@ -118,9 +118,9 @@
     width: 100%;
     min-height: 48px;
     padding: 0 14px;
-    color: #012a4a;
-    background: #ffffff;
-    border: 1px solid #b8dce9;
+    color: #222c25;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
     border-radius: 6px;
     outline: none;
     font-family: inherit;
@@ -141,7 +141,7 @@
 }
 
 .login-form-group input:focus {
-    border-color: #013a63;
+    border-color: #1c493b;
     background: #ffffff;
     box-shadow: 0 0 0 3px rgba(28, 73, 59, 0.09);
 }
@@ -153,8 +153,8 @@
     min-height: 49px;
     margin-top: 8px;
     color: #ffffff;
-    background: #013a63;
-    border: 1px solid #013a63;
+    background: #1c493b;
+    border: 1px solid #1c493b;
     border-radius: 6px;
     font-family: inherit;
     font-size: 13px;
@@ -168,7 +168,7 @@
 }
 
 .login-submit:hover {
-    background: #012a4a;
+    background: #173b31;
     transform: translateY(-2px);
     box-shadow: 0 7px 16px rgba(28, 73, 59, 0.15);
 }
@@ -196,8 +196,8 @@
 .login-message.is-error {
     margin-top: 14px;
     padding: 10px 12px;
-    color: #014f86;
-    background: #e7f5fb;
+    color: #a43f3f;
+    background: #f8ece9;
     border: 1px solid #edd5ce;
     border-radius: 6px;
     animation: cp-rise-in 0.25s ease both;
@@ -207,20 +207,20 @@
 
 .login-register {
     margin: 25px 0 0;
-    color: #2a6f97;
+    color: #72766e;
     font-size: 13px;
     text-align: center;
 }
 
 .login-register a {
-    color: #013a63;
+    color: #1c493b;
     font-weight: 700;
     text-decoration: none;
     transition: color 0.2s ease;
 }
 
 .login-register a:hover {
-    color: #2a6f97;
+    color: #bd593b;
 }
 
 /* Responsive */
