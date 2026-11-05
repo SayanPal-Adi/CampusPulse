@@ -10,14 +10,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
-    border-bottom: 1px solid #b8dce9;
+    background: #fffefa;
+    border-bottom: 1px solid #dedfd5;
 
     animation: cp-fade-down 0.65s ease both;
 }
 
 .register-logo {
-    color: #013a63;
+    color: #1c493b;
     font-size: 23px;
     font-weight: 700;
     text-decoration: none;
@@ -26,7 +26,7 @@
 }
 
 .register-logo:hover {
-    color: #2a6f97;
+    color: #bd593b;
 }
 
 .register-container {
@@ -35,15 +35,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #f4fbff;
+    background: #f7f6f0;
 }
 
 .register-card {
     width: 100%;
     max-width: 480px;
     padding: 42px;
-    background: #ffffff;
-    border: 1px solid #b8dce9;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
     border-radius: 12px;
     box-shadow: 0 12px 35px rgba(34, 44, 37, 0.06);
 
@@ -57,7 +57,7 @@
 
 .register-eyebrow {
     margin-bottom: 12px;
-    color: #2a6f97;
+    color: #bd593b;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -65,7 +65,7 @@
 
 .register-heading h1 {
     margin: 0 0 12px;
-    color: #012a4a;
+    color: #222c25;
     font-family: "Fraunces", Georgia, serif;
     font-size: 34px;
     font-weight: 500;
@@ -75,7 +75,7 @@
 
 .register-heading > p:last-child {
     margin: 0;
-    color: #2a6f97;
+    color: #72766e;
     font-size: 14px;
     line-height: 1.7;
 }
@@ -96,7 +96,7 @@
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #012a4a;
+    color: #222c25;
     font-size: 13px;
     font-weight: 600;
 }
@@ -106,9 +106,9 @@
     width: 100%;
     min-height: 48px;
     padding: 0 14px;
-    color: #012a4a;
-    background: #ffffff;
-    border: 1px solid #b8dce9;
+    color: #222c25;
+    background: #fffefa;
+    border: 1px solid #dedfd5;
     border-radius: 6px;
     outline: none;
     font-family: inherit;
@@ -132,7 +132,7 @@
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #013a63;
+    border-color: #1c493b;
     background: #ffffff;
     box-shadow: 0 0 0 3px rgba(28, 73, 59, 0.09);
 }
@@ -148,8 +148,8 @@
     min-height: 49px;
     margin-top: 8px;
     color: #ffffff;
-    background: #013a63;
-    border: 1px solid #013a63;
+    background: #1c493b;
+    border: 1px solid #1c493b;
     border-radius: 6px;
     font-family: inherit;
     font-size: 13px;
@@ -163,7 +163,7 @@
 }
 
 .register-submit:hover {
-    background: #012a4a;
+    background: #173b31;
     transform: translateY(-2px);
     box-shadow: 0 7px 16px rgba(28, 73, 59, 0.15);
 }
@@ -183,13 +183,13 @@
 
 .register-login {
     margin: 24px 0 0;
-    color: #2a6f97;
+    color: #72766e;
     font-size: 13px;
     text-align: center;
 }
 
 .register-login a {
-    color: #013a63;
+    color: #1c493b;
     font-weight: 700;
     text-decoration: none;
     transition: color 0.2s ease;
@@ -197,13 +197,13 @@
 
 .register-login a:hover,
 .login-link:hover {
-    color: #2a6f97;
+    color: #bd593b;
 }
 
 /* Header login link */
 
 .register-header .login-link {
-    color: #2a6f97;
+    color: #72766e;
     font-size: 12px;
     text-decoration: none;
     transition: color 0.2s ease;
