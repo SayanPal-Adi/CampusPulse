@@ -1,4 +1,8 @@
 
+/* =====================================
+   CampusPulse - Error Page
+===================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -12,8 +16,8 @@ body {
     justify-content: center;
     padding: 30px;
     overflow: hidden;
-    background: #f7f6f0;
-    color: #1c493b;
+    background: #f4fbff;
+    color: #01497c;
     font-family: "DM Sans", sans-serif;
 }
 
@@ -47,14 +51,14 @@ body {
     display: grid;
     place-items: center;
     border-radius: 11px;
-    background: #1c493b;
-    color: #f7f6f0;
+    background: #01497c;
+    color: #f4fbff;
     font-size: 19px;
 }
 
 .eyebrow {
     margin-bottom: 14px;
-    color: #bd593b;
+    color: #2c7da0;
     font-size: 12px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -63,7 +67,7 @@ body {
 
 .error-code {
     margin-bottom: 12px;
-    color: #bd593b;
+    color: #2c7da0;
     font-family: "Fraunces", serif;
     font-size: clamp(90px, 13vw, 150px);
     font-weight: 600;
@@ -83,7 +87,7 @@ h1 {
 
 .description {
     max-width: 430px;
-    color: #69766d;
+    color: #42677c;
     font-size: 15px;
     line-height: 1.8;
 }
@@ -101,9 +105,9 @@ h1 {
     justify-content: center;
     min-height: 48px;
     padding: 0 22px;
-    border: 1px solid #1c493b;
+    border: 1px solid #01497c;
     border-radius: 8px;
-    background: #1c493b;
+    background: #01497c;
     color: #fff;
     font-size: 13px;
     font-weight: 600;
@@ -113,16 +117,16 @@ h1 {
 
 .btn:hover {
     transform: translateY(-3px);
-    background: #28624e;
+    background: #012a4a;
 }
 
 .btn-secondary {
     background: transparent;
-    color: #1c493b;
+    color: #01497c;
 }
 
 .btn-secondary:hover {
-    background: #e9e9df;
+    background: #e3f2f9;
 }
 
 .illustration {
@@ -137,7 +141,7 @@ h1 {
     position: absolute;
     width: 330px;
     height: 330px;
-    border: 1px dashed #d9ddd1;
+    border: 1px dashed #c8e0eb;
     border-radius: 50%;
     animation: rotate 30s linear infinite;
 }
@@ -149,7 +153,7 @@ h1 {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #bd593b;
+    background: #2c7da0;
 }
 
 .orbit::before {
@@ -162,7 +166,7 @@ h1 {
     bottom: 90px;
     width: 7px;
     height: 7px;
-    background: #1c493b;
+    background: #01497c;
 }
 
 .error-card {
@@ -170,10 +174,10 @@ h1 {
     z-index: 1;
     width: 270px;
     padding: 35px 25px;
-    border: 1px solid #e5e3d8;
+    border: 1px solid #d5e8f0;
     border-radius: 22px;
-    background: #fffefa;
-    box-shadow: 0 25px 70px rgba(28, 73, 59, 0.09);
+    background: #ffffff;
+    box-shadow: 0 25px 70px rgba(1, 42, 74, 0.09);
     text-align: center;
     animation: cardFloat 5s ease-in-out infinite;
 }
@@ -185,8 +189,8 @@ h1 {
     place-items: center;
     margin: 0 auto 22px;
     border-radius: 30px;
-    background: #f5e9e2;
-    color: #bd593b;
+    background: #e3f2f9;
+    color: #2c7da0;
 }
 
 .illustration-icon svg {
@@ -201,7 +205,7 @@ h1 {
 }
 
 .error-card p {
-    color: #879087;
+    color: #42677c;
     font-size: 12px;
     line-height: 1.6;
 }
@@ -211,11 +215,11 @@ h1 {
     right: 0;
     bottom: 35px;
     padding: 13px 18px;
-    border: 1px solid #e5e3d8;
+    border: 1px solid #d5e8f0;
     border-radius: 10px;
-    background: #fffefa;
-    box-shadow: 0 10px 30px rgba(28, 73, 59, 0.07);
-    color: #bd593b;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(1, 42, 74, 0.07);
+    color: #2c7da0;
     font-size: 12px;
     font-weight: 600;
     animation: float 4s ease-in-out infinite;
@@ -223,44 +227,92 @@ h1 {
 
 .footer {
     margin-top: 55px;
-    color: #a0a69e;
+    color: #7895a5;
     font-size: 11px;
 }
 
+/* =====================================
+   ANIMATIONS
+===================================== */
+
 @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(25px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 @keyframes cardFloat {
-    0%, 100% { transform: translateY(0) rotate(1deg); }
-    50% { transform: translateY(-12px) rotate(-1deg); }
+    0%, 100% {
+        transform: translateY(0) rotate(1deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(-1deg);
+    }
 }
 
 @keyframes shake {
-    0%, 90%, 100% { transform: rotate(0); }
-    92% { transform: rotate(-2deg); }
-    94% { transform: rotate(2deg); }
-    96% { transform: rotate(-1deg); }
-    98% { transform: rotate(0); }
+    0%, 90%, 100% {
+        transform: rotate(0);
+    }
+
+    92% {
+        transform: rotate(-2deg);
+    }
+
+    94% {
+        transform: rotate(2deg);
+    }
+
+    96% {
+        transform: rotate(-1deg);
+    }
+
+    98% {
+        transform: rotate(0);
+    }
 }
 
 @keyframes rotate {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
+/* =====================================
+   RESPONSIVE DESIGN
+===================================== */
+
 @media (max-width: 800px) {
-    body { overflow-y: auto; }
+    body {
+        overflow-y: auto;
+    }
 
     .page {
         grid-template-columns: 1fr;
@@ -268,26 +320,40 @@ h1 {
         max-width: 550px;
     }
 
-    .brand { margin-bottom: 40px; }
+    .brand {
+        margin-bottom: 40px;
+    }
 
-    .illustration { min-height: 330px; }
+    .illustration {
+        min-height: 330px;
+    }
 
     .orbit {
         width: 270px;
         height: 270px;
     }
 
-    .footer { margin-top: 35px; }
+    .footer {
+        margin-top: 35px;
+    }
 }
 
 @media (max-width: 480px) {
-    body { padding: 24px; }
+    body {
+        padding: 24px;
+    }
 
-    .error-code { font-size: 105px; }
+    .error-code {
+        font-size: 105px;
+    }
 
-    .illustration { min-height: 290px; }
+    .illustration {
+        min-height: 290px;
+    }
 
-    .error-card { width: 235px; }
+    .error-card {
+        width: 235px;
+    }
 
     .orbit {
         width: 240px;
@@ -300,8 +366,14 @@ h1 {
     }
 }
 
+/* =====================================
+   ACCESSIBILITY
+===================================== */
+
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
