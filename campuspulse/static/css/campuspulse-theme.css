@@ -139,16 +139,8 @@ button:disabled {
 }
 
 /* Buttons */
-.button,
-.button-primary,
-.header-cta,
-.login-submit,
-.register-submit,
-.primary-button,
-.publish-button,
-.welcome-action,
-.home-button,
-.btn {
+.button,.button-primary,.header-cta,.login-submit,.register-submit,.primary-button,.publish-button,.welcome-action,
+.home-button,.btn {
   border: 0;
   border-radius: 12px;
   background: linear-gradient(135deg, var(--cp-primary), #5478ff);
