@@ -15,11 +15,35 @@
 }
 
 .organizer-logo {
-    color: #013a63;
-    font-size: 23px;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--color-green, #2457C5);
+    font-size: 21px;
     font-weight: 700;
+    letter-spacing: -1.1px;
     text-decoration: none;
-    letter-spacing: -0.8px;
+    white-space: nowrap;
+}
+
+.organizer-logo .brand-mark {
+    display: grid;
+    width: 33px;
+    height: 33px;
+    place-items: center;
+    color: var(--color-bg, #F4F6FB);
+    background: var(--color-green, #2457C5);
+    border-radius: 6px;
+}
+
+.organizer-logo .brand-mark svg {
+    width: 24px;
+    height: 24px;
+}
+
+.organizer-logo .brand-light {
+    color: var(--color-orange, #E76F51);
+    font-weight: 400;
 }
 
 .organizer-header-right {
