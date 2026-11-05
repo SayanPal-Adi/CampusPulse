@@ -4,15 +4,15 @@
    ===================================================== */
 
 :root {
-    --dash-bg: var(--color-bg, #f4fbff);
-    --dash-paper: var(--color-paper, #ffffff);
-    --dash-ink: var(--color-ink, #012a4a);
-    --dash-green: var(--color-green, #013a63);
-    --dash-green-dark: var(--color-green-dark, #012a4a);
-    --dash-green-soft: var(--color-green-soft, #e7f5fb);
-    --dash-orange: var(--color-orange, #2a6f97);
-    --dash-muted: var(--color-muted, #2a6f97);
-    --dash-border: var(--color-border, #b8dce9);
+    --dash-bg: var(--color-bg, #f7f6f0);
+    --dash-paper: var(--color-paper, #fffefa);
+    --dash-ink: var(--color-ink, #222c25);
+    --dash-green: var(--color-green, #1c493b);
+    --dash-green-dark: var(--color-green-dark, #173b31);
+    --dash-green-soft: var(--color-green-soft, #e6ece5);
+    --dash-orange: var(--color-orange, #bd593b);
+    --dash-muted: var(--color-muted, #72766e);
+    --dash-border: var(--color-border, #dedfd5);
 }
 
 /* Reset */
@@ -112,8 +112,8 @@ button {
 }
 
 .message.error {
-    color: #014f86;
-    border-left-color: #014f86;
+    color: #a43f3f;
+    border-left-color: #a43f3f;
 }
 
 /* Statistics */
@@ -220,7 +220,7 @@ button {
     display: inline-block;
     padding: 5px 10px;
     color: var(--dash-orange);
-    background: #f4fbff;
+    background: #f5ebe4;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 0.8px;
@@ -242,7 +242,7 @@ button {
 }
 
 .status.cancelled {
-    color: #014f86;
+    color: #a43f3f;
 }
 
 .muted {
@@ -284,15 +284,15 @@ button {
 }
 
 .cancel-button {
-    color: #014f86;
+    color: #a43f3f;
     background: transparent;
     border: 1px solid #e8caca;
 }
 
 .cancel-button:hover {
     color: white;
-    background: #014f86;
-    border-color: #014f86;
+    background: #a43f3f;
+    border-color: #a43f3f;
 }
 
 button:disabled {
