@@ -2,14 +2,14 @@
 :root {
     color-scheme: light;
 
-    --color-bg: #f7f6f0;
-    --color-paper: #fffefa;
-    --color-green: #1c493b;
-    --color-green-dark: #173b31;
-    --color-green-soft: #e6ece5;
-    --color-orange: #bd593b;
-    --color-muted: #72766e;
-    --color-border: #dedfd5;
+    --color-bg: #f4fbff;
+    --color-paper: #ffffff;
+    --color-green: #01497c;
+    --color-green-dark: #012a4a;
+    --color-green-soft: #e3f2f9;
+    --color-orange: #2c7da0;
+    --color-muted: #42677c;
+    --color-border: #d5e8f0;
 
     --font-display: "Fraunces", Georgia, serif;
     --font-body: "DM Sans", sans-serif;
@@ -54,7 +54,6 @@ a:focus-visible {
     min-height: 100vh;
     margin: auto;
     padding: 0 clamp(24px, 6vw, 88px);
-
     display: flex;
     flex-direction: column;
 }
@@ -65,13 +64,10 @@ a:focus-visible {
 
 .error-header {
     height: 92px;
-
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     border-bottom: 1px solid var(--color-border);
-
     animation: fade-down 0.8s ease both;
 }
 
@@ -79,7 +75,6 @@ a:focus-visible {
     display: inline-flex;
     align-items: center;
     gap: 11px;
-
     font-size: 23px;
     font-weight: 700;
     letter-spacing: -1.2px;
@@ -88,14 +83,11 @@ a:focus-visible {
 .brand-mark {
     width: 34px;
     height: 34px;
-
     display: grid;
     place-items: center;
-
     border-radius: 7px;
     background: var(--color-green);
     color: var(--color-bg);
-
     font-size: 19px;
     font-weight: 700;
 }
@@ -117,11 +109,9 @@ a:focus-visible {
 
 .error-content {
     flex: 1;
-
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-
     gap: 55px;
     padding: 65px 0;
 }
@@ -129,7 +119,6 @@ a:focus-visible {
 .error-copy {
     position: relative;
     z-index: 2;
-
     animation: fade-up 0.9s 0.1s ease both;
 }
 
@@ -137,9 +126,7 @@ a:focus-visible {
     display: flex;
     align-items: center;
     gap: 12px;
-
     margin-bottom: 26px;
-
     color: var(--color-orange);
     font-size: 11px;
     font-weight: 700;
@@ -154,7 +141,6 @@ a:focus-visible {
 
 .error-copy h1 {
     margin: 0;
-
     font-family: var(--font-display);
     font-size: clamp(48px, 6vw, 76px);
     font-weight: 400;
@@ -170,7 +156,6 @@ a:focus-visible {
 .error-description {
     max-width: 420px;
     margin: 25px 0 30px;
-
     color: var(--color-muted);
     font-size: 15px;
     line-height: 1.9;
@@ -190,19 +175,15 @@ a:focus-visible {
 .home-button {
     min-height: 52px;
     padding: 0 19px;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 24px;
-
     border: 1px solid var(--color-green);
     background: var(--color-green);
     color: white;
-
     font-size: 13px;
     font-weight: 600;
-
     transition:
         background 0.3s ease,
         transform 0.3s ease,
@@ -212,7 +193,7 @@ a:focus-visible {
 .home-button:hover {
     background: var(--color-green-dark);
     transform: translateY(-4px);
-    box-shadow: 0 12px 24px rgba(28, 73, 59, 0.15);
+    box-shadow: 0 12px 24px rgba(1, 58, 99, 0.15);
 }
 
 .button-arrow {
@@ -226,15 +207,12 @@ a:focus-visible {
 
 .back-button {
     padding: 12px 0;
-
     border: none;
     background: transparent;
     color: var(--color-green);
-
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
-
     transition: color 0.25s ease;
 }
 
@@ -244,7 +222,6 @@ a:focus-visible {
 
 .error-code {
     margin-top: 65px;
-
     color: var(--color-muted);
     font-size: 10px;
     font-weight: 600;
@@ -267,45 +244,34 @@ a:focus-visible {
 .error-visual {
     position: relative;
     min-height: 480px;
-
     display: grid;
     place-items: center;
-
     isolation: isolate;
-
     animation: fade-up 1s 0.25s ease both;
 }
 
 .visual-number {
     position: absolute;
     z-index: -1;
-
     color: var(--color-green-soft);
     font-family: var(--font-display);
     font-size: clamp(150px, 22vw, 260px);
     font-weight: 600;
     letter-spacing: -15px;
     line-height: 1;
-
     user-select: none;
-
     animation: number-float 6s ease-in-out infinite;
 }
 
 .lost-card {
     position: relative;
     z-index: 2;
-
     width: min(310px, 80%);
     padding: 19px;
-
     border: 1px solid var(--color-border);
     background: var(--color-paper);
-
-    box-shadow: 0 25px 70px rgba(31, 58, 43, 0.09);
-
+    box-shadow: 0 25px 70px rgba(1, 42, 74, 0.09);
     transform: rotate(-5deg);
-
     animation: card-float 5s ease-in-out infinite;
 }
 
@@ -320,7 +286,6 @@ a:focus-visible {
 .lost-card-top {
     padding-bottom: 14px;
     border-bottom: 1px solid var(--color-border);
-
     color: var(--color-muted);
     font-size: 9px;
     font-weight: 700;
@@ -333,24 +298,20 @@ a:focus-visible {
 
 .lost-card-icon {
     height: 190px;
-
     display: grid;
     place-items: center;
-
     color: var(--color-green);
 }
 
 .lost-card-icon svg {
     width: 90px;
     height: 90px;
-
     animation: marker-bob 2.5s ease-in-out infinite;
 }
 
 .lost-card-bottom {
     padding-top: 13px;
     border-top: 1px solid var(--color-border);
-
     color: var(--color-muted);
     font-size: 10px;
 }
@@ -365,11 +326,9 @@ a:focus-visible {
 .visual-orbit {
     position: absolute;
     z-index: -2;
-
     width: 390px;
     height: 390px;
-
-    border: 1px solid rgba(28, 73, 59, 0.12);
+    border: 1px solid rgba(1, 58, 99, 0.12);
     border-radius: 50%;
 }
 
@@ -380,10 +339,8 @@ a:focus-visible {
 .orbit-two {
     width: 320px;
     height: 320px;
-
     border-style: dashed;
-    border-color: rgba(189, 89, 59, 0.18);
-
+    border-color: rgba(44, 125, 160, 0.18);
     animation: orbit-spin 45s linear infinite reverse;
 }
 
@@ -391,11 +348,9 @@ a:focus-visible {
     position: absolute;
     top: 25px;
     right: 0;
-
     display: flex;
     align-items: center;
     gap: 9px;
-
     color: var(--color-muted);
     font-size: 9px;
     font-weight: 700;
@@ -405,10 +360,8 @@ a:focus-visible {
 .label-dot {
     width: 7px;
     height: 7px;
-
     border-radius: 50%;
     background: var(--color-orange);
-
     animation: dot-pulse 1.8s ease-in-out infinite;
 }
 
@@ -416,10 +369,8 @@ a:focus-visible {
     position: absolute;
     bottom: 15px;
     left: 50%;
-
     width: max-content;
     transform: translateX(-50%);
-
     color: var(--color-muted);
     font-size: 9px;
     font-weight: 600;
@@ -429,13 +380,10 @@ a:focus-visible {
 .visual-decoration {
     position: absolute;
     z-index: 3;
-
     width: 13px;
     height: 13px;
-
     border: 2px solid var(--color-orange);
     transform: rotate(45deg);
-
     animation: decoration-float 4s ease-in-out infinite;
 }
 
@@ -447,240 +395,8 @@ a:focus-visible {
 .decoration-two {
     right: 35px;
     bottom: 105px;
-
     width: 9px;
     height: 9px;
-
     border-color: var(--color-green);
     animation-delay: 1s;
-}
-
-/* =====================================
-   FOOTER
-===================================== */
-
-.error-footer {
-    min-height: 65px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-
-    border-top: 1px solid var(--color-border);
-
-    color: var(--color-muted);
-    font-size: 10px;
-    letter-spacing: 1px;
-
-    animation: fade-up 1s 0.4s ease both;
-}
-
-/* =====================================
-   ANIMATIONS
-===================================== */
-
-@keyframes fade-up {
-    from {
-        opacity: 0;
-        transform: translateY(24px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes fade-down {
-    from {
-        opacity: 0;
-        transform: translateY(-16px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes number-float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-13px);
-    }
-}
-
-@keyframes card-float {
-    0%, 100% {
-        transform: translateY(0) rotate(-5deg);
-    }
-
-    50% {
-        transform: translateY(-13px) rotate(-3deg);
-    }
-}
-
-@keyframes marker-bob {
-    0%, 100% {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-7px);
-    }
-}
-
-@keyframes orbit-spin {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes dot-pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-
-    50% {
-        opacity: 0.35;
-        transform: scale(1.5);
-    }
-}
-
-@keyframes decoration-float {
-    0%, 100% {
-        transform: translateY(0) rotate(45deg);
-    }
-
-    50% {
-        transform: translateY(-12px) rotate(135deg);
-    }
-}
-
-/* =====================================
-   RESPONSIVE DESIGN
-===================================== */
-
-@media (max-width: 800px) {
-    .error-content {
-        grid-template-columns: 1fr;
-        gap: 15px;
-        padding: 55px 0 30px;
-    }
-
-    .error-copy {
-        text-align: center;
-    }
-
-    .error-eyebrow,
-    .error-actions {
-        justify-content: center;
-    }
-
-    .error-description {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .error-code {
-        margin-top: 35px;
-    }
-
-    .error-visual {
-        min-height: 390px;
-    }
-
-    .visual-number {
-        font-size: 190px;
-    }
-
-    .visual-label {
-        right: 8%;
-    }
-
-    .decoration-one {
-        left: 12%;
-    }
-}
-
-@media (max-width: 480px) {
-    .error-page {
-        padding: 0 22px;
-    }
-
-    .error-header {
-        height: 75px;
-    }
-
-    .brand {
-        font-size: 20px;
-    }
-
-    .header-label {
-        font-size: 8px;
-        letter-spacing: 1px;
-    }
-
-    .error-copy h1 {
-        font-size: 53px;
-        letter-spacing: -2px;
-    }
-
-    .error-description {
-        font-size: 14px;
-    }
-
-    .error-visual {
-        min-height: 340px;
-    }
-
-    .visual-number {
-        font-size: 155px;
-    }
-
-    .visual-orbit {
-        width: 290px;
-        height: 290px;
-    }
-
-    .orbit-two {
-        width: 245px;
-        height: 245px;
-    }
-
-    .lost-card {
-        width: 255px;
-    }
-
-    .lost-card-icon {
-        height: 145px;
-    }
-
-    .error-footer {
-        font-size: 8px;
-    }
-}
-
-/* =====================================
-   ACCESSIBILITY
-===================================== */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
 }
