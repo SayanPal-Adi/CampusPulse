@@ -1,31 +1,17 @@
-/* CampusPulse — Deep Blue & Sky Blue brand palette */
-:root {
-    --deep-space-blue: #012a4a;
-    --yale-blue: #013a63;
-    --yale-blue-2: #014f86;
-    --yale-blue-3: #014f86;
-    --rich-cerulean: #2a6f97;
-    --cerulean: #2c7da0;
-    --air-force-blue: #2a6f97;
-    --steel-blue: #468faf;
-    --sky-blue-light: #d5edf7;
-    --light-blue: #e7f5fb;
-}
-
 
 /* =====================================
    CampusPulse - Admin Dashboard
 ===================================== */
 
 :root {
-    --admin-green: #013a63;
-    --admin-green-dark: #012a4a;
-    --admin-green-light: #e7f5fb;
-    --admin-background: #f4fbff;
+    --admin-green: #234b38;
+    --admin-green-dark: #183b2b;
+    --admin-green-light: #eaf1ec;
+    --admin-background: #f7f9f7;
     --admin-white: #ffffff;
-    --admin-text: #012a4a;
-    --admin-muted: #42677c;
-    --admin-border: #b8dce9;
+    --admin-text: #25352c;
+    --admin-muted: #7b8980;
+    --admin-border: #e6ebe7;
     --admin-sidebar-width: 260px;
 }
 
@@ -193,7 +179,7 @@ a:focus-visible {
 .sidebar-label {
     margin: 0 0 10px;
     padding: 0 10px;
-    color: #d5edf7;
+    color: #9aa59e;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 1.2px;
@@ -262,7 +248,7 @@ a:focus-visible {
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: #2c7da0;
+    background: #53a46e;
 }
 
 .sidebar-logout {
@@ -283,7 +269,7 @@ a:focus-visible {
 }
 
 .sidebar-logout:hover {
-    background: #e7f5fb;
+    background: #fbf0ef;
 }
 
 .sidebar-logout:disabled {
@@ -463,7 +449,7 @@ a:focus-visible {
 
 .overview-card > p {
     margin: 0;
-    color: #d5edf7;
+    color: #98a39b;
     font-size: 11px;
 }
 
@@ -526,7 +512,7 @@ a:focus-visible {
 }
 
 .welcome-action:hover {
-    background: #e7f5fb;
+    background: #eaf1ec;
 }
 
 .welcome-action span {
@@ -702,14 +688,14 @@ a:focus-visible {
     padding: 13px 16px;
     border: 1px solid #cce3d2;
     border-radius: 8px;
-    background: #edf8fc;
-    color: #2c7da0;
+    background: #edf7ef;
+    color: #28633a;
     font-size: 13px;
 }
 
 .admin-notification.error {
     border-color: #f0ceca;
-    background: #e7f5fb;
+    background: #fff0ee;
     color: #a33d35;
 }
 
@@ -726,7 +712,7 @@ a:focus-visible {
 
 .admin-footer p {
     margin: 0;
-    color: #d5edf7;
+    color: #98a39b;
     font-size: 11px;
 }
 
@@ -1096,8 +1082,8 @@ a:focus-visible {
 }
 
 .user-role-badge.organizer {
-    background: #e7f5fb;
-    color: #2c7da0;
+    background: #eaf4ec;
+    color: #34734a;
 }
 
 
@@ -1376,8 +1362,8 @@ a:focus-visible {
 }
 
 .event-status-badge.published {
-    background: #e7f5fb;
-    color: #2c7da0;
+    background: #eaf4ec;
+    color: #34734a;
 }
 
 .event-status-badge.draft {
@@ -1445,7 +1431,7 @@ a:focus-visible {
     padding: 8px 11px;
     border: 1px solid #d5e2d8;
     border-radius: 7px;
-    background: #edf8fc;
+    background: #f0f5f1;
     color: var(--admin-green);
     font-size: 11px;
     font-weight: 650;
@@ -1524,7 +1510,7 @@ a:focus-visible {
 }
 
 .admin-event-modal-close:hover {
-    background: #edf8fc;
+    background: #f3f6f3;
     color: var(--admin-green);
 }
 
@@ -1546,7 +1532,7 @@ a:focus-visible {
     padding: 17px;
     margin-bottom: 24px;
     border-radius: 9px;
-    background: #ffffff;
+    background: #f7faf7;
 }
 
 .event-detail-description h3 {
@@ -1654,20 +1640,20 @@ a:focus-visible {
 /* Suspend button */
 
 .event-status-action.danger {
-    color: #014f86;
+    color: #c0392b;
     border-color: #e5b7b2;
 }
 
 .event-status-action.danger:hover {
-    background: #e7f5fb;
+    background: #fcebea;
     border-color: #e5b7b2;
 }
 
 /* Confirmation state */
 
 .event-status-action.confirming {
-    background: #f4fbff;
-    color: #2a6f97;
+    background: #fff3cd;
+    color: #856404;
     border-color: #e5c76b;
 }
 
@@ -1689,7 +1675,7 @@ a:focus-visible {
 
 .event-status-badge.suspended {
     background: #fff0e6;
-    color: #2a6f97;
+    color: #b45309;
     border: 1px solid #f5d0b5;
 }
 
@@ -1914,12 +1900,12 @@ a:focus-visible {
 }
 
 .registration-status-badge.registered {
-    background: #e7f5fb;
-    color: #2c7da0;
+    background: #eaf4ec;
+    color: #34734a;
 }
 
 .registration-status-badge.cancelled {
-    background: #e7f5fb;
+    background: #fcebea;
     color: #a33d35;
 }
 
