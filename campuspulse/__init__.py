@@ -23,6 +23,31 @@ load_dotenv(override=True)
 db = SQLAlchemy()
 
 
+# =====================================
+# Authentication Helper
+# =====================================
+
+def get_logged_in_user():
+
+    # Import locally to prevent circular imports
+    from .models import User
+
+    user_id = session.get("user_id")
+
+    if not user_id:
+        return None
+
+    try:
+        user = db.session.get(User, UUID(user_id))
+
+    except (ValueError, TypeError):
+        session.clear()
+        return None
+
+    if user is None:
+        session.clear()
+
+    return user
 
 
 # =====================================
