@@ -191,23 +191,7 @@ def create_app():
     # Admin Dashboard
     # =====================================
 
-    @app.route("/admin-dashboard")
-    def admin_dashboard():
-
-        user = get_logged_in_user()
-
-        if user is None:
-            return redirect(
-                url_for("login_page")
-            )
-
-        if user.role != "admin":
-            abort(403)
-
-        return render_template(
-            "admin_dashboard.html",
-            user=user
-        )
+    
 
     # =====================================
     # Login Page
