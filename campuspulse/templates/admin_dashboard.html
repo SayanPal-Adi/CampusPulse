@@ -25,9 +25,13 @@
         <aside class="admin-sidebar" id="adminSidebar">
 
             <div class="sidebar-brand">
-                <a href="{{ url_for('home') }}" class="admin-logo">
-                    <span class="logo-icon">C</span>
-                    <span>CampusPulse</span>
+                <a href="{{ url_for('home') }}" class="admin-logo brand" aria-label="CampusPulse home">
+                    <span class="brand-mark" aria-hidden="true">
+                        <svg viewBox="0 0 32 32" fill="none">
+                            <path d="M4 8h24v4H8v4h16v4H8v4h20v4H4z" fill="currentColor"/>
+                        </svg>
+                    </span>
+                    <span>campus<span class="brand-light">pulse</span></span>
                 </a>
 
                 <button type="button" class="sidebar-close" id="sidebarClose" aria-label="Close sidebar">
