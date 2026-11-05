@@ -37,23 +37,33 @@ body {
 .brand {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
     margin-bottom: 65px;
-    color: inherit;
+    color: #01497c;
     font-size: 19px;
     font-weight: 700;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .brand-mark {
-    width: 34px;
-    height: 34px;
     display: grid;
+    width: 33px;
+    height: 33px;
     place-items: center;
-    border-radius: 11px;
+    border-radius: 8px;
     background: #01497c;
     color: #f4fbff;
-    font-size: 19px;
+}
+
+.brand-mark svg {
+    width: 24px;
+    height: 24px;
+}
+
+.brand-light {
+    color: #2c7da0;
+    font-weight: 400;
 }
 
 .eyebrow {
