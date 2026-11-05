@@ -48,24 +48,34 @@
         .brand {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
             margin-bottom: 65px;
-            color: inherit;
+            color: #1c493b;
             font-size: 19px;
             font-weight: 700;
             letter-spacing: -0.5px;
             text-decoration: none;
+            white-space: nowrap;
         }
 
         .brand-mark {
-            width: 34px;
-            height: 34px;
+            width: 33px;
+            height: 33px;
             display: grid;
             place-items: center;
-            border-radius: 11px;
+            border-radius: 8px;
             background: #1c493b;
             color: #f7f6f0;
-            font-size: 19px;
+        }
+
+        .brand-mark svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .brand-light {
+            color: #bd593b;
+            font-weight: 400;
         }
 
         .eyebrow {
@@ -349,9 +359,13 @@
     <main class="page">
 
         <section class="content">
-            <a href="{{ url_for('home') }}" class="brand">
-                <span class="brand-mark">C</span>
-                CampusPulse
+            <a href="{{ url_for('home') }}" class="brand" aria-label="CampusPulse home">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 32 32" fill="none">
+                        <path d="M4 8h24v4H8v4h16v4H8v4h20v4H4z" fill="currentColor"/>
+                    </svg>
+                </span>
+                <span>campus<span class="brand-light">pulse</span></span>
             </a>
 
             <p class="eyebrow">Unexpected error</p>
