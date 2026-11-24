@@ -1,0 +1,553 @@
+
+/* =====================================================
+   CAMPUSPULSE — STUDENT DASHBOARD
+   ===================================================== */
+
+:root {
+    --dash-bg: var(--color-bg, #f4fbff);
+    --dash-paper: var(--color-paper, #ffffff);
+    --dash-ink: var(--color-ink, #012a4a);
+    --dash-green: var(--color-green, #013a63);
+    --dash-green-dark: var(--color-green-dark, #012a4a);
+    --dash-green-soft: var(--color-green-soft, #e7f5fb);
+    --dash-orange: var(--color-orange, #2a6f97);
+    --dash-muted: var(--color-muted, #2a6f97);
+    --dash-border: var(--color-border, #b8dce9);
+}
+
+/* Reset */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--dash-bg);
+    color: var(--dash-ink);
+    font-family: var(--font-body, "DM Sans", sans-serif);
+    line-height: 1.65;
+}
+
+button {
+    font: inherit;
+    cursor: pointer;
+}
+
+/* Header */
+
+.topbar {
+    min-height: 76px;
+    padding: 0 var(--page-gutter, 6%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--dash-bg);
+    border-bottom: 1px solid var(--dash-border);
+}
+
+.brand {
+    color: var(--dash-green);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -1px;
+}
+
+.logout-button {
+    padding: 9px 17px;
+    color: var(--dash-green);
+    background: transparent;
+    border: 1px solid var(--dash-border);
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.logout-button:hover {
+    color: white;
+    background: var(--dash-green);
+    border-color: var(--dash-green);
+}
+
+/* Main container */
+
+.container {
+    width: min(1064px, calc(100% - 44px));
+    margin: 0 auto;
+    padding: 65px 0 80px;
+}
+
+/* Welcome section */
+
+.welcome {
+    margin-bottom: 35px;
+}
+
+.welcome h1 {
+    margin: 12px 0;
+    color: var(--dash-green);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(38px, 5vw, 58px);
+    font-weight: 400;
+    letter-spacing: -2px;
+    line-height: 1.15;
+}
+
+.welcome p {
+    margin: 0;
+    color: var(--dash-muted);
+    font-size: 14px;
+}
+
+/* Status message */
+
+.message {
+    margin: 22px 0;
+    padding: 12px 16px;
+    color: var(--dash-muted);
+    background: var(--dash-paper);
+    border-left: 3px solid var(--dash-green);
+    font-size: 12px;
+}
+
+.message.error {
+    color: #014f86;
+    border-left-color: #014f86;
+}
+
+/* Statistics */
+
+.summary {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 17px;
+    margin: 35px 0 65px;
+}
+
+.summary-card {
+    min-height: 135px;
+    padding: 24px;
+    background: var(--dash-paper);
+    border: 1px solid var(--dash-border);
+    transition: transform 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-3px);
+}
+
+.summary-card p {
+    margin: 0 0 17px;
+    color: var(--dash-muted);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.summary-card strong {
+    color: var(--dash-green);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 37px;
+    font-weight: 400;
+}
+
+/* Sections */
+
+.section {
+    margin-top: 58px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--dash-border);
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: var(--dash-green);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 32px;
+    font-weight: 400;
+    letter-spacing: -0.8px;
+}
+
+/* Event grid */
+
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+/* Event cards */
+
+.event-card {
+    min-width: 0;
+    padding: 25px;
+    background: var(--dash-paper);
+    border: 1px solid var(--dash-border);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.event-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--dash-green);
+}
+
+.event-card h3 {
+    margin: 15px 0 12px;
+    color: var(--dash-green);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.event-card p {
+    margin: 9px 0;
+    color: var(--dash-muted);
+    font-size: 12px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.category {
+    display: inline-block;
+    padding: 5px 10px;
+    color: var(--dash-orange);
+    background: #f4fbff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+/* Registration status */
+
+.status {
+    display: inline-block;
+    margin-top: 13px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.status.registered {
+    color: var(--dash-green);
+}
+
+.status.cancelled {
+    color: #014f86;
+}
+
+.muted {
+    color: var(--dash-muted);
+}
+
+/* Buttons */
+
+.primary-button,
+.secondary-button,
+.cancel-button {
+    min-height: 40px;
+    margin-top: 15px;
+    padding: 0 16px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.primary-button {
+    color: white;
+    background: var(--dash-green);
+    border: 1px solid var(--dash-green);
+}
+
+.primary-button:hover {
+    background: var(--dash-green-dark);
+}
+
+.secondary-button {
+    color: var(--dash-green);
+    background: transparent;
+    border: 1px solid var(--dash-border);
+}
+
+.secondary-button:hover {
+    border-color: var(--dash-green);
+}
+
+.cancel-button {
+    color: #014f86;
+    background: transparent;
+    border: 1px solid #e8caca;
+}
+
+.cancel-button:hover {
+    color: white;
+    background: #014f86;
+    border-color: #014f86;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* Empty states */
+
+.empty {
+    grid-column: 1 / -1;
+    padding: 30px;
+    color: var(--dash-muted);
+    background: var(--dash-paper);
+    border: 1px dashed var(--dash-border);
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+/* Footer */
+
+footer {
+    padding: 27px 20px;
+    color: var(--dash-muted);
+    background: #efeee6;
+    border-top: 1px solid var(--dash-border);
+    text-align: center;
+    font-size: 11px;
+}
+
+/* Focus accessibility */
+
+button:focus-visible {
+    outline: 3px solid var(--dash-orange);
+    outline-offset: 3px;
+}
+
+/* Tablet */
+
+@media (max-width: 800px) {
+    .container {
+        padding-top: 45px;
+    }
+
+    .summary {
+        gap: 12px;
+    }
+
+    .summary-card {
+        padding: 18px;
+    }
+
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+    .topbar {
+        min-height: 68px;
+        padding: 0 20px;
+    }
+
+    .container {
+        width: calc(100% - 40px);
+        padding: 38px 0 55px;
+    }
+
+    .welcome h1 {
+        font-size: 39px;
+    }
+
+    .summary {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-bottom: 45px;
+    }
+
+    .summary-card {
+        min-height: 105px;
+        padding: 17px 20px;
+    }
+
+    .summary-card p {
+        margin-bottom: 7px;
+    }
+
+    .summary-card strong {
+        font-size: 30px;
+    }
+
+    .section {
+        margin-top: 42px;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .event-card {
+        padding: 20px;
+    }
+
+    .section-heading {
+        align-items: center;
+    }
+}
+
+
+/* =====================================================
+   EVENT DETAILS MODAL
+   ===================================================== */
+
+.event-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.event-actions button {
+    margin-top: 5px;
+}
+
+/* Modal */
+
+.event-details-modal {
+    width: min(650px, calc(100% - 32px));
+    max-height: 85vh;
+    padding: 0;
+    color: var(--dash-ink);
+    background: var(--dash-paper);
+    border: 1px solid var(--dash-border);
+    border-radius: 5px;
+}
+
+.event-details-modal::backdrop {
+    background: rgba(20, 35, 28, 0.65);
+    backdrop-filter: blur(3px);
+}
+
+.modal-content {
+    padding: 32px;
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal-close {
+    width: 36px;
+    height: 36px;
+    margin: 0;
+    color: var(--dash-muted);
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    line-height: 1;
+}
+
+.modal-close:hover {
+    color: var(--dash-orange);
+}
+
+.event-details-modal h2 {
+    margin: 22px 0;
+    color: var(--dash-green);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: clamp(25px, 4vw, 35px);
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.detail-information {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.detail-item {
+    min-width: 0;
+    padding: 15px;
+    background: var(--dash-bg);
+    border: 1px solid var(--dash-border);
+}
+
+.detail-item span {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--dash-muted);
+    font-size: 11px;
+}
+
+.detail-item strong {
+    display: block;
+    color: var(--dash-green);
+    font-size: 13px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.detail-description {
+    margin-top: 25px;
+}
+
+.detail-description h3 {
+    margin-bottom: 8px;
+    color: var(--dash-green);
+    font-family: var(--font-display, Georgia, serif);
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.detail-description p {
+    color: var(--dash-muted);
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid var(--dash-border);
+}
+
+.modal-actions button {
+    margin-top: 0;
+}
+
+.event-details-modal button:focus-visible {
+    outline: 3px solid var(--dash-orange);
+    outline-offset: 3px;
+}
+
+/* Mobile modal */
+
+@media (max-width: 600px) {
+    .modal-content {
+        padding: 22px;
+    }
+
+    .detail-information {
+        grid-template-columns: 1fr;
+        gap: 9px;
+    }
+
+    .event-details-modal {
+        max-height: 90vh;
+    }
+}
