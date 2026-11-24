@@ -1,0 +1,260 @@
+
+/* =================================
+   CAMPUSPULSE - REGISTRATION PAGE
+================================= */
+
+.register-header {
+    width: 100%;
+    min-height: 76px;
+    padding: 0 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border-bottom: 1px solid #b8dce9;
+
+    animation: cp-fade-down 0.65s ease both;
+}
+
+.register-logo {
+    color: #013a63;
+    font-size: 23px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.8px;
+    transition: color 0.25s ease;
+}
+
+.register-logo:hover {
+    color: #2a6f97;
+}
+
+.register-container {
+    min-height: calc(100vh - 76px);
+    padding: 55px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f4fbff;
+}
+
+.register-card {
+    width: 100%;
+    max-width: 480px;
+    padding: 42px;
+    background: #ffffff;
+    border: 1px solid #b8dce9;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(34, 44, 37, 0.06);
+
+    animation: cp-card-enter 0.8s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+}
+
+.register-heading {
+    margin-bottom: 30px;
+    animation: cp-rise-in 0.65s ease 0.12s both;
+}
+
+.register-eyebrow {
+    margin-bottom: 12px;
+    color: #2a6f97;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.register-heading h1 {
+    margin: 0 0 12px;
+    color: #012a4a;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+.register-heading > p:last-child {
+    margin: 0;
+    color: #2a6f97;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Form fields */
+
+.form-group {
+    margin-bottom: 19px;
+    animation: cp-rise-in 0.55s ease both;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.16s; }
+.form-group:nth-child(2) { animation-delay: 0.21s; }
+.form-group:nth-child(3) { animation-delay: 0.26s; }
+.form-group:nth-child(4) { animation-delay: 0.31s; }
+.form-group:nth-child(5) { animation-delay: 0.36s; }
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #012a4a;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 14px;
+    color: #012a4a;
+    background: #ffffff;
+    border: 1px solid #b8dce9;
+    border-radius: 6px;
+    outline: none;
+    font-family: inherit;
+    font-size: 13px;
+
+    transition:
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        transform 0.22s ease;
+}
+
+.form-group input::placeholder {
+    color: #a1a39c;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+    border-color: #aab8ac;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #013a63;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(28, 73, 59, 0.09);
+}
+
+.form-group select {
+    cursor: pointer;
+}
+
+/* Submit button */
+
+.register-submit {
+    width: 100%;
+    min-height: 49px;
+    margin-top: 8px;
+    color: #ffffff;
+    background: #013a63;
+    border: 1px solid #013a63;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+
+    transition:
+        background 0.22s ease,
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+}
+
+.register-submit:hover {
+    background: #012a4a;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 16px rgba(28, 73, 59, 0.15);
+}
+
+.register-submit:active {
+    transform: translateY(0) scale(0.99);
+}
+
+.register-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Login link */
+
+.register-login {
+    margin: 24px 0 0;
+    color: #2a6f97;
+    font-size: 13px;
+    text-align: center;
+}
+
+.register-login a {
+    color: #013a63;
+    font-weight: 700;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.register-login a:hover,
+.login-link:hover {
+    color: #2a6f97;
+}
+
+/* Header login link */
+
+.register-header .login-link {
+    color: #2a6f97;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+/* Responsive design */
+
+@media (max-width: 600px) {
+    .register-header {
+        min-height: 65px;
+        padding: 0 20px;
+    }
+
+    .register-logo {
+        font-size: 20px;
+    }
+
+    .register-header .login-link {
+        font-size: 11px;
+    }
+
+    .register-container {
+        min-height: calc(100vh - 65px);
+        padding: 30px 15px;
+    }
+
+    .register-card {
+        padding: 28px 22px;
+    }
+
+    .register-heading h1 {
+        font-size: 29px;
+    }
+}
+
+/* Reduced motion accessibility */
+
+@media (prefers-reduced-motion: reduce) {
+    .register-header,
+    .register-card,
+    .register-heading,
+    .form-group {
+        animation: none !important;
+    }
+
+    .register-logo,
+    .register-header .login-link,
+    .register-login a,
+    .form-group input,
+    .form-group select,
+    .register-submit {
+        transition: none !important;
+    }
+}
